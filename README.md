@@ -24,19 +24,19 @@ The site runs at [http://localhost:3000](http://localhost:3000)
 
 ### 1. Pet Listings & Adoption Experience
 - **Filterable search** - Filter by species, age, size, gender
-- **Compatibility filters** - "Good with kids/dogs/cats" checkboxes
-- **Personality badges** - Each animal shows traits like "Cuddly", "Playful", "Independent"
-- **"Long Stay" highlighting** - Animals waiting 90+ days get special visibility
+- **Compatibility filters** - "Good with children/dogs/cats" checkboxes
+- **Personality badges** - Each animal shows traits like "Gentle", "Energetic", "Independent"
+- **"Long Stay" highlighting** - Animals waiting 90+ days get a callout banner and a badge on their card/profile
 - **Individual profile pages** - Dedicated URL for each animal with SEO benefits
-- **In-page adoption application** - Multi-step form with confirmation
+- **In-page adoption application** - Modal form with confirmation
 
 ### 2. Donation Experience (Fixed 404!)
-- **Impact-based giving levels** - "£25 provides vaccinations for one animal"
 - **One-time and monthly options** - Toggle between donation types
-- **Quick amount buttons** - £10, £25, £50, £100, £250
-- **Fund-directed donations** - Donate to specific causes (Cat Intake Unit, Medical Fund)
-- **Sponsorship section** - £6/month sponsorship program
-- **Legacy giving** - Information about leaving gifts in wills
+- **Quick amount buttons** - £10, £25, £50, £100, plus a custom amount
+- **Dedicated pages for every "Ways to Help" link** - `/sponsor`, `/legacy`, `/outreach`, `/membership` all exist now (previously 404s)
+- **Sponsorship tiers** - £6/£12/£20 per month, each with a description of what it funds
+- **Legacy giving** - Types of gift, why it matters, how to get started
+- **Membership** - £15/year with listed member benefits
 
 ### 3. Modern Design & UX
 - **Mobile-first responsive** - Works beautifully on all devices
@@ -89,10 +89,13 @@ src/
 │   │   ├── page.tsx          # Pet listings with filters
 │   │   └── [id]/page.tsx     # Individual animal profile
 │   ├── donate/page.tsx       # Donation page
+│   ├── sponsor/page.tsx      # Monthly sponsorship tiers
+│   ├── legacy/page.tsx       # Gifts in wills
+│   ├── outreach/page.tsx     # Community outreach scheme
+│   ├── membership/page.tsx   # Annual membership
 │   ├── volunteer/page.tsx    # Volunteer information
 │   ├── about/page.tsx        # About the sanctuary
-│   ├── contact/page.tsx      # Contact form & info
-│   └── success-stories/page.tsx # Happy Tails
+│   └── contact/page.tsx      # Contact form & info
 ├── components/
 │   ├── Header.tsx            # Navigation & CTAs
 │   ├── Footer.tsx            # Links & newsletter
@@ -104,9 +107,9 @@ src/
 ## 🎨 Design System
 
 ### Colors
-- **Primary (Emerald)**: `#2d5a3d` - Trust, nature, growth
-- **Secondary (Amber)**: `#f59e0b` - Warmth, urgency, calls to action
-- **Accent (Pink)**: `#ec4899` - Foster program, special features
+- **Primary (Ink)**: `#1a1a1a` - Headings, primary buttons, footer
+- **Secondary (Yellow)**: `#fbbf24` - Brand color, hero sections, CTAs
+- **Accent (Pink)**: `#db2777` - Urgent appeals, "Long Stay" highlighting
 
 ### Typography
 - **Font**: Inter (system font fallback)

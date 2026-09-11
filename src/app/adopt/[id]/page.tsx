@@ -2,8 +2,11 @@
 
 import { useState, use } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { animals } from '@/data/animals';
 import { notFound } from 'next/navigation';
+
+const LONG_STAY_THRESHOLD = 90;
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -54,25 +57,46 @@ export default function AnimalProfilePage({ params }: PageProps) {
           <div className="md:flex">
             {/* Image */}
             <div className="md:w-1/2">
-              <div className="aspect-square">
-                <img
+              <div className="relative aspect-square bg-gray-100">
+                <Image
                   src={animal.image}
                   alt={animal.name}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  priority
+                  className="object-cover"
                 />
               </div>
             </div>
 
             {/* Details */}
             <div className="md:w-1/2 p-6 md:p-8">
-              {animal.reserved && (
-                <div className="inline-block bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded mb-4">
-                  Currently Reserved
-                </div>
-              )}
-              
+              <div className="flex flex-wrap gap-2 mb-4">
+                {animal.reserved && (
+                  <span className="inline-block bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded">
+                    Currently Reserved
+                  </span>
+                )}
+                {!animal.reserved && animal.daysAtSanctuary >= LONG_STAY_THRESHOLD && (
+                  <span className="inline-block bg-pink-600 text-white text-sm font-medium px-3 py-1 rounded">
+                    Long Stay · waiting {animal.daysAtSanctuary} days
+                  </span>
+                )}
+              </div>
+
               <h1 className="text-3xl font-bold text-gray-900 mb-2">{animal.name}</h1>
               <p className="text-lg text-gray-600 mb-4">{animal.breed}</p>
+
+              <div className="flex flex-wrap gap-1.5 mb-6">
+                {animal.personality.map((trait) => (
+                  <span
+                    key={trait}
+                    className="bg-yellow-50 text-yellow-800 text-xs font-medium px-2 py-1 rounded-full"
+                  >
+                    {trait}
+                  </span>
+                ))}
+              </div>
 
               <dl className="grid grid-cols-2 gap-4 mb-6 text-sm">
                 <div>
@@ -92,6 +116,38 @@ export default function AnimalProfilePage({ params }: PageProps) {
                   <dd className="font-medium text-gray-900">£{animal.rehomingFee}</dd>
                 </div>
               </dl>
+
+              <div className="mb-6">
+                <h2 className="font-semibold text-gray-900 mb-2">Good with</h2>
+                <div className="flex flex-wrap gap-2 text-sm">
+                  <span
+                    className={`px-3 py-1 rounded-full ${
+                      animal.goodWith.children === true
+                        ? 'bg-green-50 text-green-800'
+                        : animal.goodWith.children === 'older-only'
+                        ? 'bg-amber-50 text-amber-800'
+                        : 'bg-gray-100 text-gray-500'
+                    }`}
+                  >
+                    Children{animal.goodWith.children === 'older-only' ? ' (older only)' : ''}
+                    {animal.goodWith.children === false ? ' — no' : ''}
+                  </span>
+                  <span
+                    className={`px-3 py-1 rounded-full ${
+                      animal.goodWith.dogs ? 'bg-green-50 text-green-800' : 'bg-gray-100 text-gray-500'
+                    }`}
+                  >
+                    Other dogs{!animal.goodWith.dogs ? ' — no' : ''}
+                  </span>
+                  <span
+                    className={`px-3 py-1 rounded-full ${
+                      animal.goodWith.cats ? 'bg-green-50 text-green-800' : 'bg-gray-100 text-gray-500'
+                    }`}
+                  >
+                    Cats{!animal.goodWith.cats ? ' — no' : ''}
+                  </span>
+                </div>
+              </div>
 
               <div className="mb-6">
                 <h2 className="font-semibold text-gray-900 mb-2">About {animal.name}</h2>

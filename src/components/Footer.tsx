@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -8,9 +9,11 @@ export default function Footer() {
           
           {/* About */}
           <div>
-            <img 
-              src="/logo.jpg" 
-              alt="Assisi Animal Sanctuary" 
+            <Image
+              src="/logo.jpg"
+              alt="Assisi Animal Sanctuary"
+              width={64}
+              height={64}
               className="h-16 w-auto rounded mb-4"
             />
             <p className="text-gray-400 text-sm">

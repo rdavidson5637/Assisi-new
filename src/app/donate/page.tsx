@@ -7,6 +7,7 @@ export default function DonatePage() {
   const [donationType, setDonationType] = useState<'one-time' | 'monthly'>('one-time');
   const [selectedAmount, setSelectedAmount] = useState<number | null>(25);
   const [customAmount, setCustomAmount] = useState('');
+  const [requested, setRequested] = useState(false);
 
   const amounts = [10, 25, 50, 100];
   const finalAmount = selectedAmount || (customAmount ? parseInt(customAmount) : 0);
@@ -97,18 +98,35 @@ export default function DonatePage() {
           </div>
 
           {/* Submit */}
-          <button
-            className="w-full btn-secondary text-lg py-3"
-            disabled={!finalAmount}
-          >
-            {donationType === 'monthly' 
-              ? `Donate £${finalAmount || 0} per month` 
-              : `Donate £${finalAmount || 0}`}
-          </button>
+          {requested ? (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+              <p className="text-green-800 font-medium">
+                Thank you for choosing to give £{finalAmount}{donationType === 'monthly' ? ' a month' : ''}!
+              </p>
+              <p className="text-green-700 text-sm mt-1">
+                Online card payments are launching soon. For now, please call{' '}
+                <a href="tel:02891812622" className="underline">028 9181 2622</a> or email{' '}
+                <a href="mailto:info@assisi-ni.org" className="underline">info@assisi-ni.org</a> and
+                we&apos;ll take your donation over the phone or set up your standing order.
+              </p>
+            </div>
+          ) : (
+            <>
+              <button
+                onClick={() => setRequested(true)}
+                className="w-full btn-secondary text-lg py-3"
+                disabled={!finalAmount}
+              >
+                {donationType === 'monthly'
+                  ? `Donate £${finalAmount || 0} per month`
+                  : `Donate £${finalAmount || 0}`}
+              </button>
 
-          <p className="text-center text-sm text-gray-500 mt-4">
-            Secure payment. Your donation is tax-deductible.
-          </p>
+              <p className="text-center text-sm text-gray-500 mt-4">
+                Secure payment. Your donation is tax-deductible.
+              </p>
+            </>
+          )}
         </div>
 
         {/* Other Ways */}

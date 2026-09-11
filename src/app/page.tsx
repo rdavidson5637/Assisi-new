@@ -31,6 +31,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Impact Stats */}
+      <section className="bg-gray-900 text-white py-8 border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <div className="text-2xl md:text-3xl font-bold text-yellow-400">2,500+</div>
+            <div className="text-sm text-gray-400 mt-1">animals rehomed since 1997</div>
+          </div>
+          <div>
+            <div className="text-2xl md:text-3xl font-bold text-yellow-400">4</div>
+            <div className="text-sm text-gray-400 mt-1">charity shops across NI</div>
+          </div>
+          <div>
+            <div className="text-2xl md:text-3xl font-bold text-yellow-400">No-Kill</div>
+            <div className="text-sm text-gray-400 mt-1">policy for every animal</div>
+          </div>
+          <div>
+            <div className="text-2xl md:text-3xl font-bold text-yellow-400">0</div>
+            <div className="text-sm text-gray-400 mt-1">government funding — community powered</div>
+          </div>
+        </div>
+      </section>
+
       {/* Cat Intake Appeal */}
       <section className="bg-gray-900 text-white py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -86,7 +108,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
             {/* Donate */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="card-hover bg-white rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-3">Donate</h3>
               <p className="text-gray-600 mb-4">
                 Every donation is a lifeline. We are always grateful for all donations received – 
@@ -98,7 +120,7 @@ export default function Home() {
             </div>
 
             {/* Sponsor */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="card-hover bg-white rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-3">Sponsorship</h3>
               <p className="text-gray-600 mb-4">
                 For as little as 20p a day, you could provide multiple unwanted and homeless animals 
@@ -110,7 +132,7 @@ export default function Home() {
             </div>
 
             {/* Volunteer */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="card-hover bg-white rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-3">Volunteer</h3>
               <p className="text-gray-600 mb-4">
                 Can you spare 3-4 hours each week? By volunteering with us you will meet new people, 
@@ -122,7 +144,7 @@ export default function Home() {
             </div>
 
             {/* Legacy */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="card-hover bg-white rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-3">Legacy</h3>
               <p className="text-gray-600 mb-4">
                 Leave a gift in your will. A gift left in your Will is a great way to ensure that 
@@ -134,7 +156,7 @@ export default function Home() {
             </div>
 
             {/* Membership */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="card-hover bg-white rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-3">Membership</h3>
               <p className="text-gray-600 mb-4">
                 Your support helps us feed the animals in our care, give them excellent veterinary 
@@ -146,7 +168,7 @@ export default function Home() {
             </div>
 
             {/* Outreach */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="card-hover bg-white rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-3">Outreach</h3>
               <p className="text-gray-600 mb-4">
                 Our Outreach Scheme supports individuals and families within our community who struggle 

@@ -44,7 +44,7 @@ export default function AboutPage() {
 
           <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Our Vision</h2>
           <p>
-            A future where Assisi Animal Sanctuary is Northern Ireland's leading Animal Welfare Charity 
+            A future where Assisi Animal Sanctuary is Northern Ireland&apos;s leading Animal Welfare Charity
             bringing about the day when every companion animal has a happy home for life.
           </p>
 
