@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import AnimalCard from '@/components/AnimalCard';
+import HappyTailsSlideshow from '@/components/HappyTailsSlideshow';
 import { animals } from '@/data/animals';
 
 export default function Home() {
@@ -31,25 +32,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Impact Stats */}
-      <section className="bg-gray-900 text-white py-8 border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div>
-            <div className="text-2xl md:text-3xl font-bold text-yellow-400">2,500+</div>
-            <div className="text-sm text-gray-400 mt-1">animals rehomed since 1997</div>
+      {/* Happy Tails */}
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Happy Tails</h2>
+            <p className="text-gray-600 text-lg">
+              Every one of these animals waited for the right home to come along. Here&apos;s what
+              happened after they found it.
+            </p>
           </div>
-          <div>
-            <div className="text-2xl md:text-3xl font-bold text-yellow-400">4</div>
-            <div className="text-sm text-gray-400 mt-1">charity shops across NI</div>
-          </div>
-          <div>
-            <div className="text-2xl md:text-3xl font-bold text-yellow-400">No-Kill</div>
-            <div className="text-sm text-gray-400 mt-1">policy for every animal</div>
-          </div>
-          <div>
-            <div className="text-2xl md:text-3xl font-bold text-yellow-400">0</div>
-            <div className="text-sm text-gray-400 mt-1">government funding — community powered</div>
-          </div>
+          <HappyTailsSlideshow />
         </div>
       </section>
 
