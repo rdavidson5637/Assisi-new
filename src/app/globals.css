@@ -52,6 +52,28 @@ body {
   @apply border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200;
 }
 
+::selection {
+  background: #fde68a;
+  color: #111827;
+}
+
+:focus-visible {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .card-hover,
+  .card-hover:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }

@@ -15,10 +15,13 @@ export default function SponsorPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <section className="bg-yellow-400 py-12">
+      <section className="bg-yellow-400 py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Sponsorship</h1>
-          <p className="text-xl text-gray-800 mt-2">Give a little every month, change a life every day</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-gray-800/80 mb-2">
+            Assisi Animal Sanctuary
+          </p>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Sponsorship</h1>
+          <p className="text-xl text-gray-800 mt-3">Give a little every month, change a life every day</p>
         </div>
       </section>
 
