@@ -1,136 +1,123 @@
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
+import Link from 'next/link';
+import PageHero from '@/components/PageHero';
+import VolunteerForm from '@/components/VolunteerForm';
+import { pageMetadata } from '@/lib/metadata';
+
+export const metadata: Metadata = pageMetadata(
+  'Volunteer',
+  'Volunteer at Assisi Animal Sanctuary — walk dogs, settle cats, help in our shops, foster, fundraise or join a corporate team. 16+ for shops, 18+ for animals.'
+);
+
+const roles: {
+  id: string;
+  title: string;
+  body: string;
+  extra?: ReactNode;
+}[] = [
+  {
+    id: 'sanctuary',
+    title: 'At the sanctuary',
+    body: 'Walk dogs, clean kennels, spend time with cats, or feed small animals. Prefer indoors? Reception, meet-and-greet and admin always need people. Handy? Help keep the site in good nick.',
+  },
+  {
+    id: 'drivers',
+    title: 'Transport drivers',
+    body: 'Drive animals to the vet, or support the rehoming team on the road. Driving volunteers must be 21+; conditions apply.',
+  },
+  {
+    id: 'shops',
+    title: 'In our shops',
+    body: 'Bangor, Holywood and Newtownards need people to serve customers, sort stock and make deliveries. A few hours a week in a shop is a huge contribution to the animals.',
+  },
+  {
+    id: 'foster',
+    title: 'Fostering',
+    body: 'Can’t commit to a weekly shift? Foster a golden oldie, a mum with babies, or an animal recovering from surgery. We cover vet care; you give them a home while they wait.',
+  },
+  {
+    id: 'fundraising',
+    title: 'Fundraising & events',
+    body: 'Street collections, bag packs, sponsored walks, collection cans and support groups. Money raised goes straight to food, vet bills and care.',
+    extra: (
+      <p className="text-gray-600 mt-3">
+        Contact Fundraising Manager Grace at{' '}
+        <a href="mailto:grace@assisi-ni.org" className="underline">grace@assisi-ni.org</a>
+        {' '}or 07598 050096.
+      </p>
+    ),
+  },
+  {
+    id: 'corporate',
+    title: 'Corporate teams',
+    body: 'Nominate Assisi as your charity of the year, or bring a staff team to the sanctuary. We’ll provide the support and materials you need.',
+  },
+  {
+    id: 'placement',
+    title: 'Placement / work experience',
+    body: 'Studying for a career with animals? Apply for a placement and get real experience in animal welfare.',
+  },
+];
+
 export default function VolunteerPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <section className="bg-yellow-400 py-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Become a Volunteer</h1>
-          <p className="text-xl text-gray-800 mt-2">Let&apos;s help animals together</p>
-        </div>
-      </section>
+    <div className="min-h-screen bg-gray-50">
+      <PageHero
+        title="Become a volunteer"
+        subtitle="A few hours a week. New people, useful skills, and a genuine difference to animals who need you."
+      />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="prose prose-lg max-w-none mb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-3xl mb-10 text-gray-700 space-y-4">
           <p>
-            Can you spare 3-4 hours each week? By volunteering with us you will meet new people, 
-            gain new or use existing skills, gain experience and ultimately make a big difference 
-            to animal welfare.
+            Without volunteers we could not do this work. There is something to suit most people —
+            with animals, in a shop, behind a desk, or from home as a fosterer.
           </p>
-          <p>
-            Without our dedicated volunteers, we could not continue with the work we do – and there 
-            is so much to do! Volunteering with us is very rewarding, you are helping us make a 
-            difference to so many animals&apos; lives. We have several different volunteer roles – 
-            there is something to suit everyone!
-          </p>
-          <p className="text-sm text-gray-600">
-            *Volunteers / placements must be 18+ to help with our animals, in reception or participate 
-            in fundraising events. Volunteers must be 16+ to help in our shops.
+          <p className="text-sm text-gray-500">
+            Volunteers and placements must be 18+ to help with animals, in reception or at
+            fundraising events. Shop volunteers must be 16+.
           </p>
         </div>
 
-        <div className="space-y-8">
-          <div className="border-b pb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-3">At the Sanctuary</h2>
-            <p className="text-gray-600">
-              If you love animals, maybe you can help clean the kennels and walk the dogs, spend time 
-              cuddling cats, or feed the small animals. If you would prefer something more indoors, 
-              you could volunteer in Reception, meet and greet visitors, help with admin duties and 
-              answering the telephone. If you&apos;re handy, help keep our site in great condition with 
-              some general maintenance.
-            </p>
+        <div className="grid lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 grid sm:grid-cols-2 gap-6">
+            {roles.map((role) => (
+              <article key={role.id} id={role.id} className="bg-white rounded-2xl p-6 shadow-sm">
+                <h2 className="text-lg font-bold text-gray-900 mb-2">{role.title}</h2>
+                <p className="text-gray-600 text-sm">{role.body}</p>
+                {role.extra}
+              </article>
+            ))}
           </div>
-
-          <div className="border-b pb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-3">Transport Drivers</h2>
-            <p className="text-gray-600">
-              If you like to drive, help us transport our animals to and from the vets, or support 
-              our rehoming team as they travel around the country doing important rescue work. 
-              (Driving volunteers must be 21+; conditions apply)
-            </p>
-          </div>
-
-          <div className="border-b pb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-3">In our Shops</h2>
-            <p className="text-gray-600">
-              Our four shops in Bangor, Belfast, Holywood, and Newtownards need volunteers to work 
-              shifts, help serve customers, sort stock, and make deliveries. The shops are a vital 
-              source of income for the Sanctuary, so for just a few hours a week, you can make a 
-              huge contribution to the work we do here!
-            </p>
-          </div>
-
-          <div className="border-b pb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-3">Fostering</h2>
-            <p className="text-gray-600">
-              Joining our fostering team is a fantastic way to help with the animals for those who 
-              can&apos;t commit to a weekly shift at the Sanctuary. Maybe there is an overlooked golden 
-              oldie searching for a retirement home, or an abandoned mum looking for a safe space to 
-              raise her babies. Maybe there is a forgotten soul recovering from surgery or who has a 
-              life-limiting illness. They may require daily medication or regular trips to the vet, 
-              but you know you will be able to give them the love and quality of life they deserve. 
-              You will be giving them a second chance, and in return you will receive unconditional 
-              love; what more could anyone want!
-            </p>
-          </div>
-
-          <div className="border-b pb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-3">Fundraising &amp; Events</h2>
-            <p className="text-gray-600 mb-4">
-              Fundraising is crucial to the survival of the charity; the money goes straight to the 
-              animals, paying for their food, vet bills, and care. There are so many ways you can help 
-              us raise these indispensable funds and allow us to continue to care for and rescue many 
-              more animals, such as volunteering at street collections, bag packs, and sponsored walks, 
-              helping with collection cans, joining our support groups and more!
-            </p>
-            <p className="text-gray-600">
-              You can contact our Fundraising Manager, Grace by email at{' '}
-              <a href="mailto:grace@assisi-ni.org" className="underline">grace@assisi-ni.org</a>
-              {' '}or by phone/text on 07598050096.
-            </p>
-          </div>
-
-          <div className="border-b pb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-3">Corporate Teams</h2>
-            <p className="text-gray-600">
-              Are you a company looking to support a charity? Then please consider nominating Assisi 
-              as your chosen charity of the year! We will provide all the support and materials you 
-              need to assist your organisation in all fundraising activity you chose to do. 
-              Alternatively, volunteer your staff time to help at the Sanctuary. If you would like 
-              to discuss corporate volunteering, email{' '}
-              <a href="mailto:info@assisi-ni.org" className="underline">info@assisi-ni.org</a>
-            </p>
-          </div>
-
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">Placement / Work Experience</h2>
-            <p className="text-gray-600">
-              Are you currently studying for a career working with animals and need to complete a 
-              practical module towards your qualification? Assisi believes education plays a 
-              significant role in furthering the welfare of animals now and in the future, so why 
-              not apply for one of our placement spaces to gain real-world experience in the animal 
-              welfare sector!
+            <h2 className="text-xl font-bold text-gray-900 mb-3">Tell us you’d like to help</h2>
+            <p className="text-gray-600 text-sm mb-4">
+              We can’t always offer your first-choice day. We’ll be honest about what’s free and
+              find a fit.
+            </p>
+            <VolunteerForm />
+            <p className="text-sm text-gray-500 mt-4">
+              Or email{' '}
+              <a href="mailto:info@assisi-ni.org" className="underline">info@assisi-ni.org</a>
+              {' '}or call{' '}
+              <a href="tel:02891812622" className="underline">028 9181 2622</a>.
             </p>
           </div>
         </div>
 
-        <div className="mt-12 bg-yellow-50 rounded-lg p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">How do I get involved?</h2>
-          <p className="text-gray-600 mb-4">
-            It&apos;s easy! If you are interested in volunteering with us, please contact us for a chat 
-            about how you might be able to help in our work to protect and care for stray or unwanted 
-            companion animals.
+        <div className="mt-12 bg-yellow-50 rounded-2xl p-6 md:flex md:items-center md:justify-between gap-4">
+          <p className="text-gray-800 font-medium">
+            Prefer to help from home, or give financially instead?
           </p>
-          <p className="text-gray-600 mb-6">
-            On occasion, we are unable to guarantee there will be a space available for you on your 
-            preferred day, so we will contact you with other options to see if there are any other 
-            days that suit or work for you.
-          </p>
-          <p className="text-gray-700 font-medium">
-            Contact us at{' '}
-            <a href="mailto:info@assisi-ni.org" className="underline">info@assisi-ni.org</a>
-            {' '}or call{' '}
-            <a href="tel:02891812622" className="underline">028 9181 2622</a>
-          </p>
+          <div className="flex flex-wrap gap-3 mt-4 md:mt-0">
+            <Link href="/donate" className="btn-outline">
+              Donate
+            </Link>
+            <Link href="/sponsor" className="btn-secondary">
+              Sponsor monthly
+            </Link>
+          </div>
         </div>
       </div>
     </div>

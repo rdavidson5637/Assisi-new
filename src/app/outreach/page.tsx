@@ -1,12 +1,22 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/metadata';
+
+export const metadata: Metadata = pageMetadata(
+  'Outreach',
+  'Assisi Outreach helps families in hardship keep their pets — food parcels, vet advice, and support without judgement.'
+);
 
 export default function OutreachPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="bg-yellow-400 py-12">
+      <section className="bg-yellow-400 py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Outreach Scheme</h1>
-          <p className="text-xl text-gray-800 mt-2">Keeping pets and families together</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-gray-800/80 mb-2">
+            Assisi Animal Sanctuary
+          </p>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Outreach scheme</h1>
+          <p className="text-xl text-gray-800 mt-3">Keeping pets and families together</p>
         </div>
       </section>
 

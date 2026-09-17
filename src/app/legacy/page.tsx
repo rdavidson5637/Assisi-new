@@ -1,12 +1,22 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/metadata';
+
+export const metadata: Metadata = pageMetadata(
+  'Leave a legacy',
+  'Leave a gift to Assisi Animal Sanctuary in your Will. Residuary, pecuniary and specific gifts help animals in Northern Ireland for years to come.'
+);
 
 export default function LegacyPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="bg-yellow-400 py-12">
+      <section className="bg-yellow-400 py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Leave a Legacy</h1>
-          <p className="text-xl text-gray-800 mt-2">A gift that lasts long after you&apos;re gone</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-gray-800/80 mb-2">
+            Assisi Animal Sanctuary
+          </p>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Leave a legacy</h1>
+          <p className="text-xl text-gray-800 mt-3">A gift that lasts long after you&apos;re gone</p>
         </div>
       </section>
 
