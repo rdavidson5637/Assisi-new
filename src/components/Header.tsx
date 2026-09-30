@@ -16,7 +16,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
+    <header className="sticky top-0 z-50 bg-cream border-b border-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
@@ -37,37 +37,29 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-700 hover:text-yellow-600 font-medium transition-colors"
+                className="text-ink hover:text-teal font-medium transition-colors"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <Link
-              href="/adopt"
-              className="btn-outline text-sm py-2 px-4"
-            >
-              Find a Pet
-            </Link>
-            <Link
-              href="/donate"
-              className="btn-secondary text-sm py-2 px-4"
-            >
-              Donate Now
+          <div className="hidden lg:flex items-center">
+            <Link href="/donate" className="btn-primary">
+              Donate
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100"
+            className="lg:hidden p-2 rounded-[12px] hover:bg-ink/5"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav"
           >
             <svg
-              className="w-6 h-6 text-gray-700"
+              className="w-6 h-6 text-ink"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -93,37 +85,30 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden pb-4 border-t border-gray-100">
+          <div id="mobile-nav" className="lg:hidden pb-4 border-t border-line">
             <nav className="flex flex-col space-y-2 pt-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-gray-700 hover:text-yellow-600 font-medium py-2 px-4 rounded-lg hover:bg-gray-50"
+                  className="text-ink hover:text-teal font-medium py-2 px-4 rounded-[12px] hover:bg-ink/5"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-              <div className="flex flex-col space-y-2 pt-4 px-4">
-                <Link href="/adopt" className="btn-outline text-center">
-                  Find a Pet
-                </Link>
-                <Link href="/donate" className="btn-secondary text-center">
-                  Donate Now
+              <div className="pt-4 px-4">
+                <Link
+                  href="/donate"
+                  className="btn-primary w-full"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Donate
                 </Link>
               </div>
             </nav>
           </div>
         )}
-      </div>
-
-      {/* Urgent Appeal Banner */}
-      <div className="bg-yellow-400 text-gray-900 py-2 px-4 text-center text-sm">
-        <span className="font-semibold">🚨 Urgent Appeal:</span> Help us build a dedicated Cat Intake Unit!{' '}
-        <Link href="/donate" className="underline hover:no-underline font-semibold">
-          Donate today →
-        </Link>
       </div>
     </header>
   );

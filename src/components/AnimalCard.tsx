@@ -1,56 +1,55 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Animal } from '@/data/animals';
+import { isLongStay, type Animal } from '@/data/animals';
 
 interface AnimalCardProps {
   animal: Animal;
+  large?: boolean;
 }
 
-const LONG_STAY_THRESHOLD = 90;
-
-export default function AnimalCard({ animal }: AnimalCardProps) {
-  const isLongStay = animal.daysAtSanctuary >= LONG_STAY_THRESHOLD;
+export default function AnimalCard({ animal, large = false }: AnimalCardProps) {
+  const longStay = isLongStay(animal);
+  const traits = animal.personality.slice(0, 3).join(', ');
 
   return (
-    <Link href={`/adopt/${animal.id}`} className="group block">
-      <div className="card-hover bg-white rounded-2xl shadow-sm overflow-hidden">
-        <div className="relative aspect-square bg-gray-100">
+    <Link href={`/adopt/${animal.id}`} className="group block h-full">
+      <div className="card-hover panel overflow-hidden h-full">
+        <div className={`relative bg-ink/5 ${large ? 'aspect-[4/3]' : 'aspect-square'}`}>
           <Image
             src={animal.image}
             alt={animal.name}
             fill
-            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+            sizes={
+              large
+                ? '(min-width: 768px) 50vw, 100vw'
+                : '(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw'
+            }
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          <div className="absolute top-2 left-2 flex flex-col gap-1 items-start">
-            {animal.reserved && (
-              <span className="bg-gray-900 text-white text-xs font-semibold px-2 py-1 rounded">
-                Reserved
-              </span>
-            )}
-            {!animal.reserved && isLongStay && (
-              <span className="bg-pink-600 text-white text-xs font-semibold px-2 py-1 rounded">
+        </div>
+        <div className={large ? 'p-6' : 'p-4'}>
+          {animal.reserved && (
+            <p className="text-xs font-semibold text-ink mb-2">Reserved</p>
+          )}
+          {longStay && (
+            <p className="mb-2">
+              <span className="inline-block bg-teal text-cream text-xs font-semibold px-2 py-1 rounded-[12px]">
                 Long Stay
               </span>
-            )}
-          </div>
-        </div>
-        <div className="p-4">
-          <h3 className="text-lg font-bold text-gray-900">{animal.name}</h3>
-          <p className="text-gray-600 text-sm">{animal.breed}</p>
-          <p className="text-gray-500 text-sm mb-3">
+            </p>
+          )}
+          <h3
+            className={`font-bold text-ink ${
+              large ? 'text-4xl md:text-5xl leading-none' : 'text-lg'
+            }`}
+          >
+            {animal.name}
+          </h3>
+          <p className="text-ink/70 text-sm mt-2">{animal.breed}</p>
+          <p className="text-ink/60 text-sm">
             {animal.age} · {animal.gender === 'male' ? 'Male' : 'Female'}
           </p>
-          <div className="flex flex-wrap gap-1.5">
-            {animal.personality.slice(0, 3).map((trait) => (
-              <span
-                key={trait}
-                className="bg-yellow-50 text-yellow-800 text-xs font-medium px-2 py-1 rounded-full"
-              >
-                {trait}
-              </span>
-            ))}
-          </div>
+          {traits && <p className="text-ink/70 text-sm mt-2">{traits}</p>}
         </div>
       </div>
     </Link>

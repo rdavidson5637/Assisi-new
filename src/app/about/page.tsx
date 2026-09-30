@@ -2,17 +2,16 @@ import Link from 'next/link';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <section className="bg-yellow-400 py-12">
+    <div className="min-h-screen bg-cream">
+      <section className="bg-cream border-b border-line py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">About Assisi Animal Sanctuary</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-ink">About Assisi Animal Sanctuary</h1>
         </div>
       </section>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="prose prose-lg max-w-none">
-          <p className="text-xl text-gray-700 mb-8">
+          <p className="text-xl text-ink/80 mb-8">
             Founded in 1997, Assisi Animal Sanctuary is a local independent animal welfare charity in Northern Ireland.
           </p>
 
@@ -42,13 +41,13 @@ export default function AboutPage() {
             that is right for them.
           </p>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Our Vision</h2>
+          <h2 className="text-2xl font-bold text-ink mt-12 mb-4">Our Vision</h2>
           <p>
             A future where Assisi Animal Sanctuary is Northern Ireland&apos;s leading Animal Welfare Charity
             bringing about the day when every companion animal has a happy home for life.
           </p>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Our Mission</h2>
+          <h2 className="text-2xl font-bold text-ink mt-12 mb-4">Our Mission</h2>
           <p>
             To keep as many animals in their homes as possible by providing support and advice to owners; 
             to rescue and rehome needy animals by providing modern facilities with well trained staff and 
@@ -61,7 +60,7 @@ export default function AboutPage() {
             stop the current destruction of companion animals in Northern Ireland.
           </p>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Animal Rights</h2>
+          <h2 className="text-2xl font-bold text-ink mt-12 mb-4">Animal Rights</h2>
           <p>Assisi believes that every animal has a right to:</p>
           <ol className="list-decimal pl-6 space-y-2">
             <li>A suitable, comfortable and happy environment</li>
@@ -86,9 +85,9 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="mt-12 pt-8 border-t">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Make a Donation</h2>
-          <p className="text-gray-600 mb-6">
+        <div className="mt-12 pt-8 border-t border-line">
+          <h2 className="text-2xl font-bold text-ink mb-4">Make a Donation</h2>
+          <p className="text-ink/70 mb-6">
             Your donation helps provide everything from nutritious meals and veterinary treatment to warmth, 
             safety and rehabilitation. Every contribution, whatever the amount, helps us continue our 
             lifesaving work. Thank you for being part of their journey to a brighter future.

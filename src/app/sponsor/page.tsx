@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { EmailLink, PhoneLink } from '@/components/ContactLinks';
 
 const tiers = [
   { amount: 6, label: 'Friend', blurb: 'Helps cover daily food and bedding for animals in our care.' },
@@ -14,11 +15,11 @@ export default function SponsorPage() {
   const [requested, setRequested] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <section className="bg-yellow-400 py-12">
+    <div className="min-h-screen bg-cream">
+      <section className="bg-cream border-b border-line py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Sponsorship</h1>
-          <p className="text-xl text-gray-800 mt-2">Give a little every month, change a life every day</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-ink">Sponsorship</h1>
+          <p className="text-xl text-ink/80 mt-2">Give a little every month, change a life every day</p>
         </div>
       </section>
 
@@ -35,73 +36,73 @@ export default function SponsorPage() {
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-10">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Choose Your Monthly Sponsorship</h2>
+        <div className="panel p-6 md:p-8 mb-10">
+          <h2 className="text-xl font-bold text-ink mb-6">Choose Your Monthly Sponsorship</h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
             {tiers.map((tier) => (
               <button
                 key={tier.amount}
                 onClick={() => setSelected(tier.amount)}
-                className={`text-left rounded-xl p-4 border-2 transition-colors ${
+                className={`text-left rounded-[12px] p-4 border transition-colors ${
                   selected === tier.amount
-                    ? 'border-yellow-400 bg-yellow-50'
-                    : 'border-gray-200 hover:border-gray-300'
+                    ? 'border-ink'
+                    : 'border-line hover:border-ink'
                 }`}
               >
-                <div className="text-2xl font-bold text-gray-900">£{tier.amount}<span className="text-sm font-medium text-gray-500">/mo</span></div>
-                <div className="font-semibold text-gray-800 mt-1">{tier.label}</div>
-                <p className="text-sm text-gray-600 mt-2">{tier.blurb}</p>
+                <div className="text-2xl font-bold text-ink">£{tier.amount}<span className="text-sm font-medium text-ink/60">/mo</span></div>
+                <div className="font-semibold text-ink mt-1">{tier.label}</div>
+                <p className="text-sm text-ink/70 mt-2">{tier.blurb}</p>
               </button>
             ))}
           </div>
 
           {requested ? (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-              <p className="text-green-800 font-medium">
+            <div className="panel p-4 text-center">
+              <p className="text-ink font-medium">
                 Thank you for choosing to sponsor at £{selected}/month!
               </p>
-              <p className="text-green-700 text-sm mt-1">
+              <p className="text-ink/70 text-sm mt-1">
                 Online sign-up is launching soon. Call{' '}
-                <a href="tel:02891812622" className="underline">028 9181 2622</a> or email{' '}
-                <a href="mailto:info@assisi-ni.org" className="underline">info@assisi-ni.org</a> and
+                <PhoneLink className="underline" /> or email{' '}
+                <EmailLink className="underline" /> and
                 we&apos;ll get your sponsorship set up.
               </p>
             </div>
           ) : (
-            <button onClick={() => setRequested(true)} className="w-full btn-secondary text-lg py-3">
+            <button onClick={() => setRequested(true)} className="w-full btn-primary">
               Sponsor for £{selected}/month
             </button>
           )}
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm p-6 md:p-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">What Your Sponsorship Supports</h2>
-          <ul className="space-y-3 text-gray-600">
+        <div className="panel p-6 md:p-8">
+          <h2 className="text-xl font-bold text-ink mb-4">What Your Sponsorship Supports</h2>
+          <ul className="space-y-3 text-ink/70">
             <li className="flex gap-3">
-              <span aria-hidden className="text-yellow-500">•</span>
+              <span aria-hidden className="text-teal">•</span>
               Daily food, bedding and warm shelter for every animal in our care
             </li>
             <li className="flex gap-3">
-              <span aria-hidden className="text-yellow-500">•</span>
+              <span aria-hidden className="text-teal">•</span>
               Veterinary treatment, vaccinations, neutering and microchipping
             </li>
             <li className="flex gap-3">
-              <span aria-hidden className="text-yellow-500">•</span>
+              <span aria-hidden className="text-teal">•</span>
               Extra care for our long-stay and special needs animals who take longer to rehome
             </li>
             <li className="flex gap-3">
-              <span aria-hidden className="text-yellow-500">•</span>
+              <span aria-hidden className="text-teal">•</span>
               Our Outreach Scheme, helping families in the community keep and care for their pets
             </li>
           </ul>
         </div>
 
-        <div className="mt-10 pt-8 border-t text-center">
-          <p className="text-gray-600 mb-4">
+        <div className="mt-10 pt-8 border-t border-line text-center">
+          <p className="text-ink/70 mb-4">
             Prefer a one-off gift, or want to sponsor a specific animal? Visit our donation page.
           </p>
-          <Link href="/donate" className="btn-outline">
+          <Link href="/donate" className="btn-secondary">
             Make a One-Time Donation
           </Link>
         </div>

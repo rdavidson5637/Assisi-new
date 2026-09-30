@@ -43,7 +43,7 @@ The site runs at [http://localhost:3000](http://localhost:3000)
 - **Clean navigation** - Simplified menu with clear user journeys
 - **Sticky header** - CTAs always visible
 - **Card hover effects** - Modern micro-interactions
-- **Consistent branding** - Emerald green, amber accents
+- **Consistent branding** - Ink and the sanctuary's yellow
 
 ### 4. Performance
 - **Next.js 16** - Server-side rendering for fast page loads
@@ -59,8 +59,7 @@ The site runs at [http://localhost:3000](http://localhost:3000)
 - **Semantic HTML** - Proper heading hierarchy
 
 ### 6. Content Improvements
-- **Impact statistics** - "2,547+ animals rehomed since 1997"
-- **Success stories** - "Happy Tails" section with adopter testimonials
+- **Success stories** - "Happy Tails" section with a published foster story
 - **Ways to help** - Clear paths for donate, volunteer, foster, sponsor
 - **Urgent appeal banner** - Cat Intake Unit fundraising
 - **FAQ section** - Common questions answered
@@ -109,7 +108,7 @@ src/
 ### Colors
 - **Primary (Ink)**: `#1a1a1a` - Headings, primary buttons, footer
 - **Secondary (Yellow)**: `#fbbf24` - Brand color, hero sections, CTAs
-- **Accent (Pink)**: `#db2777` - Urgent appeals, "Long Stay" highlighting
+- **Accent (Pink)**: `#db2777` - "Long stay" highlighting, when a wait time is published
 
 ### Typography
 - **Font**: Inter (system font fallback)
@@ -118,7 +117,7 @@ src/
 
 ### Components
 - **Cards**: Rounded corners (2xl), shadow, hover effects
-- **Buttons**: Primary (emerald), Secondary (amber), Outline
+- **Buttons**: Primary (ink), Secondary (yellow), Outline
 - **Forms**: Large touch targets, clear labels, validation
 
 ## 🔧 Customization
@@ -159,7 +158,7 @@ Edit `src/data/animals.ts`:
 2. **Payment Integration** - Add Stripe or PayPal for donations
 3. **Email Integration** - Connect contact/application forms to email service
 4. **Analytics** - Add Google Analytics or Plausible
-5. **Real Images** - Replace Unsplash placeholders with actual sanctuary photos
+5. **Wait times** - `daysAtSanctuary` is null until the sanctuary publishes how long each animal has been waiting
 6. **API Integration** - Connect to shelter management software if available
 
 ## 📄 License
