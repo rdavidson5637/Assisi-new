@@ -62,7 +62,7 @@ export default function ShopsPage() {
               Pre-loved clothes and furniture raise real money for vet bills and feed. For larger
               items, phone the shop and they&apos;ll help arrange collection.
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-ink/65">
               Gift Aid on donated goods adds extra 25p in every £1 from the sale if you&apos;re a UK
               taxpayer — ask in store how to sign up.
             </p>

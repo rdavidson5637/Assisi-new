@@ -34,7 +34,7 @@ export default function MembershipPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <div className="panel p-6">
             <h2 className="text-xl font-bold text-ink mb-2">Annual Membership</h2>
-            <div className="text-3xl font-bold text-ink mb-4">£15<span className="text-sm font-medium text-ink/60">/year</span></div>
+            <div className="text-3xl font-bold text-ink mb-4">£15<span className="text-sm font-medium text-ink/65">/year</span></div>
             <ul className="space-y-2 text-sm text-ink/70 mb-6">
               {perks.map((perk) => (
                 <li key={perk} className="flex gap-2">

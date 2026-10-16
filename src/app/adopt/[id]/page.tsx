@@ -43,7 +43,7 @@ function compatibilityText(value: Compatibility, label: string) {
 function compatibilityClass(value: Compatibility) {
   if (value === true) return 'bg-teal text-cream';
   if (value === 'older-only') return 'border border-line text-ink';
-  return 'border border-line text-ink/50';
+  return 'border border-line text-ink/65';
 }
 
 export default async function AnimalProfilePage({ params }: PageProps) {
@@ -61,7 +61,7 @@ export default async function AnimalProfilePage({ params }: PageProps) {
     <div className="min-h-screen bg-cream">
       <div className="bg-cream border-b border-line">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <nav aria-label="Breadcrumb" className="flex items-center space-x-2 text-sm text-ink/60">
+          <nav aria-label="Breadcrumb" className="flex items-center space-x-2 text-sm text-ink/65">
             <Link href="/" className="hover:text-ink">Home</Link>
             <span aria-hidden="true">/</span>
             <Link href="/adopt" className="hover:text-ink">Adopt</Link>
@@ -119,19 +119,19 @@ export default async function AnimalProfilePage({ params }: PageProps) {
 
               <dl className="grid grid-cols-2 gap-4 mb-6 text-sm">
                 <div>
-                  <dt className="text-ink/60">Age</dt>
+                  <dt className="text-ink/65">Age</dt>
                   <dd className="font-medium text-ink">{animal.age}</dd>
                 </div>
                 <div>
-                  <dt className="text-ink/60">Gender</dt>
+                  <dt className="text-ink/65">Gender</dt>
                   <dd className="font-medium text-ink">{gender}</dd>
                 </div>
                 <div>
-                  <dt className="text-ink/60">Size</dt>
+                  <dt className="text-ink/65">Size</dt>
                   <dd className="font-medium text-ink capitalize">{size}</dd>
                 </div>
                 <div>
-                  <dt className="text-ink/60">Rehoming fee</dt>
+                  <dt className="text-ink/65">Rehoming fee</dt>
                   <dd className="font-medium text-ink">£{animal.rehomingFee}</dd>
                 </div>
               </dl>
@@ -141,7 +141,7 @@ export default async function AnimalProfilePage({ params }: PageProps) {
                 {animal.goodWith.children === 'unknown' &&
                 animal.goodWith.dogs === 'unknown' &&
                 animal.goodWith.cats === 'unknown' ? (
-                  <p className="text-sm text-ink/60">
+                  <p className="text-sm text-ink/65">
                     This isn&apos;t listed on the profile. Ask the rehoming team when you apply.
                   </p>
                 ) : (
@@ -180,7 +180,7 @@ export default async function AnimalProfilePage({ params }: PageProps) {
               {!animal.reserved && <AdoptionForm animalName={animal.name} />}
 
               {animal.reserved && (
-                <p className="text-ink/60 text-sm">
+                <p className="text-ink/65 text-sm">
                   {animal.name} is currently reserved. Please check back later or view our other animals.
                 </p>
               )}

@@ -46,7 +46,7 @@ export default function AnimalCard({ animal, large = false }: AnimalCardProps) {
             {animal.name}
           </h3>
           <p className="text-ink/70 text-sm mt-2">{animal.breed}</p>
-          <p className="text-ink/60 text-sm">
+          <p className="text-ink/65 text-sm">
             {animal.age} · {animal.gender === 'male' ? 'Male' : 'Female'}
           </p>
           {traits && <p className="text-ink/70 text-sm mt-2">{traits}</p>}

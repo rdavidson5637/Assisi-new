@@ -35,7 +35,7 @@ export default function NewsletterSignup({ variant = 'light' }: NewsletterSignup
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email address"
-        className="flex-1 px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+        className="flex-1 px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder:text-ink/65 focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
       />
       <button type="submit" className="btn-primary whitespace-nowrap">
         Stay in touch

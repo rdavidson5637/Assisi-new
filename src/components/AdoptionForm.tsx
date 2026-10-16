@@ -137,7 +137,7 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
                 type="button"
                 onClick={close}
                 aria-label="Close application form"
-                className="text-ink/50 hover:text-ink"
+                className="text-ink/65 hover:text-ink"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
