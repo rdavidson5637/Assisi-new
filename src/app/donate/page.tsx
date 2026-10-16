@@ -82,7 +82,7 @@ export default function DonatePage() {
               ))}
             </div>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink/60">£</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink/65">£</span>
               <input
                 type="number"
                 placeholder="Other amount"
@@ -122,7 +122,7 @@ export default function DonatePage() {
                   : `Donate £${finalAmount || 0}`}
               </button>
 
-              <p className="text-center text-sm text-ink/60 mt-4">
+              <p className="text-center text-sm text-ink/65 mt-4">
                 Online card payments are not available on this page yet. You can still give by phone or email.
               </p>
             </>

@@ -198,7 +198,7 @@ export default function AdoptBrowser() {
                 <option value="name">Name</option>
               </select>
               {!hasWaitTimes && (
-                <p className="text-xs text-ink/60 mt-1">
+                <p className="text-xs text-ink/65 mt-1">
                   Wait times appear here once the sanctuary publishes them.
                 </p>
               )}
@@ -252,7 +252,7 @@ export default function AdoptBrowser() {
           )}
         </div>
 
-        <p className="text-sm text-ink/60 mb-4">
+        <p className="text-sm text-ink/65 mb-4">
           Showing {filteredAnimals.length} of {animals.length} animals
         </p>
 
@@ -263,7 +263,7 @@ export default function AdoptBrowser() {
             ))}
           </div>
         ) : (
-          <div className="panel p-12 text-center text-ink/60">
+          <div className="panel p-12 text-center text-ink/65">
             No animals match those filters right now. Try widening your search, or{' '}
             <button
               type="button"
@@ -321,7 +321,7 @@ export default function AdoptBrowser() {
               </div>
             ))}
           </div>
-          <p className="text-ink/60 text-xs mt-4">
+          <p className="text-ink/65 text-xs mt-4">
             *Where an animal leaves Assisi before being neutered, Assisi will provide a contribution
             towards the neutering costs. The amount of this contribution will vary by species and sex.
           </p>

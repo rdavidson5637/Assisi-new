@@ -50,7 +50,7 @@ export default function SponsorPage() {
                     : 'border-line hover:border-ink'
                 }`}
               >
-                <div className="text-2xl font-bold text-ink">£{tier.amount}<span className="text-sm font-medium text-ink/60">/mo</span></div>
+                <div className="text-2xl font-bold text-ink">£{tier.amount}<span className="text-sm font-medium text-ink/65">/mo</span></div>
                 <div className="font-semibold text-ink mt-1">{tier.label}</div>
                 <p className="text-sm text-ink/70 mt-2">{tier.blurb}</p>
               </button>

@@ -1,21 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #FBF7EE;
-  --ink: #171717;
-  --yellow: #F6E823;
-  --teal: #0F4C4C;
-  --line: rgba(23, 23, 23, 0.12);
+  --ink: #1a1a1a;
+  --paper: #f6f1e6;
+  --amber: #fbbf24;
+  --amber-hover: #e0a810;
+  --line: rgba(26, 26, 26, 0.15);
+  --cream: var(--paper);
+  --yellow: #f6e823;
+  --teal: #0f4c4c;
 }
 
 @theme inline {
-  --color-cream: var(--cream);
+  --color-paper: var(--paper);
   --color-ink: var(--ink);
+  --color-amber: var(--amber);
+  --color-amber-hover: var(--amber-hover);
+  --color-line: var(--line);
+  --color-cream: var(--cream);
   --color-yellow: var(--yellow);
   --color-teal: var(--teal);
-  --color-line: var(--line);
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
 }
 
 html {
@@ -23,38 +29,20 @@ html {
 }
 
 body {
-  background: var(--cream);
+  background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-body);
 }
 
 h1,
 h2 {
-  font-weight: 800;
-}
-
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 600;
-}
-
-.font-bold {
-  font-weight: 800;
+  font-family: var(--font-heading);
+  font-optical-sizing: auto;
+  font-weight: 700;
 }
 
 .panel {
-  background: var(--cream);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 12px;
   box-shadow: none;
@@ -65,16 +53,16 @@ h6 {
 }
 
 .card-hover:hover {
-  border-color: rgba(23, 23, 23, 0.4);
+  border-color: rgba(26, 26, 26, 0.4);
 }
 
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--yellow);
+  background: var(--amber);
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.25;
   padding: 0.75rem 1.5rem;
   border: 1px solid transparent;
@@ -82,11 +70,11 @@ h6 {
   box-shadow: none;
   text-decoration: none;
   cursor: pointer;
-  transition: filter 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .btn-primary:hover {
-  filter: brightness(0.96);
+  background: var(--amber-hover);
 }
 
 .btn-primary:disabled {
@@ -101,25 +89,25 @@ h6 {
   border-radius: 0;
   box-shadow: none;
   padding: 0;
-  color: var(--teal);
-  font-weight: 600;
+  color: var(--ink);
+  font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 0.2em;
   cursor: pointer;
 }
 
 .btn-secondary:hover {
-  text-decoration: none;
+  text-decoration-thickness: 2px;
 }
 
 .btn-secondary.text-cream {
-  color: var(--cream);
+  color: var(--paper);
 }
 
 .field {
   width: 100%;
   padding: 0.5rem 0.75rem;
-  background: var(--cream);
+  background: var(--paper);
   color: var(--ink);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -130,7 +118,23 @@ h6 {
   padding-left: 2rem;
 }
 
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
 .field:focus {
-  outline: 2px solid var(--teal);
-  outline-offset: 1px;
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn-primary,
+  .card-hover {
+    transition: none;
+  }
 }

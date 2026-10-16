@@ -26,7 +26,7 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white border-b">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <nav className="flex items-center space-x-2 text-sm text-gray-500" aria-label="Breadcrumb">
+          <nav className="flex items-center space-x-2 text-sm text-ink/65" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-gray-900">Home</Link>
             <span>/</span>
             <Link href="/adopt" className="hover:text-gray-900">Adopt</Link>
@@ -96,19 +96,19 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
 
               <dl className="grid grid-cols-2 gap-4 mb-6 text-sm">
                 <div>
-                  <dt className="text-gray-500">Age</dt>
+                  <dt className="text-ink/65">Age</dt>
                   <dd className="font-medium text-gray-900">{animal.age}</dd>
                 </div>
                 <div>
-                  <dt className="text-gray-500">Gender</dt>
+                  <dt className="text-ink/65">Gender</dt>
                   <dd className="font-medium text-gray-900">{animal.gender === 'male' ? 'Male' : 'Female'}</dd>
                 </div>
                 <div>
-                  <dt className="text-gray-500">Size</dt>
+                  <dt className="text-ink/65">Size</dt>
                   <dd className="font-medium text-gray-900 capitalize">{animal.size}</dd>
                 </div>
                 <div>
-                  <dt className="text-gray-500">Rehoming fee</dt>
+                  <dt className="text-ink/65">Rehoming fee</dt>
                   <dd className="font-medium text-gray-900">£{animal.rehomingFee}</dd>
                 </div>
               </dl>
@@ -122,7 +122,7 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
                         ? 'bg-green-50 text-green-800'
                         : animal.goodWith.children === 'older-only'
                           ? 'bg-amber-50 text-amber-800'
-                          : 'bg-gray-100 text-gray-500'
+                          : 'bg-gray-100 text-ink/65'
                     }`}
                   >
                     Children{animal.goodWith.children === 'older-only' ? ' (older only)' : ''}
@@ -130,14 +130,14 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
                   </span>
                   <span
                     className={`px-3 py-1 rounded-full ${
-                      animal.goodWith.dogs ? 'bg-green-50 text-green-800' : 'bg-gray-100 text-gray-500'
+                      animal.goodWith.dogs ? 'bg-green-50 text-green-800' : 'bg-gray-100 text-ink/65'
                     }`}
                   >
                     Other dogs{!animal.goodWith.dogs ? ' — no' : ''}
                   </span>
                   <span
                     className={`px-3 py-1 rounded-full ${
-                      animal.goodWith.cats ? 'bg-green-50 text-green-800' : 'bg-gray-100 text-gray-500'
+                      animal.goodWith.cats ? 'bg-green-50 text-green-800' : 'bg-gray-100 text-ink/65'
                     }`}
                   >
                     Cats{!animal.goodWith.cats ? ' — no' : ''}
@@ -164,7 +164,7 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
               ) : null}
 
               {animal.reserved ? (
-                <p className="text-gray-500 text-sm">
+                <p className="text-ink/65 text-sm">
                   {animal.name} is currently reserved.{' '}
                   <Link href="/adopt" className="underline font-medium text-gray-900">
                     See other animals looking for homes
@@ -200,7 +200,7 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
                 </h2>
                 <button
                   onClick={() => setShowForm(false)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-ink/65 hover:text-gray-600"
                   aria-label="Close application form"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
