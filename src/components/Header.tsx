@@ -9,8 +9,8 @@ export default function Header() {
 
   const navLinks = [
     { href: '/adopt', label: 'Adopt' },
-    { href: '/donate', label: 'Donate' },
     { href: '/volunteer', label: 'Volunteer' },
+    { href: '/shops', label: 'Shops' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];
@@ -32,7 +32,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -52,7 +52,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-[12px] hover:bg-ink/5"
+            className="lg:hidden p-2 rounded-panel hover:bg-ink/5"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
@@ -91,7 +91,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-ink hover:text-teal font-medium py-2 px-4 rounded-[12px] hover:bg-ink/5"
+                  className="text-ink hover:text-teal font-medium py-2 px-4 rounded-panel hover:bg-ink/5"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}

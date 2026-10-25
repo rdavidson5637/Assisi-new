@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import Link from 'next/link';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
+import { postEnquiry, type EnquiryState } from '@/lib/submit-enquiry';
 
 const tiers = [
   { amount: 6, label: 'Friend', blurb: 'Helps cover daily food and bedding for animals in our care.' },
@@ -12,7 +13,8 @@ const tiers = [
 
 export default function SponsorPage() {
   const [selected, setSelected] = useState<number>(tiers[0].amount);
-  const [requested, setRequested] = useState(false);
+  const [status, setStatus] = useState<EnquiryState>('idle');
+  const formId = useId();
 
   return (
     <div className="min-h-screen bg-cream">
@@ -24,14 +26,14 @@ export default function SponsorPage() {
       </section>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="prose prose-lg max-w-none mb-10">
+        <div className="max-w-prose space-y-4 mb-10">
           <p>
             For as little as 20p a day, you could provide multiple unwanted and homeless animals each
             year with warm shelter, food, medical care and the love and happiness they deserve until
             they find their forever home.
           </p>
           <p>
-            Sponsorship doesn&apos;t fund one animal alone — it keeps the Sanctuary running so we can
+            Sponsorship doesn&apos;t fund one animal alone. It keeps the Sanctuary running so we can
             say yes to the next animal that needs us, whatever their story.
           </p>
         </div>
@@ -44,7 +46,7 @@ export default function SponsorPage() {
               <button
                 key={tier.amount}
                 onClick={() => setSelected(tier.amount)}
-                className={`text-left rounded-[12px] p-4 border transition-colors ${
+                className={`text-left rounded-panel p-4 border transition-colors ${
                   selected === tier.amount
                     ? 'border-ink'
                     : 'border-line hover:border-ink'
@@ -57,22 +59,66 @@ export default function SponsorPage() {
             ))}
           </div>
 
-          {requested ? (
-            <div className="panel p-4 text-center">
+          {status === 'sent' ? (
+            <div className="panel p-4">
+              <p className="text-ink font-medium">Request sent for £{selected} a month.</p>
+              <p className="text-ink/70 text-sm mt-1">
+                The team will contact you to set up the standing order. Nothing is taken until then.
+              </p>
+            </div>
+          ) : status === 'unconfigured' || status === 'error' ? (
+            <div className="panel p-4">
               <p className="text-ink font-medium">
-                Thank you for choosing to sponsor at £{selected}/month!
+                {status === 'error' ? "We couldn't send that." : 'Online sign-up is not connected yet.'}
               </p>
               <p className="text-ink/70 text-sm mt-1">
-                Online sign-up is launching soon. Call{' '}
-                <PhoneLink className="underline" /> or email{' '}
-                <EmailLink className="underline" /> and
-                we&apos;ll get your sponsorship set up.
+                Call <PhoneLink className="underline" /> or email <EmailLink className="underline" /> and
+                we&apos;ll set up £{selected} a month.
               </p>
             </div>
           ) : (
-            <button onClick={() => setRequested(true)} className="w-full btn-primary">
-              Sponsor for £{selected}/month
-            </button>
+            <form
+              className="space-y-4"
+              onSubmit={async (event) => {
+                event.preventDefault();
+                const data = new FormData(event.currentTarget);
+                const tier = tiers.find((item) => item.amount === selected);
+                setStatus('sending');
+                const result = await postEnquiry({
+                  kind: 'sponsor',
+                  name: String(data.get('name') ?? ''),
+                  email: String(data.get('email') ?? ''),
+                  phone: String(data.get('phone') ?? ''),
+                  amount: String(selected),
+                  tier: tier?.label ?? '',
+                  company: String(data.get('company') ?? ''),
+                });
+                setStatus(result);
+              }}
+            >
+              <div className="sr-only" aria-hidden="true">
+                <label htmlFor={`${formId}-company`}>Company</label>
+                <input id={`${formId}-company`} name="company" tabIndex={-1} autoComplete="off" />
+              </div>
+              <div>
+                <label htmlFor={`${formId}-name`} className="block text-sm font-medium text-ink/80 mb-1">Name *</label>
+                <input id={`${formId}-name`} name="name" required autoComplete="name" className="field" />
+              </div>
+              <div>
+                <label htmlFor={`${formId}-email`} className="block text-sm font-medium text-ink/80 mb-1">Email *</label>
+                <input id={`${formId}-email`} name="email" type="email" required autoComplete="email" className="field" />
+              </div>
+              <div>
+                <label htmlFor={`${formId}-phone`} className="block text-sm font-medium text-ink/80 mb-1">Phone</label>
+                <input id={`${formId}-phone`} name="phone" type="tel" autoComplete="tel" className="field" />
+              </div>
+              <button type="submit" className="w-full btn-primary" disabled={status === 'sending'}>
+                {status === 'sending' ? 'Sending...' : `Request £${selected}/month sponsorship`}
+              </button>
+              <p className="text-sm text-ink/60">
+                This asks the team to set up a standing order. It does not take a payment.
+              </p>
+            </form>
           )}
         </div>
 
@@ -103,7 +149,7 @@ export default function SponsorPage() {
             Prefer a one-off gift, or want to sponsor a specific animal? Visit our donation page.
           </p>
           <Link href="/donate" className="btn-secondary">
-            Make a One-Time Donation
+            Make a one-off donation
           </Link>
         </div>
       </div>

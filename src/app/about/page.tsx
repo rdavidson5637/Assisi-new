@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'About',
+  description:
+    'Assisi Animal Sanctuary in Conlig has rescued and rehomed animals in Northern Ireland since 1997. No-kill care, vision and mission.',
+};
 
 export default function AboutPage() {
   return (
@@ -10,7 +17,7 @@ export default function AboutPage() {
       </section>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="prose prose-lg max-w-none">
+        <div className="max-w-prose space-y-4">
           <p className="text-xl text-ink/80 mb-8">
             Founded in 1997, Assisi Animal Sanctuary is a local independent animal welfare charity in Northern Ireland.
           </p>
@@ -88,12 +95,10 @@ export default function AboutPage() {
         <div className="mt-12 pt-8 border-t border-line">
           <h2 className="text-2xl font-bold text-ink mb-4">Make a Donation</h2>
           <p className="text-ink/70 mb-6">
-            Your donation helps provide everything from nutritious meals and veterinary treatment to warmth, 
-            safety and rehabilitation. Every contribution, whatever the amount, helps us continue our 
-            lifesaving work. Thank you for being part of their journey to a brighter future.
+            A donation pays for food, veterinary treatment and a place to stay.
           </p>
           <Link href="/donate" className="btn-primary">
-            Donate Now
+            Donate
           </Link>
         </div>
       </div>

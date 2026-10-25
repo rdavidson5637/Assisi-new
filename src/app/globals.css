@@ -14,12 +14,36 @@
   --color-yellow: var(--yellow);
   --color-teal: var(--teal);
   --color-line: var(--line);
+  --radius-panel: 12px;
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
 }
 
 body {
@@ -89,6 +113,11 @@ h6 {
   filter: brightness(0.96);
 }
 
+.btn-on-yellow {
+  background: var(--ink);
+  color: var(--cream);
+}
+
 .btn-primary:disabled {
   opacity: 0.45;
   cursor: not-allowed;
@@ -128,6 +157,11 @@ h6 {
 
 .field.pl-8 {
   padding-left: 2rem;
+}
+
+.field.flex-1 {
+  width: auto;
+  flex: 1 1 0%;
 }
 
 .field:focus {

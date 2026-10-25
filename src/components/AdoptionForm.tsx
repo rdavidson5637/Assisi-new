@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { mailtoHref, site } from '@/data/site';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
+import { postEnquiry, type EnquiryState } from '@/lib/submit-enquiry';
 
 interface AdoptionFormProps {
   animalName: string;
@@ -13,6 +14,7 @@ const fieldClass = 'field';
 export default function AdoptionForm({ animalName }: AdoptionFormProps) {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<{ subject: string; body: string } | null>(null);
+  const [status, setStatus] = useState<EnquiryState>('idle');
   const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
   const formId = useId();
@@ -64,7 +66,7 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
     };
   }, [open]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const firstName = String(data.get('firstName') ?? '');
@@ -73,20 +75,34 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
     const phone = String(data.get('phone') ?? '');
     const address = String(data.get('address') ?? '');
     const about = String(data.get('about') ?? '');
-
-    setDraft({
-      subject: `Rehoming application for ${animalName}`,
-      body: [
-        `Rehoming application for ${animalName}`,
-        '',
-        `Name: ${firstName} ${lastName}`,
-        `Email: ${email}`,
-        `Phone: ${phone}`,
-        `Address: ${address}`,
-        '',
-        about,
-      ].join('\n'),
+    setStatus('sending');
+    const result = await postEnquiry({
+      kind: 'adoption',
+      animal: animalName,
+      firstName,
+      lastName,
+      email,
+      phone,
+      address,
+      about,
+      company: String(data.get('company') ?? ''),
     });
+    if (result === 'unconfigured') {
+      setDraft({
+        subject: `Rehoming application for ${animalName}`,
+        body: [
+          `Rehoming application for ${animalName}`,
+          '',
+          `Name: ${firstName} ${lastName}`,
+          `Email: ${email}`,
+          `Phone: ${phone}`,
+          `Address: ${address}`,
+          '',
+          about,
+        ].join('\n'),
+      });
+    }
+    setStatus(result);
     setOpen(false);
   };
 
@@ -94,10 +110,27 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
 
   return (
     <>
-      {draft && (
+      {status === 'sent' && (
         <div className="mb-6 panel p-4">
           <p className="text-ink">
-            <strong>This form is not sent automatically.</strong> Email it to us, or call, and a
+            <strong>Application sent.</strong> The rehoming team has it and will be in touch.
+          </p>
+        </div>
+      )}
+
+      {status === 'error' && (
+        <div className="mb-6 panel p-4">
+          <p className="text-ink">
+            We couldn&apos;t send the application. Call <PhoneLink className="underline" /> or email{' '}
+            <EmailLink className="underline" />.
+          </p>
+        </div>
+      )}
+
+      {draft && status === 'unconfigured' && (
+        <div className="mb-6 panel p-4">
+          <p className="text-ink">
+            <strong>The form is not connected yet.</strong> Email it to us, or call, and a
             member of the rehoming team will be in touch.
           </p>
           <p className="text-ink/80 text-sm mt-2">
@@ -114,7 +147,7 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
         </div>
       )}
 
-      {!draft && (
+      {status !== 'sent' && !(draft && status === 'unconfigured') && (
         <button type="button" onClick={() => setOpen(true)} className="w-full btn-primary">
           Apply to Adopt {animalName}
         </button>
@@ -147,9 +180,13 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
 
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <p className="text-sm text-ink/70">
-                We can&apos;t take applications through this page yet. When you continue, your email
-                app will open with this form ready to send to {site.email}.
+                This goes to the rehoming team at {site.email}. If the form is not connected yet,
+                you&apos;ll get an email draft instead of a confirmation.
               </p>
+              <div className="sr-only" aria-hidden="true">
+                <label htmlFor={id('company')}>Company</label>
+                <input id={id('company')} name="company" tabIndex={-1} autoComplete="off" />
+              </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label htmlFor={id('firstName')} className="block text-sm font-medium text-ink/80 mb-1">
@@ -204,8 +241,8 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
                 <button type="button" onClick={close} className="flex-1 btn-secondary text-center">
                   Cancel
                 </button>
-                <button type="submit" className="flex-1 btn-primary">
-                  Prepare email
+                <button type="submit" className="flex-1 btn-primary" disabled={status === 'sending'}>
+                  {status === 'sending' ? 'Sending...' : 'Send application'}
                 </button>
               </div>
             </form>

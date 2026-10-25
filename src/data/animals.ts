@@ -25,6 +25,10 @@ export interface Animal {
   /** Days waiting, when the sanctuary has published a figure. Null means it is not stated. */
   daysAtSanctuary: number | null;
   reserved: boolean;
+  /** Staff have not finished the rehoming assessment, so the application form stays closed. */
+  underAssessment?: boolean;
+  /** Shown on the homepage. Leave unset for the rest of the list. */
+  featured?: boolean;
 }
 
 export const LONG_STAY_DAYS = 90;
@@ -40,6 +44,7 @@ export function isLongStay(animal: Pick<Animal, 'daysAtSanctuary' | 'reserved'>)
 export const animals: Animal[] = [
   {
     "id": "rocky",
+    "underAssessment": true,
     "name": "Rocky",
     "species": "dog",
     "breed": "Labrador Retriever",
@@ -48,7 +53,7 @@ export const animals: Animal[] = [
     "gender": "male",
     "size": "unknown",
     "image": "/images/animals/rocky.jpg",
-    "description": "*Still under assessment*\n\nMeet Rocky! Rocky is a handsome 6 year old black lab cross who is looking for his new home! Staff noticed that his legs looked a bit longer than they should for a lab, and after speaking to a vet it is believed he has some Lurcher crossed in with him.\n\nRocky is a wonderful dog with a gentle soul and plenty of love to give.\n\nAt six years old, he has left the chaos of puppyhood behind but still enjoys getting out and about for walks, exploring new places, and spending quality time with his people.\n\nWith his Labrador nature, Rocky is loyal, affectionate, and enjoys being part of family life.\n\nHis suspected Lurcher heritage gives him an athletic side, and he loves stretching his legs and enjoying the outdoors.\n\nAfter a good walk, however, he is more than happy to settle down and relax beside you for a fuss and a cuddle.\n\nRocky is looking for a home where he can continue to thrive and be treated as a valued member of the family.\n\nHe would suit an owner who can provide him with regular exercise, companionship, and plenty of affection.\n\nWhether it’s countryside adventures, beach walks, or simply curling up at home together, Rocky is happiest when he is with his people.",
+    "description": "Meet Rocky! Rocky is a handsome 6 year old black lab cross who is looking for his new home! Staff noticed that his legs looked a bit longer than they should for a lab, and after speaking to a vet it is believed he has some Lurcher crossed in with him.\n\nRocky is a wonderful dog with a gentle soul and plenty of love to give.\n\nAt six years old, he has left the chaos of puppyhood behind but still enjoys getting out and about for walks, exploring new places, and spending quality time with his people.\n\nWith his Labrador nature, Rocky is loyal, affectionate, and enjoys being part of family life.\n\nHis suspected Lurcher heritage gives him an athletic side, and he loves stretching his legs and enjoying the outdoors.\n\nAfter a good walk, however, he is more than happy to settle down and relax beside you for a fuss and a cuddle.\n\nRocky is looking for a home where he can continue to thrive and be treated as a valued member of the family.\n\nHe would suit an owner who can provide him with regular exercise, companionship, and plenty of affection.\n\nWhether it’s countryside adventures, beach walks, or simply curling up at home together, Rocky is happiest when he is with his people.",
     "personality": [],
     "goodWith": {
       "children": "unknown",
@@ -62,6 +67,7 @@ export const animals: Animal[] = [
   },
   {
     "id": "marshall",
+    "underAssessment": true,
     "name": "Marshall",
     "species": "dog",
     "breed": "Cockapoo",
@@ -70,7 +76,7 @@ export const animals: Animal[] = [
     "gender": "male",
     "size": "unknown",
     "image": "/images/animals/marshall.jpg",
-    "description": "*Still under assessment*\n\nMarshall is is a young, affectionate boy with lots of love to give.\n\nLike many Cockapoos, he is intelligent, playful, and enjoys being around people.\n\nHe has a friendly nature and loves attention, cuddles, and spending time with his family.\n\nAt just one year old, Marshall still has plenty of puppy energy and enjoys walks, playtime, and opportunities to learn new things.\n\nHe would thrive in a home where he can receive the\n\ntime, patience, and companionship he deserves.\n\nHe is still being assessed and more information will be added with time, but so far Marshall is passing them with flying colours with how friendly he is!\n\nHe could be rehomed with children, as long as they are okay with a energetic, bouncy dog! He is also showing positive reactions to dogs, so could live with another dog.",
+    "description": "Marshall is a young, affectionate boy with lots of love to give.\n\nLike many Cockapoos, he is intelligent, playful, and enjoys being around people.\n\nHe has a friendly nature and loves attention, cuddles, and spending time with his family.\n\nAt just one year old, Marshall still has plenty of puppy energy and enjoys walks, playtime, and opportunities to learn new things.\n\nHe would thrive in a home where he can receive the\n\ntime, patience, and companionship he deserves.\n\nHe is still being assessed and more information will be added with time, but so far Marshall is passing them with flying colours with how friendly he is!\n\nHe could be rehomed with children, as long as they are okay with an energetic, bouncy dog! He is also showing positive reactions to dogs, so could live with another dog.",
     "personality": [],
     "goodWith": {
       "children": true,
@@ -107,6 +113,7 @@ export const animals: Animal[] = [
   },
   {
     "id": "wee-max",
+    "featured": true,
     "name": "Wee Max",
     "species": "dog",
     "breed": "Collie (Border)",
@@ -115,7 +122,7 @@ export const animals: Animal[] = [
     "gender": "male",
     "size": "medium",
     "image": "/images/animals/wee-max.jpg",
-    "description": "Max is a handsome Collie who is ready to start searching for his forever home.\n\nWhen Max first arrived at the sanctuary he was originally a stray and therefore was very wary of us all.\n\nHe initially would be scared to approach staff and volunteers but through a lot of time and patience he has build confidence and come on leaps and bounds.\n\nHe was even scared of having a collar and lead put on.\n\nThrough time the staff worked with Max daily to help him build some positive associations to having a lead on and were able to then start taking him out for walks.\n\nHe eventually grew even more confident allowing us to harness on him and happy to be walked by volunteers too.\n\nMax is a nervous boy and would love to find a patient owner who can help him as he learns to trust humans again.\n\nMax loves having a sniff about on his walks and has been known to seek out the sunniest spot in our field to lay down and sunbathe.\n\nMax would love the chance to start over again with a new owner, he deserves a quiet happy home where he can relax and enjoy living life to the fullest.\n\nMax is seeking an experienced quiet home with someone who has patience and time to further encourage him to come out of his shell.\n\nHe needs a home with no other pets and no children (living or visiting).\n\nMax would also need to live in a quiet or rural area as he is wary of fast moving vehicles.\n\nIf you think you can provide Max with his forever home please submit an application form and a member of the dog team will be in touch!.",
+    "description": "Max is a handsome Collie who is ready to start searching for his forever home.\n\nWhen Max first arrived at the sanctuary he was originally a stray and therefore was very wary of us all.\n\nHe initially would be scared to approach staff and volunteers but through a lot of time and patience he has built confidence and come on leaps and bounds.\n\nHe was even scared of having a collar and lead put on.\n\nThrough time the staff worked with Max daily to help him build some positive associations to having a lead on and were able to then start taking him out for walks.\n\nHe eventually grew even more confident allowing us to harness on him and happy to be walked by volunteers too.\n\nMax is a nervous boy and would love to find a patient owner who can help him as he learns to trust humans again.\n\nMax loves having a sniff about on his walks and has been known to seek out the sunniest spot in our field to lay down and sunbathe.\n\nMax would love the chance to start over again with a new owner, he deserves a quiet happy home where he can relax and enjoy living life to the fullest.\n\nMax is seeking an experienced quiet home with someone who has patience and time to further encourage him to come out of his shell.\n\nHe needs a home with no other pets and no children (living or visiting).\n\nMax would also need to live in a quiet or rural area as he is wary of fast moving vehicles.\n\nIf you think you can provide Max with his forever home please submit an application form and a member of the dog team will be in touch!.",
     "personality": [],
     "goodWith": {
       "children": false,
@@ -129,6 +136,7 @@ export const animals: Animal[] = [
   },
   {
     "id": "pablo",
+    "featured": true,
     "name": "Pablo",
     "species": "dog",
     "breed": "Pug",
@@ -217,7 +225,7 @@ export const animals: Animal[] = [
   },
   {
     "id": "c-cooper",
-    "name": "C Cooper",
+    "name": "Cooper",
     "species": "dog",
     "breed": "Cockapoo",
     "age": "2 Years 10 Months",
@@ -225,7 +233,7 @@ export const animals: Animal[] = [
     "gender": "male",
     "size": "unknown",
     "image": "/images/animals/c-cooper.jpg",
-    "description": "Cooper – our curly-haired boy! ??\n\nUnfortunately, our lovely Cooper has found himself back at the sanctuary.\n\nCooper is a wonderful young Cockapoo with so much love to give.\n\nAs a young boy, he has lots and lots of energy and needs an active home that can provide plenty of time, stimulation, and enrichment.\n\nHe’s incredibly intelligent and loves getting out and about, exploring the world and taking everything in with excitement and curiosity.\n\nThat said, new environments and unfamiliar sounds can sometimes feel a little overwhelming for him.\n\nCooper is still finding his way in the world.\n\nWhile he enjoys a good fuss and lots of attention, he can be reactive towards other dogs when out and about.\n\nBecause of this, Cooper would really benefit from ongoing training to help him focus his energy, build confidence, and develop great manners.\n\nHe’s a clever boy who would love learning new skills and showing off some cool tricks!\n\nDue to previous home incidents, Cooper is looking for an adult-only, active home.\n\nHe would thrive with adopters who are committed to continuing his training.\n\nHe would also benefit hugely from having a hobby, such as scent work, which would give him a positive outlet for his intelligence and energy.\n\nIf you feel you could offer Cooper a loving home where he can continue to grow, learn, and become the best companion he can be, please fill in an application form.",
+    "description": "Cooper, our curly-haired boy.\n\nUnfortunately, our lovely Cooper has found himself back at the sanctuary.\n\nCooper is a wonderful young Cockapoo with so much love to give.\n\nAs a young boy, he has lots and lots of energy and needs an active home that can provide plenty of time, stimulation, and enrichment.\n\nHe’s incredibly intelligent and loves getting out and about, exploring the world and taking everything in with excitement and curiosity.\n\nThat said, new environments and unfamiliar sounds can sometimes feel a little overwhelming for him.\n\nCooper is still finding his way in the world.\n\nWhile he enjoys a good fuss and lots of attention, he can be reactive towards other dogs when out and about.\n\nBecause of this, Cooper would really benefit from ongoing training to help him focus his energy, build confidence, and develop great manners.\n\nHe’s a clever boy who would love learning new skills and showing off some cool tricks!\n\nDue to previous home incidents, Cooper is looking for an adult-only, active home.\n\nHe would thrive with adopters who are committed to continuing his training.\n\nHe would also benefit hugely from having a hobby, such as scent work, which would give him a positive outlet for his intelligence and energy.\n\nIf you feel you could offer Cooper a loving home where he can continue to grow, learn, and become the best companion he can be, please fill in an application form.",
     "personality": [],
     "goodWith": {
       "children": "unknown",
@@ -258,7 +266,7 @@ export const animals: Animal[] = [
     "rehomingFee": 100,
     "daysAtSanctuary": null,
     "reserved": false,
-    "specialNeedsDetails": "May be FIV positive — their mum, Tayto, is FIV+, and the kittens cannot be confirmed until 6 months. Rehome with a littermate, as the only cat, or with an FIV-positive cat."
+    "specialNeedsDetails": "May be FIV positive. Their mum, Tayto, is FIV+, and the kittens cannot be confirmed until 6 months. Rehome with a littermate, as the only cat, or with an FIV-positive cat."
   },
   {
     "id": "roast-chicken",
@@ -281,7 +289,7 @@ export const animals: Animal[] = [
     "rehomingFee": 100,
     "daysAtSanctuary": null,
     "reserved": false,
-    "specialNeedsDetails": "May be FIV positive — their mum, Tayto, is FIV+, and the kittens cannot be confirmed until 6 months. Rehome with a littermate, as the only cat, or with an FIV-positive cat."
+    "specialNeedsDetails": "May be FIV positive. Their mum, Tayto, is FIV+, and the kittens cannot be confirmed until 6 months. Rehome with a littermate, as the only cat, or with an FIV-positive cat."
   },
   {
     "id": "prawn-cocktail",
@@ -304,7 +312,7 @@ export const animals: Animal[] = [
     "rehomingFee": 100,
     "daysAtSanctuary": null,
     "reserved": false,
-    "specialNeedsDetails": "May be FIV positive — their mum, Tayto, is FIV+, and the kittens cannot be confirmed until 6 months. Rehome with a littermate, as the only cat, or with an FIV-positive cat."
+    "specialNeedsDetails": "May be FIV positive. Their mum, Tayto, is FIV+, and the kittens cannot be confirmed until 6 months. Rehome with a littermate, as the only cat, or with an FIV-positive cat."
   },
   {
     "id": "pickled-onion",
@@ -327,7 +335,7 @@ export const animals: Animal[] = [
     "rehomingFee": 100,
     "daysAtSanctuary": null,
     "reserved": false,
-    "specialNeedsDetails": "May be FIV positive — their mum, Tayto, is FIV+, and the kittens cannot be confirmed until 6 months. Rehome with a littermate, as the only cat, or with an FIV-positive cat."
+    "specialNeedsDetails": "May be FIV positive. Their mum, Tayto, is FIV+, and the kittens cannot be confirmed until 6 months. Rehome with a littermate, as the only cat, or with an FIV-positive cat."
   },
   {
     "id": "tayto",
@@ -376,6 +384,7 @@ export const animals: Animal[] = [
   },
   {
     "id": "nora",
+    "featured": true,
     "name": "Nora",
     "species": "cat",
     "breed": "Domestic shorthair",
@@ -421,6 +430,7 @@ export const animals: Animal[] = [
   },
   {
     "id": "boris",
+    "featured": true,
     "name": "Boris",
     "species": "rabbit",
     "breed": "Lop Cross",

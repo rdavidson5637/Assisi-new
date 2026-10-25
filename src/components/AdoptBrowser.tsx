@@ -105,7 +105,7 @@ export default function AdoptBrowser() {
         <div className="bg-ink text-cream">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm font-medium">
             {longStayCount} {longStayCount === 1 ? 'animal has' : 'animals have'} been waiting 90+
-            days for a home — could you give one of them a second look?
+            days for a home. Could you give one of them a second look?
           </div>
         </div>
       )}
@@ -122,7 +122,7 @@ export default function AdoptBrowser() {
               key={tab.value}
               type="button"
               onClick={() => update({ species: tab.value === 'all' ? null : tab.value })}
-              className={`px-4 py-2 rounded-[12px] font-medium transition-colors border ${
+              className={`px-4 py-2 rounded-panel font-medium transition-colors border ${
                 species === tab.value
                   ? 'bg-ink text-cream border-ink'
                   : 'bg-cream text-ink/80 border-line hover:border-ink'
@@ -280,11 +280,11 @@ export default function AdoptBrowser() {
           <h2 className="text-xl font-bold text-ink mb-4">Our Rehoming Process</h2>
           <ol className="list-decimal pl-5 space-y-2 text-ink/70">
             <li>Find an animal you think would match your lifestyle</li>
-            <li>Fill out an application form – available on every pet&apos;s page</li>
+            <li>Fill out an application form, available on every pet&apos;s page</li>
             <li>We will give you a call as soon as possible to discuss your application</li>
             <li>If we don&apos;t think you are a perfect match for that animal we will do our best to suggest an alternative</li>
             <li>We&apos;ll ask you to come up if you are successful and meet the animals that match</li>
-            <li>For some animals – especially dogs, we may ask you to visit more than once</li>
+            <li>For some animals, especially dogs, we may ask you to visit more than once</li>
             <li>If you already have dogs, we&apos;ll arrange for you to bring them to meet their new family member at a later date</li>
           </ol>
           <p className="mt-4 text-ink/70">

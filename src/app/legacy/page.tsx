@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
+
+export const metadata: Metadata = {
+  title: 'Leave a legacy',
+  description:
+    'Leave a gift in your will to Assisi Animal Sanctuary. Residuary, pecuniary and specific gifts, and how to talk to the team in confidence.',
+};
 
 export default function LegacyPage() {
   return (
@@ -12,11 +19,11 @@ export default function LegacyPage() {
       </section>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="prose prose-lg max-w-none mb-8">
+        <div className="max-w-prose space-y-4 mb-8">
           <p>
             A gift left in your Will is a great way to ensure that your love of animals and interest
             in their well-being is continued into the future. Legacy gifts, of any size, make a real
-            and lasting difference — helping us be there for the next animal in need, long after
+            and lasting difference, helping us be there for the next animal in need, long after
             today.
           </p>
         </div>
@@ -50,7 +57,7 @@ export default function LegacyPage() {
           <div className="border-b border-line pb-8">
             <h2 className="text-xl font-bold text-ink mb-3">Why It Matters</h2>
             <p className="text-ink/70">
-              As an independent charity, Assisi receives no government funding — we rely entirely on
+              As an independent charity, Assisi receives no government funding. We rely entirely on
               the generosity of our community. Legacy gifts help fund the day-to-day running of the
               Sanctuary as well as bigger projects, like our current appeal to build a dedicated Cat
               Intake Unit, ensuring animals in Northern Ireland have somewhere to turn for years to
@@ -63,7 +70,7 @@ export default function LegacyPage() {
             <p className="text-ink/70">
               We&apos;d always recommend speaking with a solicitor when writing or updating your Will.
               If you&apos;re considering leaving a gift to Assisi, or have already included us, we&apos;d
-              love to hear from you so we can say thank you — get in touch with our team in complete
+              love to hear from you so we can say thank you. Get in touch with our team in complete
               confidence.
             </p>
           </div>

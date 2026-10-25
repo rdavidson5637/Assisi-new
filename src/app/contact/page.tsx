@@ -3,32 +3,45 @@
 import { useId, useState } from 'react';
 import { AddressLines, EmailLink, PhoneLink } from '@/components/ContactLinks';
 import { mailtoHref, site } from '@/data/site';
+import { postEnquiry, type EnquiryState } from '@/lib/submit-enquiry';
 
 const fieldClass = 'field';
 
 export default function ContactPage() {
   const [draft, setDraft] = useState<{ subject: string; body: string } | null>(null);
+  const [status, setStatus] = useState<EnquiryState>('idle');
   const formId = useId();
   const id = (name: string) => `${formId}-${name}`;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const name = String(data.get('name') ?? '');
     const email = String(data.get('email') ?? '');
     const phone = String(data.get('phone') ?? '');
     const message = String(data.get('message') ?? '');
-
-    setDraft({
-      subject: `Message from ${name}`,
-      body: [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        ...(phone ? [`Phone: ${phone}`] : []),
-        '',
-        message,
-      ].join('\n'),
+    setStatus('sending');
+    const result = await postEnquiry({
+      kind: 'contact',
+      name,
+      email,
+      phone,
+      message,
+      company: String(data.get('company') ?? ''),
     });
+    if (result === 'unconfigured') {
+      setDraft({
+        subject: `Message from ${name}`,
+        body: [
+          `Name: ${name}`,
+          `Email: ${email}`,
+          ...(phone ? [`Phone: ${phone}`] : []),
+          '',
+          message,
+        ].join('\n'),
+      });
+    }
+    setStatus(result);
   };
 
   return (
@@ -78,11 +91,25 @@ export default function ContactPage() {
           </div>
 
           <div>
-            {draft ? (
+            {status === 'sent' ? (
+              <div className="panel p-6">
+                <h2 className="text-lg font-bold text-ink mb-2">Message sent</h2>
+                <p className="text-ink/80">
+                  The sanctuary has your message and will reply by email or phone.
+                </p>
+              </div>
+            ) : status === 'error' ? (
+              <div className="panel p-6">
+                <h2 className="text-lg font-bold text-ink mb-2">We couldn&apos;t send that</h2>
+                <p className="text-ink/80">
+                  Please call <PhoneLink className="underline" /> or email <EmailLink className="underline" />.
+                </p>
+              </div>
+            ) : draft && status === 'unconfigured' ? (
               <div className="panel p-6">
                 <h2 className="text-lg font-bold text-ink mb-2">Ready to send</h2>
                 <p className="text-ink/80">
-                  This form is not delivered automatically. Open your email app to send the message,
+                  The online form is not connected yet. Open your email app to send the message,
                   or call us and we&apos;ll take it from there.
                 </p>
                 <p className="text-ink/80 text-sm mt-2">
@@ -106,9 +133,13 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <p className="text-sm text-ink/70">
-                  We can&apos;t take messages through this page yet. Continuing opens your email app
-                  with the message ready to send to {site.email}.
+                  This goes to the sanctuary team. If the form is not connected yet, the next step
+                  opens an email to {site.email} with your message filled in.
                 </p>
+                <div className="sr-only" aria-hidden="true">
+                  <label htmlFor={id('company')}>Company</label>
+                  <input id={id('company')} name="company" tabIndex={-1} autoComplete="off" />
+                </div>
                 <div>
                   <label htmlFor={id('name')} className="block text-sm font-medium text-ink/80 mb-1">
                     Name *
@@ -137,8 +168,8 @@ export default function ContactPage() {
                   <textarea id={id('message')} name="message" rows={5} required className={fieldClass} />
                 </div>
 
-                <button type="submit" className="w-full btn-primary">
-                  Prepare email
+                <button type="submit" className="w-full btn-primary" disabled={status === 'sending'}>
+                  {status === 'sending' ? 'Sending...' : 'Send message'}
                 </button>
               </form>
             )}

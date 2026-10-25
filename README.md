@@ -20,61 +20,11 @@ npm start
 
 The site runs at [http://localhost:3000](http://localhost:3000)
 
-## ✨ Improvements Over Original Site
+## Pages
 
-### 1. Pet Listings & Adoption Experience
-- **Filterable search** - Filter by species, age, size, gender
-- **Compatibility filters** - "Good with children/dogs/cats" checkboxes
-- **Personality badges** - Each animal shows traits like "Gentle", "Energetic", "Independent"
-- **"Long Stay" highlighting** - Animals waiting 90+ days get a callout banner and a badge on their card/profile
-- **Individual profile pages** - Dedicated URL for each animal with SEO benefits
-- **In-page adoption application** - Modal form with confirmation
+Adopt, donate, sponsor, legacy, outreach, membership, volunteer, shops, about, contact and privacy. Each animal has a page at `/adopt/[id]`. The homepage shows animals marked `featured` in `src/data/animals.ts`.
 
-### 2. Donation Experience (Fixed 404!)
-- **One-time and monthly options** - Toggle between donation types
-- **Quick amount buttons** - £10, £25, £50, £100, plus a custom amount
-- **Dedicated pages for every "Ways to Help" link** - `/sponsor`, `/legacy`, `/outreach`, `/membership` all exist now (previously 404s)
-- **Sponsorship tiers** - £6/£12/£20 per month, each with a description of what it funds
-- **Legacy giving** - Types of gift, why it matters, how to get started
-- **Membership** - £15/year with listed member benefits
-
-### 3. Modern Design & UX
-- **Mobile-first responsive** - Works beautifully on all devices
-- **Clean navigation** - Simplified menu with clear user journeys
-- **Sticky header** - CTAs always visible
-- **Card hover effects** - Modern micro-interactions
-- **Consistent branding** - Ink and the sanctuary's yellow
-
-### 4. Performance
-- **Next.js 16** - Server-side rendering for fast page loads
-- **Image optimization** - Lazy loading, responsive images
-- **Static generation** - Pre-built pages for instant loading
-- **Tailwind CSS** - Optimized, minimal CSS bundle
-
-### 5. Accessibility
-- **Skip to content link** - Keyboard navigation support
-- **ARIA labels** - Screen reader friendly
-- **Color contrast** - WCAG AA compliant
-- **Focus indicators** - Visible focus states
-- **Semantic HTML** - Proper heading hierarchy
-
-### 6. Content Improvements
-- **Success stories** - "Happy Tails" section with a published foster story
-- **Ways to help** - Clear paths for donate, volunteer, foster, sponsor
-- **Urgent appeal banner** - Cat Intake Unit fundraising
-- **FAQ section** - Common questions answered
-
-### 7. Forms & Applications
-- **Multi-step adoption form** - Logical progression
-- **Volunteer application** - Role selection with requirements
-- **Contact form** - Subject categories, consent checkbox
-- **Form validation** - Required fields, confirmation messages
-
-### 8. SEO Optimizations
-- **Meta tags** - Title, description, Open Graph
-- **Individual animal URLs** - `/adopt/teddy`, `/adopt/banjo`
-- **Semantic markup** - Proper HTML5 elements
-- **Local SEO ready** - Address, phone, map integration
+There is no FAQ, no map, and no multi-step form. A long-stay badge appears only when `daysAtSanctuary` is 90 or more.
 
 ## 📁 Project Structure
 
@@ -106,19 +56,21 @@ src/
 ## 🎨 Design System
 
 ### Colors
-- **Primary (Ink)**: `#1a1a1a` - Headings, primary buttons, footer
-- **Secondary (Yellow)**: `#fbbf24` - Brand color, hero sections, CTAs
-- **Accent (Pink)**: `#db2777` - "Long stay" highlighting, when a wait time is published
+- **Cream**: `#FBF7EE` - page background
+- **Ink**: `#171717` - text and dark sections
+- **Yellow**: `#F6E823` - logo, appeal bar, primary button
+- **Teal**: `#0F4C4C` - text links
 
 ### Typography
-- **Font**: Inter (system font fallback)
+- **Headings**: Bricolage Grotesque
+- **Body**: Figtree
 - **Headings**: Bold, large for impact
 - **Body**: Regular weight, comfortable reading
 
 ### Components
-- **Cards**: Rounded corners (2xl), shadow, hover effects
-- **Buttons**: Primary (ink), Secondary (yellow), Outline
-- **Forms**: Large touch targets, clear labels, validation
+- **Panels**: 1px line, 12px radius, no shadow
+- **Buttons**: one yellow primary button, teal underlined text links
+- **Forms**: labelled fields, and no success message unless the message was actually sent
 
 ## 🔧 Customization
 
@@ -135,13 +87,13 @@ Edit `src/data/animals.ts`:
   ageCategory: 'baby' | 'young' | 'adult' | 'senior',
   gender: 'male' | 'female',
   size: 'small' | 'medium' | 'large',
-  image: 'https://...',
+  image: '/images/animals/pet-name.jpg',
   description: 'About this pet...',
-  personality: ['Trait1', 'Trait2', 'Trait3'],
-  goodWith: { children: true, dogs: false, cats: true },
+  personality: [],
+  goodWith: { children: 'unknown', dogs: 'unknown', cats: 'unknown' },
   specialNeeds: false,
   rehomingFee: 170,
-  daysAtSanctuary: 30,
+  daysAtSanctuary: null,
   reserved: false,
   featured: true
 }
@@ -152,14 +104,16 @@ Edit `src/data/animals.ts`:
 - Footer: `src/components/Footer.tsx`
 - Contact page: `src/app/contact/page.tsx`
 
-## 📝 Next Steps for Production
+## Production
 
-1. **CMS Integration** - Connect to a headless CMS (Sanity, Strapi) for easy content management
-2. **Payment Integration** - Add Stripe or PayPal for donations
-3. **Email Integration** - Connect contact/application forms to email service
-4. **Analytics** - Add Google Analytics or Plausible
-5. **Wait times** - `daysAtSanctuary` is null until the sanctuary publishes how long each animal has been waiting
-6. **API Integration** - Connect to shelter management software if available
+Copy `.env.example` to `.env.local`.
+
+- `STRIPE_SECRET_KEY` turns on card checkout at `/donate` (one-off and monthly, with an optional Gift Aid declaration). Without it, the page tells people to give by phone or email.
+- `FORMSPREE_FORM_ID` delivers contact, adoption, volunteer, newsletter, sponsorship and membership enquiries. Without it, contact and adoption offer an email draft. The other forms give the phone number and email. None of them show a success message for a message that was not sent.
+- Sponsorship and membership requests do not take payment. The team sets up the standing order or membership after they receive the request.
+- A Gift Aid tick sends the declaration with the Stripe payment and asks Stripe for a billing address. Assisi still makes the claim with HMRC.
+
+Animal records live in `src/data/animals.ts`. `daysAtSanctuary` stays empty until the sanctuary publishes a wait time.
 
 ## 📄 License
 

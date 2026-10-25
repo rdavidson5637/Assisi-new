@@ -1,6 +1,11 @@
 export const site = {
   name: 'Assisi Animal Sanctuary',
+  legalName: 'The Friends of Assisi Animal Sanctuary',
   charityNumber: 'NIC104594',
+  companyNumber: 'NI48385',
+  hmrcReference: 'XR24248',
+  privacyPolicyPdf:
+    'https://www.assisi-ni.org/wp-content/uploads/2024/11/Assisi-Animal-Sanctuary-Privacy-Policy-Final-Document-updated-151024.pdf',
   addressLines: ['1 Old Bangor Road', 'Conlig, Newtownards', 'BT23 7PU'],
   phoneDisplay: '028 9181 2622',
   phoneHref: 'tel:02891812622',

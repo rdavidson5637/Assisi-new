@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
+
+export const metadata: Metadata = {
+  title: 'Outreach',
+  description:
+    'Assisi Outreach helps families in Northern Ireland keep their pets when money is tight, with food, vet support and advice.',
+};
 
 export default function OutreachPage() {
   return (
@@ -12,11 +19,11 @@ export default function OutreachPage() {
       </section>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="prose prose-lg max-w-none mb-8">
+        <div className="max-w-prose space-y-4 mb-8">
           <p>
             Our Outreach Scheme supports individuals and families within our community who struggle to
             make ends meet and provide food for themselves, their families and pets. We believe that,
-            wherever possible, animals are best off staying with the family who loves them — so we step
+            wherever possible, animals are best off staying with the family who loves them, so we step
             in with practical support rather than removing a pet from a good home over hardship alone.
           </p>
         </div>
@@ -38,7 +45,7 @@ export default function OutreachPage() {
             <p className="text-ink/70">
               If you&apos;re struggling to afford food or basic care for your pet and are worried you
               might have to give them up, please reach out. Our Outreach team will listen without
-              judgement and work with you to find a way to keep your family — pets included — together
+              judgement and work with you to find a way to keep your family, pets included, together
               wherever we possibly can.
             </p>
           </div>

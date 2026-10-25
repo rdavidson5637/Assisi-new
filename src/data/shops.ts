@@ -50,7 +50,7 @@ export const sanctuary = {
   email: 'info@assisi-ni.org',
   hours: 'Monday – Saturday: 12pm – 4pm',
   sunday: 'Sunday: Closed',
-  charityNumber: 'NIC100079',
+  charityNumber: 'NIC104594',
 };
 
 export const socialLinks = [

@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
+import VolunteerForm from '@/components/VolunteerForm';
 import { site } from '@/data/site';
+
+export const metadata: Metadata = {
+  title: 'Volunteer',
+  description:
+    'Volunteer at Assisi Animal Sanctuary or in the charity shops. Roles on site, in shops, fostering, driving and fundraising.',
+};
 
 export default function VolunteerPage() {
   return (
@@ -12,17 +20,17 @@ export default function VolunteerPage() {
       </section>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="prose prose-lg max-w-none mb-12">
+        <div className="max-w-prose space-y-4 mb-12">
           <p>
             Can you spare 3-4 hours each week? By volunteering with us you will meet new people, 
             gain new or use existing skills, gain experience and ultimately make a big difference 
             to animal welfare.
           </p>
           <p>
-            Without our dedicated volunteers, we could not continue with the work we do – and there 
-            is so much to do! Volunteering with us is very rewarding, you are helping us make a 
-            difference to so many animals&apos; lives. We have several different volunteer roles – 
-            there is something to suit everyone!
+            Without our dedicated volunteers, we could not continue with the work we do, and there 
+            is so much to do. Volunteering with us is very rewarding, you are helping us make a 
+            difference to so many animals&apos; lives. We have several different volunteer roles, 
+            and there is something to suit everyone.
           </p>
           <p className="text-sm text-ink/70">
             *Volunteers / placements must be 18+ to help with our animals, in reception or participate 
@@ -54,7 +62,7 @@ export default function VolunteerPage() {
           <div className="border-b border-line pb-8">
             <h2 className="text-xl font-bold text-ink mb-3">In our Shops</h2>
             <p className="text-ink/70">
-              Our four shops in Bangor, Belfast, Holywood, and Newtownards need volunteers to work 
+              Our three shops in Bangor, Holywood and Newtownards need volunteers to work 
               shifts, help serve customers, sort stock, and make deliveries. The shops are a vital 
               source of income for the Sanctuary, so for just a few hours a week, you can make a 
               huge contribution to the work we do here!
@@ -127,12 +135,13 @@ export default function VolunteerPage() {
             preferred day, so we will contact you with other options to see if there are any other 
             days that suit or work for you.
           </p>
-          <p className="text-ink/80 font-medium">
-            Contact us at{' '}
+          <p className="text-ink/80 font-medium mb-6">
+            Or contact us at{' '}
             <EmailLink className="underline" />
             {' '}or call{' '}
             <PhoneLink className="underline" />
           </p>
+          <VolunteerForm />
         </div>
       </div>
     </div>

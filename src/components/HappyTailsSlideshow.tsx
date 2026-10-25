@@ -24,7 +24,7 @@ export default function HappyTailsSlideshow() {
 
   return (
     <div
-      className="relative rounded-[12px] border border-line overflow-hidden bg-ink aspect-[3/2]"
+      className="relative rounded-panel border border-line overflow-hidden bg-ink aspect-[3/2]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -48,7 +48,7 @@ export default function HappyTailsSlideshow() {
           <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-cream">
             <h3 className="text-xl sm:text-2xl font-bold mb-1">{story.name}</h3>
             <p className="text-sm sm:text-base text-cream/90 max-w-2xl mb-1">{story.story}</p>
-            <p className="text-xs sm:text-sm text-cream/70">— {story.adopter}</p>
+            <p className="text-xs sm:text-sm text-cream/70">{story.adopter}</p>
           </div>
         </div>
       ))}

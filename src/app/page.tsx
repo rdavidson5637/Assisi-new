@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import AnimalCard from '@/components/AnimalCard';
 import { animals } from '@/data/animals';
+import { shops } from '@/data/shops';
 import { site } from '@/data/site';
 
 const waysToHelp = [
@@ -43,16 +44,10 @@ const waysToHelp = [
   },
 ] as const;
 
-const shops = [
-  { name: 'Bangor', address: '59 Main Street, Bangor, BT20 5AF' },
-  { name: 'Holywood', address: '60 High Street, Holywood, BT18 9AE' },
-  { name: 'Newtownards', address: '63 High Street, Newtownards, BT23 7HS' },
-] as const;
-
-const shopHoursUrl = 'https://www.assisi-ni.org/our-shops/';
-
 export default function Home() {
-  const featuredAnimals = animals.filter((animal) => !animal.reserved).slice(0, 4);
+  const featuredAnimals = animals.filter(
+    (animal) => animal.featured && !animal.reserved && !animal.underAssessment,
+  );
 
   return (
     <div>
@@ -61,40 +56,48 @@ export default function Home() {
           src="/images/animals/wee-max.jpg"
           alt="Wee Max, a collie at Assisi Animal Sanctuary, lying in the grass"
           fill
-          loading="eager"
+          priority
           sizes="100vw"
           className="object-cover object-[center_30%]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/60 to-ink/25" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
           <div className="max-w-3xl text-left">
-            <h1 className="text-3xl md:text-5xl font-bold mb-8">
-              Every animal deserves a second chance
+            <h1 className="text-3xl md:text-5xl font-bold mb-4">
+              Help for the Helpless
             </h1>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-              <Link href="/adopt" className="btn-primary">
-                Adopt a pet
-              </Link>
-              <Link href="/donate" className="btn-secondary text-cream">
-                Donate
-              </Link>
-            </div>
+            <p className="text-lg text-cream/90 max-w-xl mb-8">
+              Assisi Animal Sanctuary, Conlig. Dogs, cats, rabbits and guinea pigs looking for a home.
+            </p>
+            <Link href="/adopt" className="btn-primary">
+              Adopt a pet
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="bg-yellow text-ink">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-6">
-            Help us build a dedicated Cat Intake Unit.
-          </h2>
-          <Link
-            href="/donate"
-            className="btn-primary"
-            style={{ background: 'var(--ink)', color: 'var(--cream)' }}
-          >
-            Donate
-          </Link>
+      <section>
+        <div className="relative aspect-[16/9] md:aspect-[21/9] bg-ink">
+          <Image
+            src="/images/cat-unit.jpg"
+            alt="Outdoor pens at Assisi Animal Sanctuary in Conlig"
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="bg-yellow text-ink">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Help us build a dedicated Cat Intake Unit.
+            </h2>
+            <p className="text-lg max-w-prose mb-6">
+              The photograph shows the outdoor pens at Conlig. This appeal is for a separate Cat Intake Unit.
+            </p>
+            <Link href="/donate" className="btn-primary btn-on-yellow">
+              Donate
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -147,24 +150,27 @@ export default function Home() {
       <section className="py-12 bg-cream border-t border-line">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6">Shops</h2>
-          <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <ul className="divide-y divide-line border-t border-line">
             {shops.map((shop) => (
-              <li key={shop.name}>
+              <li key={shop.id} className="py-5">
                 <h3 className="font-bold text-ink">{shop.name}</h3>
-                <p className="text-ink/80 text-sm mt-1">{shop.address}</p>
-                <p className="mt-1">
-                  <a
-                    href={shopHoursUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary text-sm"
-                  >
-                    Hours
+                <p className="text-ink/80 mt-1">
+                  {shop.address}, {shop.postcode}
+                </p>
+                <p className="text-ink/70 text-sm mt-1">{shop.hours}</p>
+                <p className="mt-2">
+                  <a href={`tel:${shop.phone.replace(/\s/g, '')}`} className="btn-secondary">
+                    {shop.phone}
                   </a>
                 </p>
               </li>
             ))}
           </ul>
+          <p className="mt-6">
+            <Link href="/shops" className="btn-secondary">
+              Donation times and how to volunteer
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -204,8 +210,7 @@ export default function Home() {
                 alt={`${site.magazine.title}, ${site.magazine.edition}`}
                 width={180}
                 height={254}
-                className="rounded-[12px] border border-line"
-                style={{ width: '9rem', height: 'auto' }}
+                className="rounded-panel border border-line w-36 h-auto"
               />
             </a>
             <div>

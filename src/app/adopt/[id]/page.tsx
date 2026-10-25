@@ -3,7 +3,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import AdoptionForm from '@/components/AdoptionForm';
+import { EmailLink, PhoneLink } from '@/components/ContactLinks';
 import { animals, isLongStay, type Compatibility } from '@/data/animals';
+import { siteUrl } from '@/lib/metadata';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -22,11 +24,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const description = animal.description.replace(/\s+/g, ' ').slice(0, 160);
 
+  const title = `Adopt ${animal.name}`;
+
   return {
-    title: `${animal.name} | Adopt | Assisi Animal Sanctuary`,
+    title: { absolute: `${title} | Assisi Animal Sanctuary` },
     description,
     openGraph: {
-      title: `Adopt ${animal.name}`,
+      title: `${title} | Assisi Animal Sanctuary`,
       description,
       images: [{ url: animal.image, alt: animal.name }],
     },
@@ -36,8 +40,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 function compatibilityText(value: Compatibility, label: string) {
   if (value === true) return label;
   if (value === 'older-only') return `${label} (older only)`;
-  if (value === false) return `${label} — no`;
-  return `${label} — ask us`;
+  if (value === false) return `${label}: no`;
+  return `${label}: ask us`;
 }
 
 function compatibilityClass(value: Compatibility) {
@@ -56,9 +60,19 @@ export default async function AnimalProfilePage({ params }: PageProps) {
 
   const gender = animal.gender === 'male' ? 'Male' : 'Female';
   const size = animal.size === 'unknown' ? 'Not listed' : animal.size;
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Adopt', item: `${siteUrl}/adopt` },
+      { '@type': 'ListItem', position: 3, name: animal.name, item: `${siteUrl}/adopt/${animal.id}` },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-cream">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <div className="bg-cream border-b border-line">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <nav aria-label="Breadcrumb" className="flex items-center space-x-2 text-sm text-ink/60">
@@ -90,12 +104,17 @@ export default async function AnimalProfilePage({ params }: PageProps) {
             <div className="md:w-1/2 p-6 md:p-8">
               <div className="flex flex-wrap gap-2 mb-4">
                 {animal.reserved && (
-                  <span className="inline-block bg-ink text-cream text-sm font-medium px-3 py-1 rounded-[12px]">
+                  <span className="inline-block bg-ink text-cream text-sm font-medium px-3 py-1 rounded-panel">
                     Currently reserved
                   </span>
                 )}
+                {animal.underAssessment && (
+                  <span className="inline-block border border-ink text-ink text-sm font-medium px-3 py-1 rounded-panel">
+                    Still under assessment
+                  </span>
+                )}
                 {isLongStay(animal) && (
-                  <span className="inline-block border border-teal text-teal text-sm font-medium px-3 py-1 rounded-[12px]">
+                  <span className="inline-block border border-teal text-teal text-sm font-medium px-3 py-1 rounded-panel">
                     Long stay · waiting {animal.daysAtSanctuary} days
                   </span>
                 )}
@@ -109,7 +128,7 @@ export default async function AnimalProfilePage({ params }: PageProps) {
                   {animal.personality.map((trait) => (
                     <span
                       key={trait}
-                      className="border border-line text-teal text-xs font-medium px-2 py-1 rounded-[12px]"
+                      className="border border-line text-teal text-xs font-medium px-2 py-1 rounded-panel"
                     >
                       {trait}
                     </span>
@@ -177,9 +196,19 @@ export default async function AnimalProfilePage({ params }: PageProps) {
                 </div>
               )}
 
-              {!animal.reserved && <AdoptionForm animalName={animal.name} />}
+              {!animal.reserved && !animal.underAssessment && (
+                <AdoptionForm animalName={animal.name} />
+              )}
 
-              {animal.reserved && (
+              {animal.underAssessment && (
+                <p className="text-ink/80">
+                  Staff are still getting to know {animal.name}, so the application form is closed.
+                  Call <PhoneLink className="btn-secondary" /> or email{' '}
+                  <EmailLink className="btn-secondary" /> to ask about {animal.name}.
+                </p>
+              )}
+
+              {animal.reserved && !animal.underAssessment && (
                 <p className="text-ink/60 text-sm">
                   {animal.name} is currently reserved. Please check back later or view our other animals.
                 </p>

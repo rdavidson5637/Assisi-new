@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import AdoptBrowser from '@/components/AdoptBrowser';
 
 export const metadata: Metadata = {
-  title: 'Adopt a Pet | Assisi Animal Sanctuary',
+  title: 'Adopt a Pet',
   description:
     'Meet the dogs, cats, rabbits, guinea pigs and other small animals waiting for a home at Assisi Animal Sanctuary in Conlig, Northern Ireland.',
 };
