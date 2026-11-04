@@ -1,22 +1,13 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
-import { pageMetadata } from '@/lib/metadata';
-
-export const metadata: Metadata = pageMetadata(
-  'Outreach',
-  'Assisi Outreach helps families in hardship keep their pets: food parcels, vet advice, and support without judgement.'
-);
+import { EmailLink, PhoneLink } from '@/components/ContactLinks';
 
 export default function OutreachPage() {
   return (
-    <div className="min-h-screen">
-      <section className="bg-paper border-b border-line py-12 md:py-16">
+    <div className="min-h-screen bg-cream">
+      <section className="bg-cream border-b border-line py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-bold uppercase tracking-wide text-gray-700 mb-2">
-            Assisi Animal Sanctuary
-          </p>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl text-gray-900">Outreach scheme</h1>
-          <p className="text-xl text-gray-700 mt-3">Keeping pets and families together</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-ink">Outreach Scheme</h1>
+          <p className="text-xl text-ink/80 mt-2">Keeping pets and families together</p>
         </div>
       </section>
 
@@ -25,15 +16,15 @@ export default function OutreachPage() {
           <p>
             Our Outreach Scheme supports individuals and families within our community who struggle to
             make ends meet and provide food for themselves, their families and pets. We believe that,
-            wherever possible, animals are best off staying with the family who loves them, so we step
+            wherever possible, animals are best off staying with the family who loves them — so we step
             in with practical support rather than removing a pet from a good home over hardship alone.
           </p>
         </div>
 
         <div className="space-y-8 mb-12">
-          <div className="border-b pb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-3">How We Help</h2>
-            <ul className="space-y-2 text-gray-600 list-disc pl-5">
+          <div className="border-b border-line pb-8">
+            <h2 className="text-xl font-bold text-ink mb-3">How We Help</h2>
+            <ul className="space-y-2 text-ink/70 list-disc pl-5">
               <li>Emergency pet food parcels for families facing financial hardship</li>
               <li>Support accessing low-cost or subsidised veterinary treatment</li>
               <li>Advice on neutering, microchipping, and responsible pet ownership</li>
@@ -42,19 +33,19 @@ export default function OutreachPage() {
             </ul>
           </div>
 
-          <div className="border-b pb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-3">Who It&apos;s For</h2>
-            <p className="text-gray-600">
+          <div className="border-b border-line pb-8">
+            <h2 className="text-xl font-bold text-ink mb-3">Who It&apos;s For</h2>
+            <p className="text-ink/70">
               If you&apos;re struggling to afford food or basic care for your pet and are worried you
               might have to give them up, please reach out. Our Outreach team will listen without
-              judgement and work with you to find a way to keep your family, pets included, together
+              judgement and work with you to find a way to keep your family — pets included — together
               wherever we possibly can.
             </p>
           </div>
 
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-3">Support Our Outreach Work</h2>
-            <p className="text-gray-600">
+            <h2 className="text-xl font-bold text-ink mb-3">Support Our Outreach Work</h2>
+            <p className="text-ink/70">
               Outreach is funded entirely by donations. Every contribution helps us say yes to another
               family in need, and keep another pet out of the shelter system and in a loving home.
             </p>
@@ -62,15 +53,15 @@ export default function OutreachPage() {
         </div>
 
         <div className="panel p-6 text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">Need Help, or Want to Help?</h2>
-          <p className="text-gray-600 mb-4">
+          <h2 className="text-xl font-bold text-ink mb-3">Need Help, or Want to Help?</h2>
+          <p className="text-ink/70 mb-4">
             Contact our Outreach team at{' '}
-            <a href="mailto:info@assisi-ni.org" className="link">info@assisi-ni.org</a>
+            <EmailLink className="underline" />
             {' '}or call{' '}
-            <a href="tel:02891812622" className="link">028 9181 2622</a>. All enquiries are
+            <PhoneLink className="underline" />. All enquiries are
             handled sensitively and in confidence.
           </p>
-          <Link href="/donate" className="btn-outline">
+          <Link href="/donate" className="btn-secondary">
             Support Outreach
           </Link>
         </div>

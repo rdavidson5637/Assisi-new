@@ -1,269 +1,229 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import AnimalCard from '@/components/AnimalCard';
-import NewsletterSignup from '@/components/NewsletterSignup';
-import SocialLinks from '@/components/SocialLinks';
 import { animals } from '@/data/animals';
-import { sanctuary, shops } from '@/data/shops';
-import { plainDashes } from '@/lib/text';
+import { site } from '@/data/site';
 
 const waysToHelp = [
   {
-    href: '/donate',
     title: 'Donate',
-    body: 'Every donation is a lifeline: food, vet care, warmth and a safe place to recover.',
-    cta: 'Ways to donate',
+    text: 'One-off and monthly gifts for food, housing and veterinary care.',
+    href: '/donate',
+    link: 'Donate',
   },
   {
-    href: '/sponsor',
     title: 'Sponsorship',
-    body: 'From 20p a day you help shelter, feed and treat animals until they find a home.',
-    cta: 'Become a sponsor',
+    text: 'From 20p a day for shelter, food and medical care.',
+    href: '/sponsor',
+    link: 'Become a sponsor',
   },
   {
-    href: '/volunteer',
     title: 'Volunteer',
-    body: 'A few hours a week walking dogs, settling cats, or helping in a shop changes lives.',
-    cta: 'Get involved',
+    text: '3-4 hours a week at the sanctuary or in the shops.',
+    href: '/volunteer',
+    link: 'Volunteer',
   },
   {
-    href: '/legacy',
     title: 'Legacy',
-    body: 'A gift in your Will keeps Assisi here for the next animal who has nowhere else to turn.',
-    cta: 'Leave a gift',
+    text: 'Leave a gift in your will.',
+    href: '/legacy',
+    link: 'Leave a gift',
   },
   {
-    href: '/membership',
     title: 'Membership',
-    body: 'Join from £15 a year, get Paw Prints through the door, and have a say at our AGM.',
-    cta: 'Join us',
+    text: 'Annual membership helps with food, veterinary treatment and treats.',
+    href: '/membership',
+    link: 'Become a member',
   },
   {
-    href: '/outreach',
     title: 'Outreach',
-    body: 'We help families in hardship keep the pets they love, instead of giving them up.',
-    cta: 'Find out more',
+    text: 'Pet food for local people who are struggling to provide it.',
+    href: '/outreach',
+    link: 'Outreach scheme',
   },
-];
+] as const;
+
+const shops = [
+  { name: 'Bangor', address: '59 Main Street, Bangor, BT20 5AF' },
+  { name: 'Holywood', address: '60 High Street, Holywood, BT18 9AE' },
+  { name: 'Newtownards', address: '63 High Street, Newtownards, BT23 7HS' },
+] as const;
+
+const shopHoursUrl = 'https://www.assisi-ni.org/our-shops/';
 
 export default function Home() {
-  const featuredAnimals = animals.filter((a) => !a.reserved).slice(0, 4);
-  const waiting = animals.filter((a) => !a.reserved).length;
+  const featuredAnimals = animals.filter((animal) => !animal.reserved).slice(0, 4);
 
   return (
     <div>
-      <section className="relative min-h-[78vh] flex items-end overflow-hidden bg-ink">
+      <section className="relative isolate overflow-hidden bg-ink text-cream min-h-[32rem]">
         <Image
-          src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1920&h=1280&fit=crop"
-          alt="Two dogs running through grass, the kind of second chance Assisi works for every day"
+          src="/images/animals/wee-max.jpg"
+          alt="Wee Max, a collie at Assisi Animal Sanctuary, lying in the grass"
           fill
-          priority
+          loading="eager"
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-[center_30%]"
         />
-        <div className="absolute inset-0 bg-ink/65" />
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <p className="text-yellow-400 font-semibold tracking-wide uppercase text-sm mb-4">
-            Help for the helpless · Northern Ireland · Est. 1997
-          </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl text-white max-w-3xl leading-tight mb-6">
-            Every animal deserves a second chance
-          </h1>
-          <p className="text-lg md:text-xl text-gray-100 max-w-2xl mb-8">
-            Assisi is a local, independent, no-kill sanctuary. We rescue, treat and rehome dogs,
-            cats, rabbits and small animals, and we stay with them for as long as it takes.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/adopt" className="btn-secondary text-center">
-              Meet the animals
-            </Link>
-            <Link
-              href="/donate"
-              className="border border-white text-white hover:bg-white hover:text-gray-900 font-bold py-3 px-6 rounded-md transition-colors text-center"
-            >
-              Donate today
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-gray-900 text-white py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center lg:text-left">
-            <div>
-              <div className="text-3xl font-bold text-yellow-400">{waiting}</div>
-              <div className="text-sm text-gray-300 mt-1">Animals looking for a home right now</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-yellow-400">No-kill</div>
-              <div className="text-sm text-gray-300 mt-1">Every animal gets the time they need</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-yellow-400">1997</div>
-              <div className="text-sm text-gray-300 mt-1">Independent charity, serving NI ever since</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-yellow-400">{shops.length} shops</div>
-              <div className="text-sm text-gray-300 mt-1">Raising funds in Bangor, Holywood &amp; Newtownards</div>
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/60 to-ink/25" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+          <div className="max-w-3xl text-left">
+            <h1 className="text-3xl md:text-5xl font-bold mb-8">
+              Every animal deserves a second chance
+            </h1>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link href="/adopt" className="btn-primary">
+                Adopt a pet
+              </Link>
+              <Link href="/donate" className="btn-secondary text-cream">
+                Donate
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-14">
+      <section className="bg-yellow text-ink">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6">
+            Help us build a dedicated Cat Intake Unit.
+          </h2>
+          <Link
+            href="/donate"
+            className="btn-primary"
+            style={{ background: 'var(--ink)', color: 'var(--cream)' }}
+          >
+            Donate
+          </Link>
+        </div>
+      </section>
+
+      {/* restore only with real, consented stories from Assisi */}
+
+      <section className="py-12 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Adopt a pet</h2>
-              <p className="text-gray-600 text-lg max-w-2xl">
-                Every rescue has a story, and every adoption creates a happy ending. Meet dogs, cats,
-                rabbits and guinea pigs waiting for a forever home.
-              </p>
-            </div>
-            <Link href="/adopt" className="btn-outline whitespace-nowrap self-start">
+          <div className="mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-3">Adopt a pet</h2>
+            <p className="text-ink/70 text-lg">
+              Dogs, cats, rabbits and guinea pigs waiting for a home.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {featuredAnimals.map((animal) => (
+              <AnimalCard key={animal.id} animal={animal} large />
+            ))}
+          </div>
+
+          <div className="mt-8">
+            <Link href="/adopt" className="btn-secondary">
               View all animals
             </Link>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredAnimals.map((animal) => (
-              <AnimalCard key={animal.id} animal={animal} />
-            ))}
-          </div>
         </div>
       </section>
 
-      <section className="bg-gray-900 text-white py-10">
+      <section className="py-12 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div className="max-w-3xl">
-              <p className="text-yellow-400 font-semibold text-sm uppercase tracking-wide mb-2">
-                Urgent appeal
-              </p>
-              <h2 className="text-2xl font-bold mb-2">Help us build a dedicated Cat Intake Unit</h2>
-              <p className="text-gray-300">
-                Incoming cats need a calm assessment and treatment space of their own. Your gift
-                helps us isolate, treat and settle them properly before they join the rest of the sanctuary.
+          <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6">Ways you can help</h2>
+          <ul className="divide-y divide-line border-t border-line">
+            {waysToHelp.map((way) => (
+              <li key={way.href} className="grid grid-cols-1 md:grid-cols-2 gap-2 py-5">
+                <h3 className="text-lg font-bold text-ink">{way.title}</h3>
+                <div>
+                  <p className="text-ink/80">{way.text}</p>
+                  <p>
+                    <Link href={way.href} className="btn-secondary">
+                      {way.link}
+                    </Link>
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="py-12 bg-cream border-t border-line">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6">Shops</h2>
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {shops.map((shop) => (
+              <li key={shop.name}>
+                <h3 className="font-bold text-ink">{shop.name}</h3>
+                <p className="text-ink/80 text-sm mt-1">{shop.address}</p>
+                <p className="mt-1">
+                  <a
+                    href={shopHoursUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary text-sm"
+                  >
+                    Hours
+                  </a>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="py-10 bg-cream border-t border-line">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="md:flex md:items-center md:justify-between gap-6">
+            <div className="mb-4 md:mb-0">
+              <h2 className="text-xl font-bold text-ink mb-2">Amazon WishList</h2>
+              <p className="text-ink/70">
+                We always look forward to our Amazon deliveries. Many supporters buy things from the
+                list that they know the animals will like.
               </p>
             </div>
-            <Link
-              href="/donate"
-              className="btn-secondary whitespace-nowrap text-center"
+            <a
+              href={site.wishlistUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary whitespace-nowrap"
             >
-              Donate now
-            </Link>
+              View wishlist
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Happy Tails stays unmounted until there are real, consented adopter stories. */}
-
-
-      <section className="py-14 border-t border-line">
+      <section className="py-10 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Ways you can help</h2>
-            <p className="text-gray-600 text-lg max-w-2xl">
-              Assisi receives no government funding. Everything we do is possible because people
-              like you give time, money, or a home.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {waysToHelp.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="group panel p-6 block hover:border-gray-900 transition-colors"
+          <div className="md:flex md:items-center md:gap-8">
+            <a
+              href={site.magazine.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block shrink-0 mb-6 md:mb-0"
+            >
+              <Image
+                src={site.magazine.cover}
+                alt={`${site.magazine.title}, ${site.magazine.edition}`}
+                width={180}
+                height={254}
+                className="rounded-[12px] border border-line"
+                style={{ width: '9rem', height: 'auto' }}
+              />
+            </a>
+            <div>
+              <h2 className="text-xl font-bold text-ink mb-2">Assisi Magazine</h2>
+              <p className="text-ink/70 mb-4">
+                The latest ({site.magazine.edition}) edition of our {site.magazine.title} magazine is now available.
+                Call into your local Assisi shop to pick one up, or read the digital copy online.
+              </p>
+              <a
+                href={site.magazine.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
               >
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-600 mb-4">{item.body}</p>
-                <span className="text-gray-900 font-bold underline underline-offset-4 decoration-1 group-hover:decoration-2">
-                  {item.cta} →
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8">
-          <div className="panel p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Our charity shops</h2>
-            <p className="text-gray-600 mb-6">
-              Three shops, every purchase and donated jumper going straight back to the animals.
-              Pop in for a browse, drop off pre-loved goods, or volunteer a shift.
-            </p>
-            <ul className="space-y-2 text-gray-700 mb-6">
-              {shops.map((shop) => (
-                <li key={shop.id} className="font-medium">
-                  {shop.name} · {shop.address}
-                </li>
-              ))}
-            </ul>
-            <Link href="/shops" className="btn-outline">
-              Shop details &amp; hours
-            </Link>
-          </div>
-          <div className="panel p-8">
-            <div>
-              <h2 className="text-2xl text-gray-900 mb-3">Paw Prints magazine</h2>
-              <p className="text-gray-600">
-                The Autumn/Winter 2025 edition is in our shops now. Pick up a copy, or ask us about
-                a digital version.
-              </p>
+                Read the digital edition →
+              </a>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="py-14 border-t border-line">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div>
-              <h3 className="font-bold text-gray-900 mb-2">Visit the sanctuary</h3>
-              <p className="text-gray-800">
-                {sanctuary.address}<br />
-                {sanctuary.town}<br />
-                {sanctuary.postcode}
-              </p>
-              <p className="text-gray-800 mt-3">
-                {plainDashes(sanctuary.hours)}<br />
-                {sanctuary.sunday}
-              </p>
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 mb-2">Get in touch</h3>
-              <p className="text-gray-800">
-                <a href={`mailto:${sanctuary.email}`} className="link">{sanctuary.email}</a>
-                <br />
-                <a href={`tel:${sanctuary.phone.replace(/\s/g, '')}`} className="link">
-                  {sanctuary.phone}
-                </a>
-              </p>
-              <Link href="/contact" className="inline-block mt-3 font-bold link">
-                Send a message →
-              </Link>
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 mb-3">Follow along</h3>
-              <p className="text-gray-800 mb-4">
-                Photos, urgent appeals and the animals who need a look this week.
-              </p>
-              <SocialLinks variant="light" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-14">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">News from the sanctuary</h2>
-          <p className="text-gray-600 mb-6">
-            Occasional updates: new arrivals, events, and when a long-stay animal finally goes home.
-            No spam.
-          </p>
-          <NewsletterSignup />
         </div>
       </section>
     </div>

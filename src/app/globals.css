@@ -1,145 +1,136 @@
 @import "tailwindcss";
 
-/*
- * Assisi tokens. See .cursor/skills/assisi/SKILL.md.
- * Ink #1a1a1a, paper #f6f1e6 (flat), amber #fbbf24 is button fill only,
- * amber hover #e0a810, lines are ink at ~15%.
- */
-@theme {
-  --color-ink: #1a1a1a;
-  --color-paper: #f6f1e6;
-  --color-amber: #fbbf24;
-  --color-amber-hover: #e0a810;
-  --color-line: rgb(26 26 26 / 0.15);
-
-  /* Alias the Tailwind greys/yellows that pages still use onto the tokens. */
-  --color-gray-900: #1a1a1a;
-  --color-yellow-400: #fbbf24;
-
-  --font-sans: var(--font-body);
-  --font-display: var(--font-heading);
-}
-
 :root {
-  --color-primary: var(--color-ink);
-  --color-secondary: var(--color-amber);
+  --cream: #FBF7EE;
+  --ink: #171717;
+  --yellow: #F6E823;
+  --teal: #0F4C4C;
+  --line: rgba(23, 23, 23, 0.12);
 }
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    background: var(--color-paper);
-    color: var(--color-ink);
-    font-family: var(--font-body);
-  }
-
-  h1,
-  h2 {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-  }
+@theme inline {
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-yellow: var(--yellow);
+  --color-teal: var(--teal);
+  --color-line: var(--line);
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
 }
 
-@layer components {
-  /* One panel style: flat, 1px ink at ~15%, no shadow. */
-  .panel {
-    background: var(--color-paper);
-    border: 1px solid var(--color-line);
-    border-radius: 8px;
-    box-shadow: none;
-  }
-
-  /* Content links: ink with an underline. */
-  .link {
-    color: var(--color-ink);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-
-  .link:hover {
-    text-decoration-thickness: 2px;
-  }
-
-  /* Amber fill, ink text. The main call to action. */
-  .btn-secondary {
-    display: inline-block;
-    background: var(--color-amber);
-    color: var(--color-ink);
-    font-weight: 700;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    border: 1px solid var(--color-amber);
-    transition: background-color 150ms ease, border-color 150ms ease;
-  }
-
-  .btn-secondary:hover {
-    background: var(--color-amber-hover);
-    border-color: var(--color-amber-hover);
-  }
-
-  .btn-secondary:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  /* Ink fill, paper text. */
-  .btn-primary {
-    display: inline-block;
-    background: var(--color-ink);
-    color: var(--color-paper);
-    font-weight: 700;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    border: 1px solid var(--color-ink);
-    transition: background-color 150ms ease, color 150ms ease;
-  }
-
-  .btn-primary:hover {
-    background: #000;
-  }
-
-  .btn-outline {
-    display: inline-block;
-    background: transparent;
-    color: var(--color-ink);
-    font-weight: 700;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    border: 1px solid var(--color-ink);
-    transition: background-color 150ms ease, color 150ms ease;
-  }
-
-  .btn-outline:hover {
-    background: var(--color-ink);
-    color: var(--color-paper);
-  }
+html {
+  scroll-behavior: smooth;
 }
 
-::selection {
-  background: var(--color-amber);
-  color: var(--color-ink);
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-ink);
-  outline-offset: 2px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+h1,
+h2 {
+  font-weight: 800;
+}
 
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-  }
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 800;
+}
+
+.panel {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.card-hover {
+  transition: border-color 0.2s ease;
+}
+
+.card-hover:hover {
+  border-color: rgba(23, 23, 23, 0.4);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.25;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  box-shadow: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(0.96);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  color: var(--teal);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  text-decoration: none;
+}
+
+.btn-secondary.text-cream {
+  color: var(--cream);
+}
+
+.field {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: var(--cream);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.field.pl-8 {
+  padding-left: 2rem;
+}
+
+.field:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
 }

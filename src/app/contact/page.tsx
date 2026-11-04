@@ -1,167 +1,144 @@
 'use client';
 
-import { useState } from 'react';
-import PageHero from '@/components/PageHero';
-import { sanctuary, shops } from '@/data/shops';
-import { plainDashes } from '@/lib/text';
+import { useId, useState } from 'react';
+import { AddressLines, EmailLink, PhoneLink } from '@/components/ContactLinks';
+import { mailtoHref, site } from '@/data/site';
 
-const subjects = [
-  'General enquiry',
-  'Adopting an animal',
-  'Volunteering',
-  'Outreach / need help keeping a pet',
-  'Donation or legacy',
-  'Shops',
-];
+const fieldClass = 'field';
 
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
+  const [draft, setDraft] = useState<{ subject: string; body: string } | null>(null);
+  const formId = useId();
+  const id = (name: string) => `${formId}-${name}`;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const name = String(data.get('name') ?? '');
+    const email = String(data.get('email') ?? '');
+    const phone = String(data.get('phone') ?? '');
+    const message = String(data.get('message') ?? '');
+
+    setDraft({
+      subject: `Message from ${name}`,
+      body: [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        ...(phone ? [`Phone: ${phone}`] : []),
+        '',
+        message,
+      ].join('\n'),
+    });
   };
 
-  const mapQuery = encodeURIComponent(
-    `${sanctuary.address}, ${sanctuary.town} ${sanctuary.postcode}`
-  );
-
   return (
-    <div className="min-h-screen">
-      <PageHero
-        title="Contact us"
-        subtitle="Visit the sanctuary, call, or send a message. We’d rather you asked than wondered."
-      />
+    <div className="min-h-screen bg-cream">
+      <section className="bg-cream border-b border-line py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-ink">Contact Us</h1>
+        </div>
+      </section>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-2 gap-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Sanctuary</h2>
-            <div className="space-y-5 text-gray-600 mb-8">
-              <p>
-                {sanctuary.name}<br />
-                {sanctuary.address}<br />
-                {sanctuary.town}<br />
-                {sanctuary.postcode}
-              </p>
-              <p>
-                <a href={`tel:${sanctuary.phone.replace(/\s/g, '')}`} className="font-bold link">
-                  {sanctuary.phone}
-                </a>
-                <br />
-                <a href={`mailto:${sanctuary.email}`} className="font-bold link">
-                  {sanctuary.email}
-                </a>
-              </p>
-              <p>
-                {plainDashes(sanctuary.hours)}<br />
-                {sanctuary.sunday}
-              </p>
-            </div>
+            <h2 className="text-xl font-bold text-ink mb-6">Get in Touch</h2>
 
-            <div className="aspect-[16/10] rounded-lg overflow-hidden border border-line mb-8">
-              <iframe
-                title="Map of Assisi Animal Sanctuary"
-                src={`https://maps.google.com/maps?q=${mapQuery}&z=14&output=embed`}
-                className="w-full h-full border-0"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-semibold text-ink mb-1">Address</h3>
+                <AddressLines className="text-ink/70" />
+              </div>
 
-            <h3 className="font-bold text-gray-900 mb-3">Charity shops</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
-              {shops.map((shop) => (
-                <li key={shop.id}>
-                  <span className="font-medium text-gray-900">{shop.name}</span>
-                  {' · '}
-                  {shop.address}
-                  {' · '}
-                  <a href={`tel:${shop.phone.replace(/\s/g, '')}`} className="link">
-                    {shop.phone}
-                  </a>
-                </li>
-              ))}
-            </ul>
+              <div>
+                <h3 className="font-semibold text-ink mb-1">Phone</h3>
+                <p>
+                  <PhoneLink className="text-ink/70 hover:text-ink" />
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-ink mb-1">Email</h3>
+                <p>
+                  <EmailLink className="text-ink/70 hover:text-ink" />
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-ink mb-1">Opening Hours</h3>
+                <p className="text-ink/70">
+                  {site.openingHours.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </p>
+              </div>
+            </div>
           </div>
 
           <div>
-            {submitted ? (
+            {draft ? (
               <div className="panel p-6">
-                <h2 className="text-lg font-bold text-gray-900 mb-2">Message sent</h2>
-                <p className="text-gray-700">
-                  Thank you. We’ll get back to you as soon as we can. During opening hours, if you
-                  need us sooner, the phone is the fastest route.
+                <h2 className="text-lg font-bold text-ink mb-2">Ready to send</h2>
+                <p className="text-ink/80">
+                  This form is not delivered automatically. Open your email app to send the message,
+                  or call us and we&apos;ll take it from there.
                 </p>
-                <button
-                  type="button"
-                  onClick={() => setSubmitted(false)}
-                  className="mt-4 text-gray-900 underline"
-                >
-                  Send another message
-                </button>
+                <p className="text-ink/80 text-sm mt-2">
+                  <PhoneLink className="underline" />
+                  {' · '}
+                  <EmailLink className="underline" />
+                </p>
+                <a href={mailtoHref(draft.subject, draft.body)} className="btn-primary mt-4">
+                  Email this message
+                </a>
+                <div className="mt-4">
+                  <button
+                    type="button"
+                    onClick={() => setDraft(null)}
+                    className="btn-secondary"
+                  >
+                    Edit message
+                  </button>
+                </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="panel p-6 space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <p className="text-sm text-ink/70">
+                  We can&apos;t take messages through this page yet. Continuing opens your email app
+                  with the message ready to send to {site.email}.
+                </p>
                 <div>
-                  <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor={id('name')} className="block text-sm font-medium text-ink/80 mb-1">
                     Name *
                   </label>
-                  <input
-                    id="contact-name"
-                    type="text"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                  />
+                  <input id={id('name')} name="name" type="text" required autoComplete="name" className={fieldClass} />
                 </div>
+
                 <div>
-                  <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor={id('email')} className="block text-sm font-medium text-ink/80 mb-1">
                     Email *
                   </label>
-                  <input
-                    id="contact-email"
-                    type="email"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                  />
+                  <input id={id('email')} name="email" type="email" required autoComplete="email" className={fieldClass} />
                 </div>
+
                 <div>
-                  <label htmlFor="contact-phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor={id('phone')} className="block text-sm font-medium text-ink/80 mb-1">
                     Phone
                   </label>
-                  <input
-                    id="contact-phone"
-                    type="tel"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                  />
+                  <input id={id('phone')} name="phone" type="tel" autoComplete="tel" className={fieldClass} />
                 </div>
+
                 <div>
-                  <label htmlFor="contact-subject" className="block text-sm font-medium text-gray-700 mb-1">
-                    Subject *
-                  </label>
-                  <select
-                    id="contact-subject"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent bg-white"
-                  >
-                    {subjects.map((subject) => (
-                      <option key={subject}>{subject}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor={id('message')} className="block text-sm font-medium text-ink/80 mb-1">
                     Message *
                   </label>
-                  <textarea
-                    id="contact-message"
-                    rows={5}
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                  />
+                  <textarea id={id('message')} name="message" rows={5} required className={fieldClass} />
                 </div>
-                <button type="submit" className="w-full btn-secondary">
-                  Send message
+
+                <button type="submit" className="w-full btn-primary">
+                  Prepare email
                 </button>
               </form>
             )}
