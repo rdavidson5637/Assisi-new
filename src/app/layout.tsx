@@ -1,14 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Atkinson_Hyperlegible, Fraunces } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { sanctuary, socialLinks } from "@/data/shops";
 import { siteUrl } from "@/lib/metadata";
 
-const inter = Inter({
+const body = Atkinson_Hyperlegible({
+  weight: ["400", "700"],
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-body",
+});
+
+const heading = Fraunces({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-heading",
 });
 
 export const metadata: Metadata = {
@@ -65,13 +73,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-GB">
-      <body className={`${inter.className} antialiased`}>
+    <html lang="en-GB" className={`${body.variable} ${heading.variable}`}>
+      <body className="antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-gray-900 text-white px-4 py-2 rounded-lg z-50">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-ink text-paper px-4 py-2 rounded z-50">
           Skip to main content
         </a>
         <Header />

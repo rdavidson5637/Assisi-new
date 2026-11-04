@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import PageHero from '@/components/PageHero';
 import { sanctuary, shops } from '@/data/shops';
+import { plainDashes } from '@/lib/text';
 
 const subjects = [
   'General enquiry',
@@ -26,7 +27,7 @@ export default function ContactPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <PageHero
         title="Contact us"
         subtitle="Visit the sanctuary, call, or send a message. We’d rather you asked than wondered."
@@ -44,21 +45,21 @@ export default function ContactPage() {
                 {sanctuary.postcode}
               </p>
               <p>
-                <a href={`tel:${sanctuary.phone.replace(/\s/g, '')}`} className="font-semibold text-gray-900 hover:underline">
+                <a href={`tel:${sanctuary.phone.replace(/\s/g, '')}`} className="font-bold link">
                   {sanctuary.phone}
                 </a>
                 <br />
-                <a href={`mailto:${sanctuary.email}`} className="font-semibold text-gray-900 hover:underline">
+                <a href={`mailto:${sanctuary.email}`} className="font-bold link">
                   {sanctuary.email}
                 </a>
               </p>
               <p>
-                {sanctuary.hours}<br />
+                {plainDashes(sanctuary.hours)}<br />
                 {sanctuary.sunday}
               </p>
             </div>
 
-            <div className="aspect-[16/10] rounded-2xl overflow-hidden bg-gray-200 mb-8">
+            <div className="aspect-[16/10] rounded-lg overflow-hidden border border-line mb-8">
               <iframe
                 title="Map of Assisi Animal Sanctuary"
                 src={`https://maps.google.com/maps?q=${mapQuery}&z=14&output=embed`}
@@ -76,7 +77,7 @@ export default function ContactPage() {
                   {' · '}
                   {shop.address}
                   {' · '}
-                  <a href={`tel:${shop.phone.replace(/\s/g, '')}`} className="underline">
+                  <a href={`tel:${shop.phone.replace(/\s/g, '')}`} className="link">
                     {shop.phone}
                   </a>
                 </li>
@@ -86,22 +87,22 @@ export default function ContactPage() {
 
           <div>
             {submitted ? (
-              <div className="bg-green-50 border border-green-200 rounded-2xl p-6">
-                <h2 className="text-lg font-bold text-green-800 mb-2">Message sent</h2>
-                <p className="text-green-700">
-                  Thank you. We’ll get back to you as soon as we can — during opening hours if you
+              <div className="panel p-6">
+                <h2 className="text-lg font-bold text-gray-900 mb-2">Message sent</h2>
+                <p className="text-gray-700">
+                  Thank you. We’ll get back to you as soon as we can. During opening hours, if you
                   need us sooner, the phone is the fastest route.
                 </p>
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
-                  className="mt-4 text-green-800 underline"
+                  className="mt-4 text-gray-900 underline"
                 >
                   Send another message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm p-6 space-y-4">
+              <form onSubmit={handleSubmit} className="panel p-6 space-y-4">
                 <div>
                   <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-1">
                     Name *
@@ -110,7 +111,7 @@ export default function ContactPage() {
                     id="contact-name"
                     type="text"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -121,7 +122,7 @@ export default function ContactPage() {
                     id="contact-email"
                     type="email"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -131,7 +132,7 @@ export default function ContactPage() {
                   <input
                     id="contact-phone"
                     type="tel"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -141,7 +142,7 @@ export default function ContactPage() {
                   <select
                     id="contact-subject"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent bg-white"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent bg-white"
                   >
                     {subjects.map((subject) => (
                       <option key={subject}>{subject}</option>
@@ -156,7 +157,7 @@ export default function ContactPage() {
                     id="contact-message"
                     rows={5}
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                   />
                 </div>
                 <button type="submit" className="w-full btn-secondary">

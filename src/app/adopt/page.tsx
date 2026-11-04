@@ -64,14 +64,14 @@ export default function AdoptPage() {
     activeCompatibilityCount > 0;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <section className="bg-yellow-400 py-12 md:py-16">
+    <div className="min-h-screen">
+      <section className="bg-paper border-b border-line py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wide text-gray-800/80 mb-2">
+          <p className="text-sm font-bold uppercase tracking-wide text-gray-700 mb-2">
             Assisi Animal Sanctuary
           </p>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">Adopt a pet</h1>
-          <p className="text-lg text-gray-800 max-w-3xl">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-3">Adopt a pet</h1>
+          <p className="text-lg text-gray-700 max-w-3xl">
             Every rescue has a story, and every adoption creates a happy ending. Meet our dogs, cats,
             rabbits and guinea pigs waiting for a loving forever home.
           </p>
@@ -79,10 +79,10 @@ export default function AdoptPage() {
       </section>
 
       {longStayCount > 0 && (
-        <div className="bg-pink-600 text-white">
+        <div className="bg-ink text-paper">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm font-medium">
-            💗 {longStayCount} {longStayCount === 1 ? 'animal has' : 'animals have'} been waiting 90+
-            days for a home — could you give one of them a second look?
+            {longStayCount} {longStayCount === 1 ? 'animal has' : 'animals have'} been waiting 90+
+            days for a home. Could you give one of them a second look?
           </div>
         </div>
       )}
@@ -98,11 +98,13 @@ export default function AdoptPage() {
           ].map((tab) => (
             <button
               key={tab.value}
+              type="button"
+              aria-pressed={filters.species === tab.value}
               onClick={() => setFilters((f) => ({ ...f, species: tab.value }))}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 filters.species === tab.value
-                  ? 'bg-gray-900 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  ? 'bg-ink text-paper border border-gray-900'
+                  : 'border border-line text-gray-900 hover:border-gray-900'
               }`}
             >
               {tab.label}
@@ -111,14 +113,14 @@ export default function AdoptPage() {
         </div>
 
         {/* Refine Filters */}
-        <div className="bg-white rounded-2xl shadow-sm p-4 sm:p-6 mb-8">
+        <div className="panel p-4 sm:p-6 mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
               <select
                 value={filters.age}
                 onChange={(e) => setFilters((f) => ({ ...f, age: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
               >
                 <option value="all">Any age</option>
                 <option value="baby">Baby</option>
@@ -132,7 +134,7 @@ export default function AdoptPage() {
               <select
                 value={filters.size}
                 onChange={(e) => setFilters((f) => ({ ...f, size: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
               >
                 <option value="all">Any size</option>
                 <option value="small">Small</option>
@@ -145,7 +147,7 @@ export default function AdoptPage() {
               <select
                 value={filters.gender}
                 onChange={(e) => setFilters((f) => ({ ...f, gender: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
               >
                 <option value="all">Any gender</option>
                 <option value="male">Male</option>
@@ -162,7 +164,7 @@ export default function AdoptPage() {
                   type="checkbox"
                   checked={filters.goodWithChildren}
                   onChange={(e) => setFilters((f) => ({ ...f, goodWithChildren: e.target.checked }))}
-                  className="rounded border-gray-300"
+                  className="rounded border-gray-300 accent-gray-900"
                 />
                 Children
               </label>
@@ -171,7 +173,7 @@ export default function AdoptPage() {
                   type="checkbox"
                   checked={filters.goodWithDogs}
                   onChange={(e) => setFilters((f) => ({ ...f, goodWithDogs: e.target.checked }))}
-                  className="rounded border-gray-300"
+                  className="rounded border-gray-300 accent-gray-900"
                 />
                 Other dogs
               </label>
@@ -180,7 +182,7 @@ export default function AdoptPage() {
                   type="checkbox"
                   checked={filters.goodWithCats}
                   onChange={(e) => setFilters((f) => ({ ...f, goodWithCats: e.target.checked }))}
-                  className="rounded border-gray-300"
+                  className="rounded border-gray-300 accent-gray-900"
                 />
                 Cats
               </label>
@@ -190,7 +192,7 @@ export default function AdoptPage() {
           {hasActiveFilters && (
             <button
               onClick={() => setFilters(defaultFilters)}
-              className="mt-4 text-sm font-semibold text-gray-900 hover:underline"
+              className="mt-4 text-sm font-bold link"
             >
               Clear all filters
             </button>
@@ -210,7 +212,7 @@ export default function AdoptPage() {
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-2xl p-12 text-center text-gray-500">
+          <div className="panel p-12 text-center text-gray-500">
             No animals match those filters right now. Try widening your search, or{' '}
             <button onClick={() => setFilters(defaultFilters)} className="underline font-medium text-gray-900">
               clear all filters
@@ -220,16 +222,16 @@ export default function AdoptPage() {
         )}
 
         {/* Rehoming Info */}
-        <div className="mt-12 bg-white rounded-lg p-6 shadow-sm">
+        <div className="mt-12 panel p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Our Rehoming Process</h2>
           <div className="prose text-gray-600">
             <ol className="list-decimal pl-5 space-y-2">
               <li>Find an animal you think would match your lifestyle</li>
-              <li>Fill out an application form – available on every pet&apos;s page</li>
+              <li>Fill out an application form, available on every pet&apos;s page</li>
               <li>We will give you a call as soon as possible to discuss your application</li>
               <li>If we don&apos;t think you are a perfect match for that animal we will do our best to suggest an alternative</li>
               <li>We&apos;ll ask you to come up if you are successful and meet the animals that match</li>
-              <li>For some animals – especially dogs, we may ask you to visit more than once</li>
+              <li>For some animals, especially dogs, we may ask you to visit more than once</li>
               <li>If you already have dogs, we&apos;ll arrange for you to bring them to meet their new family member at a later date</li>
             </ol>
             <p className="mt-4">
@@ -244,7 +246,7 @@ export default function AdoptPage() {
         </div>
 
         {/* Rehoming Fees */}
-        <div className="mt-6 bg-yellow-50 rounded-lg p-6">
+        <div className="mt-6 panel p-6">
           <h3 className="text-lg font-bold text-gray-900 mb-3">Rehoming Fees</h3>
           <p className="text-gray-600 text-sm mb-4">
             To help towards the costs of caring for your new companion whilst they have been at our
@@ -254,19 +256,19 @@ export default function AdoptPage() {
             received from us.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-            <div className="bg-white rounded-lg p-3">
+            <div className="panel p-3">
               <div className="font-semibold text-gray-900">Dogs</div>
               <div className="text-gray-600">£170</div>
             </div>
-            <div className="bg-white rounded-lg p-3">
+            <div className="panel p-3">
               <div className="font-semibold text-gray-900">Puppies</div>
               <div className="text-gray-600">£200</div>
             </div>
-            <div className="bg-white rounded-lg p-3">
+            <div className="panel p-3">
               <div className="font-semibold text-gray-900">Cats/Kittens</div>
               <div className="text-gray-600">£100</div>
             </div>
-            <div className="bg-white rounded-lg p-3">
+            <div className="panel p-3">
               <div className="font-semibold text-gray-900">Rabbits</div>
               <div className="text-gray-600">£45</div>
             </div>

@@ -23,8 +23,8 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b">
+    <div className="min-h-screen">
+      <div className="border-b border-line">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <nav className="flex items-center space-x-2 text-sm text-gray-500" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-gray-900">Home</Link>
@@ -38,18 +38,18 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {submitted ? (
-          <div className="mb-6 bg-green-50 border border-green-200 rounded-2xl p-4">
-            <p className="text-green-800">
+          <div className="mb-6 panel p-4">
+            <p className="text-gray-900">
               <strong>Thank you!</strong> Your application for {animal.name} has been submitted.
               We will review it and contact you as soon as possible.
             </p>
           </div>
         ) : null}
 
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div className="panel overflow-hidden">
           <div className="md:flex">
             <div className="md:w-1/2">
-              <div className="relative aspect-square bg-gray-100">
+              <div className="relative aspect-square bg-line">
                 <Image
                   src={animal.image}
                   alt={animal.name}
@@ -64,17 +64,17 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
             <div className="md:w-1/2 p-6 md:p-8">
               <div className="flex flex-wrap gap-2 mb-4">
                 {animal.reserved ? (
-                  <span className="inline-block bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1 rounded">
+                  <span className="inline-block bg-ink text-paper text-sm font-bold px-3 py-1 rounded">
                     Currently reserved
                   </span>
                 ) : null}
                 {!animal.reserved && animal.daysAtSanctuary >= LONG_STAY_THRESHOLD ? (
-                  <span className="inline-block bg-pink-600 text-white text-sm font-medium px-3 py-1 rounded">
+                  <span className="inline-block bg-amber text-gray-900 text-sm font-bold px-3 py-1 rounded">
                     Long stay · waiting {animal.daysAtSanctuary} days
                   </span>
                 ) : null}
                 {animal.specialNeeds ? (
-                  <span className="inline-block bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded">
+                  <span className="inline-block border border-gray-900 text-gray-900 text-sm font-bold px-3 py-1 rounded">
                     Special care
                   </span>
                 ) : null}
@@ -87,7 +87,7 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
                 {animal.personality.map((trait) => (
                   <span
                     key={trait}
-                    className="bg-yellow-50 text-yellow-800 text-xs font-medium px-2 py-1 rounded-full"
+                    className="border border-line text-gray-900 text-xs font-medium px-2 py-1 rounded-full"
                   >
                     {trait}
                   </span>
@@ -119,28 +119,28 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
                   <span
                     className={`px-3 py-1 rounded-full ${
                       animal.goodWith.children === true
-                        ? 'bg-green-50 text-green-800'
+                        ? 'border border-gray-900 text-gray-900'
                         : animal.goodWith.children === 'older-only'
                           ? 'bg-amber-50 text-amber-800'
-                          : 'bg-gray-100 text-gray-500'
+                          : 'border border-line text-gray-500'
                     }`}
                   >
                     Children{animal.goodWith.children === 'older-only' ? ' (older only)' : ''}
-                    {animal.goodWith.children === false ? ' — no' : ''}
+                    {animal.goodWith.children === false ? ': no' : ''}
                   </span>
                   <span
                     className={`px-3 py-1 rounded-full ${
-                      animal.goodWith.dogs ? 'bg-green-50 text-green-800' : 'bg-gray-100 text-gray-500'
+                      animal.goodWith.dogs ? 'border border-gray-900 text-gray-900' : 'border border-line text-gray-500'
                     }`}
                   >
-                    Other dogs{!animal.goodWith.dogs ? ' — no' : ''}
+                    Other dogs{!animal.goodWith.dogs ? ': no' : ''}
                   </span>
                   <span
                     className={`px-3 py-1 rounded-full ${
-                      animal.goodWith.cats ? 'bg-green-50 text-green-800' : 'bg-gray-100 text-gray-500'
+                      animal.goodWith.cats ? 'border border-gray-900 text-gray-900' : 'border border-line text-gray-500'
                     }`}
                   >
-                    Cats{!animal.goodWith.cats ? ' — no' : ''}
+                    Cats{!animal.goodWith.cats ? ': no' : ''}
                   </span>
                 </div>
               </div>
@@ -151,7 +151,7 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
               </div>
 
               {animal.specialNeeds && animal.specialNeedsDetails ? (
-                <div className="mb-6 bg-yellow-50 rounded-lg p-4">
+                <div className="mb-6 panel p-4">
                   <h3 className="font-semibold text-gray-900 mb-1">Special requirements</h3>
                   <p className="text-gray-600 text-sm">{animal.specialNeedsDetails}</p>
                 </div>
@@ -190,7 +190,7 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
         {showForm ? (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
             <div
-              className="bg-white rounded-2xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
+              className="panel bg-paper max-w-lg w-full max-h-[90vh] overflow-y-auto"
               role="dialog"
               aria-labelledby="application-title"
             >

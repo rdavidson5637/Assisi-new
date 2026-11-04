@@ -4,19 +4,19 @@ import { pageMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = pageMetadata(
   'Outreach',
-  'Assisi Outreach helps families in hardship keep their pets — food parcels, vet advice, and support without judgement.'
+  'Assisi Outreach helps families in hardship keep their pets: food parcels, vet advice, and support without judgement.'
 );
 
 export default function OutreachPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <section className="bg-yellow-400 py-12 md:py-16">
+    <div className="min-h-screen">
+      <section className="bg-paper border-b border-line py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wide text-gray-800/80 mb-2">
+          <p className="text-sm font-bold uppercase tracking-wide text-gray-700 mb-2">
             Assisi Animal Sanctuary
           </p>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Outreach scheme</h1>
-          <p className="text-xl text-gray-800 mt-3">Keeping pets and families together</p>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl text-gray-900">Outreach scheme</h1>
+          <p className="text-xl text-gray-700 mt-3">Keeping pets and families together</p>
         </div>
       </section>
 
@@ -25,7 +25,7 @@ export default function OutreachPage() {
           <p>
             Our Outreach Scheme supports individuals and families within our community who struggle to
             make ends meet and provide food for themselves, their families and pets. We believe that,
-            wherever possible, animals are best off staying with the family who loves them — so we step
+            wherever possible, animals are best off staying with the family who loves them, so we step
             in with practical support rather than removing a pet from a good home over hardship alone.
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function OutreachPage() {
             <p className="text-gray-600">
               If you&apos;re struggling to afford food or basic care for your pet and are worried you
               might have to give them up, please reach out. Our Outreach team will listen without
-              judgement and work with you to find a way to keep your family — pets included — together
+              judgement and work with you to find a way to keep your family, pets included, together
               wherever we possibly can.
             </p>
           </div>
@@ -61,13 +61,13 @@ export default function OutreachPage() {
           </div>
         </div>
 
-        <div className="bg-yellow-50 rounded-lg p-6 text-center">
+        <div className="panel p-6 text-center">
           <h2 className="text-xl font-bold text-gray-900 mb-3">Need Help, or Want to Help?</h2>
           <p className="text-gray-600 mb-4">
             Contact our Outreach team at{' '}
-            <a href="mailto:info@assisi-ni.org" className="underline">info@assisi-ni.org</a>
+            <a href="mailto:info@assisi-ni.org" className="link">info@assisi-ni.org</a>
             {' '}or call{' '}
-            <a href="tel:02891812622" className="underline">028 9181 2622</a>. All enquiries are
+            <a href="tel:02891812622" className="link">028 9181 2622</a>. All enquiries are
             handled sensitively and in confidence.
           </p>
           <Link href="/donate" className="btn-outline">

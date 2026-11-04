@@ -7,7 +7,7 @@ import { pageMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = pageMetadata(
   'Volunteer',
-  'Volunteer at Assisi Animal Sanctuary — walk dogs, settle cats, help in our shops, foster, fundraise or join a corporate team. 16+ for shops, 18+ for animals.'
+  'Volunteer at Assisi Animal Sanctuary: walk dogs, settle cats, help in our shops, foster, fundraise or join a corporate team. 16+ for shops, 18+ for animals.'
 );
 
 const roles: {
@@ -43,7 +43,7 @@ const roles: {
     extra: (
       <p className="text-gray-600 mt-3">
         Contact Fundraising Manager Grace at{' '}
-        <a href="mailto:grace@assisi-ni.org" className="underline">grace@assisi-ni.org</a>
+        <a href="mailto:grace@assisi-ni.org" className="link">grace@assisi-ni.org</a>
         {' '}or 07598 050096.
       </p>
     ),
@@ -62,7 +62,7 @@ const roles: {
 
 export default function VolunteerPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <PageHero
         title="Become a volunteer"
         subtitle="A few hours a week. New people, useful skills, and a genuine difference to animals who need you."
@@ -71,7 +71,7 @@ export default function VolunteerPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="max-w-3xl mb-10 text-gray-700 space-y-4">
           <p>
-            Without volunteers we could not do this work. There is something to suit most people —
+            Without volunteers we could not do this work. There is something to suit most people:
             with animals, in a shop, behind a desk, or from home as a fosterer.
           </p>
           <p className="text-sm text-gray-500">
@@ -83,7 +83,7 @@ export default function VolunteerPage() {
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 grid sm:grid-cols-2 gap-6">
             {roles.map((role) => (
-              <article key={role.id} id={role.id} className="bg-white rounded-2xl p-6 shadow-sm">
+              <article key={role.id} id={role.id} className="panel p-6">
                 <h2 className="text-lg font-bold text-gray-900 mb-2">{role.title}</h2>
                 <p className="text-gray-600 text-sm">{role.body}</p>
                 {role.extra}
@@ -99,14 +99,14 @@ export default function VolunteerPage() {
             <VolunteerForm />
             <p className="text-sm text-gray-500 mt-4">
               Or email{' '}
-              <a href="mailto:info@assisi-ni.org" className="underline">info@assisi-ni.org</a>
+              <a href="mailto:info@assisi-ni.org" className="link">info@assisi-ni.org</a>
               {' '}or call{' '}
-              <a href="tel:02891812622" className="underline">028 9181 2622</a>.
+              <a href="tel:02891812622" className="link">028 9181 2622</a>.
             </p>
           </div>
         </div>
 
-        <div className="mt-12 bg-yellow-50 rounded-2xl p-6 md:flex md:items-center md:justify-between gap-4">
+        <div className="mt-12 panel p-6 md:flex md:items-center md:justify-between gap-4">
           <p className="text-gray-800 font-medium">
             Prefer to help from home, or give financially instead?
           </p>

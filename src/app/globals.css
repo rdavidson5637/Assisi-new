@@ -1,64 +1,132 @@
 @import "tailwindcss";
 
+/*
+ * Assisi tokens. See .cursor/skills/assisi/SKILL.md.
+ * Ink #1a1a1a, paper #f6f1e6 (flat), amber #fbbf24 is button fill only,
+ * amber hover #e0a810, lines are ink at ~15%.
+ */
+@theme {
+  --color-ink: #1a1a1a;
+  --color-paper: #f6f1e6;
+  --color-amber: #fbbf24;
+  --color-amber-hover: #e0a810;
+  --color-line: rgb(26 26 26 / 0.15);
+
+  /* Alias the Tailwind greys/yellows that pages still use onto the tokens. */
+  --color-gray-900: #1a1a1a;
+  --color-yellow-400: #fbbf24;
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+}
+
 :root {
-  --color-primary: #1a1a1a;
-  --color-primary-light: #333333;
-  --color-primary-dark: #000000;
-  --color-secondary: #fbbf24;
-  --color-secondary-light: #fcd34d;
-  --color-accent: #f59e0b;
-  --color-warm: #fef3c7;
-  --color-warm-dark: #fde68a;
+  --color-primary: var(--color-ink);
+  --color-secondary: var(--color-amber);
 }
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
 }
 
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-}
+@layer components {
+  /* One panel style: flat, 1px ink at ~15%, no shadow. */
+  .panel {
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    box-shadow: none;
+  }
 
-.gradient-primary {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-}
+  /* Content links: ink with an underline. */
+  .link {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
 
-.gradient-warm {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-}
+  .link:hover {
+    text-decoration-thickness: 2px;
+  }
 
-.text-shadow {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
+  /* Amber fill, ink text. The main call to action. */
+  .btn-secondary {
+    display: inline-block;
+    background: var(--color-amber);
+    color: var(--color-ink);
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-amber);
+    transition: background-color 150ms ease, border-color 150ms ease;
+  }
 
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+  .btn-secondary:hover {
+    background: var(--color-amber-hover);
+    border-color: var(--color-amber-hover);
+  }
 
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-}
+  .btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
-.btn-primary {
-  @apply bg-gray-900 hover:bg-black text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
-}
+  /* Ink fill, paper text. */
+  .btn-primary {
+    display: inline-block;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-ink);
+    transition: background-color 150ms ease, color 150ms ease;
+  }
 
-.btn-secondary {
-  @apply bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
-}
+  .btn-primary:hover {
+    background: #000;
+  }
 
-.btn-outline {
-  @apply border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200;
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--color-ink);
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-ink);
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  .btn-outline:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
 }
 
 ::selection {
-  background: #fde68a;
-  color: #111827;
+  background: var(--color-amber);
+  color: var(--color-ink);
 }
 
 :focus-visible {
-  outline: 2px solid #fbbf24;
+  outline: 2px solid var(--color-ink);
   outline-offset: 2px;
 }
 
@@ -67,27 +135,11 @@ body {
     scroll-behavior: auto;
   }
 
-  .card-hover,
-  .card-hover:hover {
-    transition: none;
-    transform: none;
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes pulse-gentle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
-}
-
-.animate-pulse-gentle {
-  animation: pulse-gentle 2s ease-in-out infinite;
 }

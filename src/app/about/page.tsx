@@ -18,7 +18,7 @@ const rights = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <PageHero
         title="About Assisi"
         subtitle="A local, independent sanctuary. No-kill. No government funding. Every animal gets the time they need."
@@ -26,15 +26,15 @@ export default function AboutPage() {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid sm:grid-cols-3 gap-4 mb-12">
-          <div className="bg-gray-50 rounded-2xl p-6">
+          <div className="panel p-6">
             <div className="text-2xl font-bold text-gray-900">1997</div>
             <p className="text-sm text-gray-600 mt-1">Founded as a local charity for companion animals in Northern Ireland.</p>
           </div>
-          <div className="bg-yellow-50 rounded-2xl p-6">
+          <div className="panel p-6">
             <div className="text-2xl font-bold text-gray-900">No-kill</div>
             <p className="text-sm text-gray-600 mt-1">If we cannot find a home, we keep providing sanctuary for life.</p>
           </div>
-          <div className="bg-gray-50 rounded-2xl p-6">
+          <div className="panel p-6">
             <div className="text-2xl font-bold text-gray-900">NIC100079</div>
             <p className="text-sm text-gray-600 mt-1">Registered charity. Independent. Accountable to our community.</p>
           </div>
@@ -42,7 +42,7 @@ export default function AboutPage() {
 
         <div className="prose prose-lg max-w-none text-gray-700 space-y-4">
           <p>
-            We provide shelter, care, food, veterinary treatment, safety and companionship — and we
+            We provide shelter, care, food, veterinary treatment, safety and companionship, and we
             work to find a loving home for every animal that comes through our gates.
           </p>
           <p>
@@ -55,7 +55,7 @@ export default function AboutPage() {
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-3">Our vision</h2>
             <p className="text-gray-600">
-              A Northern Ireland where every companion animal has a happy home for life — and Assisi
+              A Northern Ireland where every companion animal has a happy home for life, and Assisi
               is here to help make that ordinary, not exceptional.
             </p>
           </div>
@@ -73,7 +73,7 @@ export default function AboutPage() {
         <ol className="space-y-3">
           {rights.map((right, index) => (
             <li key={right} className="flex gap-3 text-gray-700">
-              <span className="font-bold text-yellow-600">{index + 1}.</span>
+              <span className="font-bold text-gray-900">{index + 1}.</span>
               {right}
             </li>
           ))}
@@ -84,7 +84,7 @@ export default function AboutPage() {
           never comes, they stay with us.
         </p>
 
-        <div className="mt-12 bg-gray-900 text-white rounded-2xl p-8 md:flex md:items-center md:justify-between gap-6">
+        <div className="mt-12 bg-gray-900 text-white rounded-lg p-8 md:flex md:items-center md:justify-between gap-6">
           <div>
             <h2 className="text-2xl font-bold mb-2">Stand with them</h2>
             <p className="text-gray-300 max-w-xl">
