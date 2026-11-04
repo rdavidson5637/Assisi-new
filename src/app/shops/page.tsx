@@ -22,8 +22,8 @@ export default function ShopsPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {shops.map((shop) => (
             <article key={shop.id} className="panel p-6 flex flex-col">
-              <h2 className="text-xl font-bold text-gray-900 mb-3">{shop.name}</h2>
-              <p className="text-gray-600">
+              <h2 className="text-xl font-bold text-ink mb-3">{shop.name}</h2>
+              <p className="text-ink/70">
                 {shop.address}<br />
                 {shop.postcode}
               </p>
@@ -35,12 +35,12 @@ export default function ShopsPage() {
                   {shop.phone}
                 </a>
               </p>
-              <div className="mt-4 text-sm text-gray-600 space-y-3 flex-1">
+              <div className="mt-4 text-sm text-ink/70 space-y-3 flex-1">
                 <p>
-                  <span className="font-medium text-gray-900">Open:</span> {plainDashes(shop.hours)}
+                  <span className="font-medium text-ink">Open:</span> {plainDashes(shop.hours)}
                 </p>
                 <p>
-                  <span className="font-medium text-gray-900">Donations:</span> {plainDashes(shop.donations)}
+                  <span className="font-medium text-ink">Donations:</span> {plainDashes(shop.donations)}
                 </p>
                 {shop.notes ? <p>{shop.notes}</p> : null}
               </div>
@@ -58,19 +58,19 @@ export default function ShopsPage() {
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="panel p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-3">Donate goods</h2>
-            <p className="text-gray-600 mb-4">
+            <h2 className="text-xl font-bold text-ink mb-3">Donate goods</h2>
+            <p className="text-ink/70 mb-4">
               Pre-loved clothes and furniture raise real money for vet bills and feed. For larger
               items, phone the shop and they&apos;ll help arrange collection.
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-ink/60">
               Gift Aid on donated goods adds extra 25p in every £1 from the sale if you&apos;re a UK
               taxpayer. Ask in store how to sign up.
             </p>
           </div>
           <div className="panel p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-3">Volunteer in a shop</h2>
-            <p className="text-gray-600 mb-4">
+            <h2 className="text-xl font-bold text-ink mb-3">Volunteer in a shop</h2>
+            <p className="text-ink/70 mb-4">
               Volunteers 16+ are welcome on the shop floor. It&apos;s retail experience, a friendly
               team, and a direct line to keeping the sanctuary running.
             </p>

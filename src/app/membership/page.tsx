@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
+import { mailtoHref, site } from '@/data/site';
 
 const perks = [
   'Our Paw Prints magazine, posted to your door twice a year',
@@ -38,25 +39,32 @@ export default function MembershipPage() {
             <ul className="space-y-2 text-sm text-ink/70 mb-6">
               {perks.map((perk) => (
                 <li key={perk} className="flex gap-2">
-                  <span aria-hidden className="text-teal">•</span>
+                  <span aria-hidden className="text-ink">•</span>
                   {perk}
                 </li>
               ))}
             </ul>
 
             {requested ? (
-              <div className="panel p-4 text-center">
-                <p className="text-ink font-medium">Thank you for joining Assisi!</p>
+              <div className="panel p-4" aria-live="polite">
+                <p className="text-ink font-medium">To join, call or email us.</p>
                 <p className="text-ink/70 text-sm mt-1">
-                  Online sign-up is launching soon. Call{' '}
-                  <PhoneLink className="underline" /> or email{' '}
-                  <EmailLink className="underline" /> and
-                  we&apos;ll set up your membership.
+                  You haven&apos;t been signed up or charged. Call <PhoneLink className="link" /> or{' '}
+                  <a
+                    href={mailtoHref(
+                      'Membership: £15 a year',
+                      'Hello,\n\nI would like to become an Assisi member (£15 a year). Please get in touch to set it up.\n\nName:\nAddress:\nPhone:\n',
+                    )}
+                    className="link"
+                  >
+                    email {site.email}
+                  </a>{' '}
+                  and we&apos;ll set up your membership.
                 </p>
               </div>
             ) : (
-              <button onClick={() => setRequested(true)} className="w-full btn-primary">
-                Become a Member
+              <button type="button" onClick={() => setRequested(true)} className="w-full btn-primary">
+                Join by phone or email
               </button>
             )}
           </div>
@@ -65,7 +73,7 @@ export default function MembershipPage() {
             <h2 className="text-xl font-bold text-ink mb-3">Why Membership Matters</h2>
             <p className="text-ink/70 text-sm mb-4">
               As an independent charity, Assisi receives no government funding. Membership fees provide
-              reliable, year-round income that lets us plan ahead — covering everything from routine
+              reliable, year-round income that lets us plan ahead, covering everything from routine
               vet bills to the day-to-day running of the Sanctuary.
             </p>
             <p className="text-ink/70 text-sm">
@@ -79,9 +87,9 @@ export default function MembershipPage() {
           <h2 className="text-xl font-bold text-ink mb-3">Have a Question?</h2>
           <p className="text-ink/70">
             Contact us at{' '}
-            <EmailLink className="underline" />
+            <EmailLink className="link" />
             {' '}or call{' '}
-            <PhoneLink className="underline" />.
+            <PhoneLink className="link" />.
           </p>
         </div>
       </div>

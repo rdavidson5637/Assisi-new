@@ -24,7 +24,7 @@ export default function AnimalCard({ animal, large = false }: AnimalCardProps) {
                 ? '(min-width: 768px) 50vw, 100vw'
                 : '(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw'
             }
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="object-cover"
           />
         </div>
         <div className={large ? 'p-6' : 'p-4'}>
@@ -33,13 +33,13 @@ export default function AnimalCard({ animal, large = false }: AnimalCardProps) {
           )}
           {longStay && (
             <p className="mb-2">
-              <span className="inline-block bg-teal text-cream text-xs font-semibold px-2 py-1 rounded-[12px]">
+              <span className="inline-block bg-ink text-cream text-xs font-semibold px-2 py-1 rounded-[8px]">
                 Long Stay
               </span>
             </p>
           )}
           <h3
-            className={`font-bold text-ink ${
+            className={`font-bold text-ink group-hover:underline underline-offset-4 ${
               large ? 'text-4xl md:text-5xl leading-none' : 'text-lg'
             }`}
           >

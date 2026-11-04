@@ -16,7 +16,7 @@ export default function OutreachPage() {
           <p>
             Our Outreach Scheme supports individuals and families within our community who struggle to
             make ends meet and provide food for themselves, their families and pets. We believe that,
-            wherever possible, animals are best off staying with the family who loves them — so we step
+            wherever possible, animals are best off staying with the family who loves them, so we step
             in with practical support rather than removing a pet from a good home over hardship alone.
           </p>
         </div>
@@ -38,7 +38,7 @@ export default function OutreachPage() {
             <p className="text-ink/70">
               If you&apos;re struggling to afford food or basic care for your pet and are worried you
               might have to give them up, please reach out. Our Outreach team will listen without
-              judgement and work with you to find a way to keep your family — pets included — together
+              judgement and work with you to find a way to keep your family, pets included, together
               wherever we possibly can.
             </p>
           </div>
@@ -56,9 +56,9 @@ export default function OutreachPage() {
           <h2 className="text-xl font-bold text-ink mb-3">Need Help, or Want to Help?</h2>
           <p className="text-ink/70 mb-4">
             Contact our Outreach team at{' '}
-            <EmailLink className="underline" />
+            <EmailLink className="link" />
             {' '}or call{' '}
-            <PhoneLink className="underline" />. All enquiries are
+            <PhoneLink className="link" />. All enquiries are
             handled sensitively and in confidence.
           </p>
           <Link href="/donate" className="btn-secondary">

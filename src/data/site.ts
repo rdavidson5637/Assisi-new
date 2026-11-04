@@ -29,6 +29,6 @@ export const site = {
 } as const;
 
 export function mailtoHref(subject: string, body: string) {
-  const params = new URLSearchParams({ subject, body });
-  return `mailto:${site.email}?${params.toString()}`;
+  // encodeURIComponent, not URLSearchParams: mail clients show "+" for spaces.
+  return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

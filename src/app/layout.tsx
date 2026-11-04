@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Figtree } from "next/font/google";
+import { Atkinson_Hyperlegible, Fraunces } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const figtree = Figtree({
+// Atkinson Hyperlegible for body and UI; Fraunces for h1 and h2 only.
+const body = Atkinson_Hyperlegible({
   subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
   variable: "--font-body",
 });
 
-const bricolage = Bricolage_Grotesque({
+const display = Fraunces({
   subsets: ["latin"],
-  weight: ["600", "800"],
-  variable: "--font-heading",
+  display: "swap",
+  variable: "--font-display",
 });
 
 export const metadata: Metadata = {
@@ -36,9 +39,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${figtree.variable} ${bricolage.variable}`}>
+    <html lang="en" className={`${body.variable} ${display.variable}`}>
       <body className="antialiased">
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-ink text-cream px-4 py-2 rounded-[12px] z-50">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-ink text-cream px-4 py-2 rounded-[8px] z-50">
           Skip to main content
         </a>
         <Header />

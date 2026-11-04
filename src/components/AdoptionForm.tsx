@@ -101,9 +101,9 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
             member of the rehoming team will be in touch.
           </p>
           <p className="text-ink/80 text-sm mt-2">
-            <PhoneLink className="underline" />
+            <PhoneLink className="link" />
             {' · '}
-            <EmailLink className="underline" />
+            <EmailLink className="link" />
           </p>
           <a
             href={mailtoHref(draft.subject, draft.body)}
@@ -194,7 +194,7 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
               </div>
 
               <div className="flex items-start gap-2">
-                <input id={id('confirm')} name="confirm" type="checkbox" required className="mt-1 accent-teal" />
+                <input id={id('confirm')} name="confirm" type="checkbox" required className="mt-1 accent-ink" />
                 <label htmlFor={id('confirm')} className="text-sm text-ink/70">
                   I confirm that I am over 18 and the information provided is accurate.
                 </label>

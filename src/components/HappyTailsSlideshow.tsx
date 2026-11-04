@@ -24,7 +24,7 @@ export default function HappyTailsSlideshow() {
 
   return (
     <div
-      className="relative rounded-[12px] border border-line overflow-hidden bg-ink aspect-[3/2]"
+      className="relative rounded-[8px] border border-line overflow-hidden bg-ink aspect-[3/2]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

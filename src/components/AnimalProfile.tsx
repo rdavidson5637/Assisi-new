@@ -126,21 +126,21 @@ export default function AnimalProfile({ animal }: { animal: Animal }) {
                     }`}
                   >
                     Children{animal.goodWith.children === 'older-only' ? ' (older only)' : ''}
-                    {animal.goodWith.children === false ? ' — no' : ''}
+                    {animal.goodWith.children === false ? ': no' : ''}
                   </span>
                   <span
                     className={`px-3 py-1 rounded-full ${
                       animal.goodWith.dogs ? 'bg-green-50 text-green-800' : 'bg-gray-100 text-gray-500'
                     }`}
                   >
-                    Other dogs{!animal.goodWith.dogs ? ' — no' : ''}
+                    Other dogs{!animal.goodWith.dogs ? ': no' : ''}
                   </span>
                   <span
                     className={`px-3 py-1 rounded-full ${
                       animal.goodWith.cats ? 'bg-green-50 text-green-800' : 'bg-gray-100 text-gray-500'
                     }`}
                   >
-                    Cats{!animal.goodWith.cats ? ' — no' : ''}
+                    Cats{!animal.goodWith.cats ? ': no' : ''}
                   </span>
                 </div>
               </div>
