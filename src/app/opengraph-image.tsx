@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'Assisi Animal Sanctuary — Help for the Helpless';
+export const alt = 'Assisi Animal Sanctuary - Help for the Helpless';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -63,7 +63,7 @@ export default async function Image() {
           Every animal deserves a second chance
         </div>
         <div style={{ display: 'flex', color: '#d1d5db', fontSize: 32 }}>
-          Assisi Animal Sanctuary — Help for the Helpless
+          Assisi Animal Sanctuary - Help for the Helpless
         </div>
       </div>
     ),

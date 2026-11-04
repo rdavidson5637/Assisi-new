@@ -13,7 +13,7 @@ export const site = {
     phoneDisplay: '07598050096',
     phoneHref: 'tel:07598050096',
   },
-  openingHours: ['Monday – Saturday: 12pm – 4pm', 'Sunday: Closed'],
+  openingHours: ['Monday to Saturday: 12pm-4pm', 'Sunday: Closed'],
   wishlistUrl: 'https://www.amazon.co.uk/hz/wishlist/ls/3S6T34K45JNHT',
   magazine: {
     title: 'Paw Prints',
