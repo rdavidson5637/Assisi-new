@@ -2,10 +2,13 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isCurrent = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   const navLinks = [
     { href: '/adopt', label: 'Adopt' },
@@ -37,7 +40,8 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-ink hover:text-teal font-medium transition-colors"
+                aria-current={isCurrent(link.href) ? 'page' : undefined}
+                className="link font-medium aria-[current=page]:decoration-2"
               >
                 {link.label}
               </Link>
@@ -52,7 +56,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-[12px] hover:bg-ink/5"
+            className="lg:hidden p-2 rounded-[8px] hover:bg-ink/5"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
@@ -91,7 +95,8 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-ink hover:text-teal font-medium py-2 px-4 rounded-[12px] hover:bg-ink/5"
+                  aria-current={isCurrent(link.href) ? 'page' : undefined}
+                  className="link font-medium py-2 px-4 aria-[current=page]:decoration-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}

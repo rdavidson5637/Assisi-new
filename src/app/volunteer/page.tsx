@@ -19,9 +19,9 @@ export default function VolunteerPage() {
             to animal welfare.
           </p>
           <p>
-            Without our dedicated volunteers, we could not continue with the work we do – and there 
+            Without our dedicated volunteers, we could not continue with the work we do, and there 
             is so much to do! Volunteering with us is very rewarding, you are helping us make a 
-            difference to so many animals&apos; lives. We have several different volunteer roles – 
+            difference to so many animals&apos; lives. We have several different volunteer roles, so 
             there is something to suit everyone!
           </p>
           <p className="text-sm text-ink/70">
@@ -86,7 +86,7 @@ export default function VolunteerPage() {
             </p>
             <p className="text-ink/70">
               You can contact our Fundraising Manager, {site.fundraising.name} by email at{' '}
-              <a href={site.fundraising.emailHref} className="underline">{site.fundraising.email}</a>
+              <a href={site.fundraising.emailHref} className="link">{site.fundraising.email}</a>
               {' '}or by phone/text on {site.fundraising.phoneDisplay}.
             </p>
           </div>
@@ -99,7 +99,7 @@ export default function VolunteerPage() {
               need to assist your organisation in all fundraising activity you chose to do. 
               Alternatively, volunteer your staff time to help at the Sanctuary. If you would like 
               to discuss corporate volunteering, email{' '}
-              <EmailLink className="underline" />
+              <EmailLink className="link" />
             </p>
           </div>
 
@@ -129,9 +129,9 @@ export default function VolunteerPage() {
           </p>
           <p className="text-ink/80 font-medium">
             Contact us at{' '}
-            <EmailLink className="underline" />
+            <EmailLink className="link" />
             {' '}or call{' '}
-            <PhoneLink className="underline" />
+            <PhoneLink className="link" />
           </p>
         </div>
       </div>

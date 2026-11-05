@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { EmailLink, PhoneLink } from '@/components/ContactLinks';
+import { PhoneLink } from '@/components/ContactLinks';
+import { mailtoHref, site } from '@/data/site';
 
 const tiers = [
   { amount: 6, label: 'Friend', blurb: 'Helps cover daily food and bedding for animals in our care.' },
@@ -31,7 +32,7 @@ export default function SponsorPage() {
             they find their forever home.
           </p>
           <p>
-            Sponsorship doesn&apos;t fund one animal alone — it keeps the Sanctuary running so we can
+            Sponsorship doesn&apos;t fund one animal alone. It keeps the Sanctuary running so we can
             say yes to the next animal that needs us, whatever their story.
           </p>
         </div>
@@ -43,8 +44,10 @@ export default function SponsorPage() {
             {tiers.map((tier) => (
               <button
                 key={tier.amount}
+                type="button"
+                aria-pressed={selected === tier.amount}
                 onClick={() => setSelected(tier.amount)}
-                className={`text-left rounded-[12px] p-4 border transition-colors ${
+                className={`text-left rounded-[8px] p-4 border transition-colors ${
                   selected === tier.amount
                     ? 'border-ink'
                     : 'border-line hover:border-ink'
@@ -58,20 +61,34 @@ export default function SponsorPage() {
           </div>
 
           {requested ? (
-            <div className="panel p-4 text-center">
+            <div className="panel p-4" aria-live="polite">
               <p className="text-ink font-medium">
-                Thank you for choosing to sponsor at £{selected}/month!
+                To sponsor at £{selected} a month, call or email us.
               </p>
               <p className="text-ink/70 text-sm mt-1">
-                Online sign-up is launching soon. Call{' '}
-                <PhoneLink className="underline" /> or email{' '}
-                <EmailLink className="underline" /> and
-                we&apos;ll get your sponsorship set up.
+                You haven&apos;t been signed up or charged. Call <PhoneLink className="link" /> or{' '}
+                <a
+                  href={mailtoHref(
+                    `Sponsorship: £${selected} a month`,
+                    `Hello,\n\nI would like to sponsor Assisi at £${selected} a month. Please get in touch to set it up.\n\nName:\nPhone:\n`,
+                  )}
+                  className="link"
+                >
+                  email {site.email}
+                </a>{' '}
+                and we&apos;ll set up your sponsorship.
               </p>
+              <button
+                type="button"
+                onClick={() => setRequested(false)}
+                className="btn-secondary text-sm mt-3"
+              >
+                Change amount
+              </button>
             </div>
           ) : (
-            <button onClick={() => setRequested(true)} className="w-full btn-primary">
-              Sponsor for £{selected}/month
+            <button type="button" onClick={() => setRequested(true)} className="w-full btn-primary">
+              Sponsor at £{selected} a month by phone or email
             </button>
           )}
         </div>
@@ -80,19 +97,19 @@ export default function SponsorPage() {
           <h2 className="text-xl font-bold text-ink mb-4">What Your Sponsorship Supports</h2>
           <ul className="space-y-3 text-ink/70">
             <li className="flex gap-3">
-              <span aria-hidden className="text-teal">•</span>
+              <span aria-hidden className="text-ink">•</span>
               Daily food, bedding and warm shelter for every animal in our care
             </li>
             <li className="flex gap-3">
-              <span aria-hidden className="text-teal">•</span>
+              <span aria-hidden className="text-ink">•</span>
               Veterinary treatment, vaccinations, neutering and microchipping
             </li>
             <li className="flex gap-3">
-              <span aria-hidden className="text-teal">•</span>
+              <span aria-hidden className="text-ink">•</span>
               Extra care for our long-stay and special needs animals who take longer to rehome
             </li>
             <li className="flex gap-3">
-              <span aria-hidden className="text-teal">•</span>
+              <span aria-hidden className="text-ink">•</span>
               Our Outreach Scheme, helping families in the community keep and care for their pets
             </li>
           </ul>

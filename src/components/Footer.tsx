@@ -1,9 +1,6 @@
 import { AddressLines, EmailLink, PhoneLink } from '@/components/ContactLinks';
 import { site } from '@/data/site';
-
-function withHyphens(line: string) {
-  return line.replaceAll('—', '-').replaceAll('–', '-');
-}
+import { plainDashes } from '@/lib/text';
 
 export default function Footer() {
   return (
@@ -21,7 +18,7 @@ export default function Footer() {
             <p className="text-cream/80">
               {site.openingHours.map((line) => (
                 <span key={line} className="block">
-                  {withHyphens(line)}
+                  {plainDashes(line)}
                 </span>
               ))}
             </p>
@@ -30,14 +27,14 @@ export default function Footer() {
           <div>
             <h2 className="font-bold mb-2">Phone</h2>
             <p>
-              <PhoneLink className="text-cream/80 hover:text-cream" />
+              <PhoneLink className="text-cream underline underline-offset-[0.2em] hover:decoration-2" />
             </p>
           </div>
 
           <div>
             <h2 className="font-bold mb-2">Email</h2>
             <p>
-              <EmailLink className="text-cream/80 hover:text-cream" />
+              <EmailLink className="text-cream underline underline-offset-[0.2em] hover:decoration-2" />
             </p>
           </div>
         </div>
