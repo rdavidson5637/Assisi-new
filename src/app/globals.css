@@ -21,8 +21,6 @@
   --color-amber: var(--amber);
   --color-amber-hover: var(--amber-hover);
   --color-line: var(--line);
-  /* Map leftover Tailwind greys onto ink so stray utilities stay on-palette. */
-  --color-gray-900: var(--ink);
   --font-sans: var(--font-body);
   --font-heading: var(--font-display);
 }

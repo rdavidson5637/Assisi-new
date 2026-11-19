@@ -3,6 +3,7 @@ import { Atkinson_Hyperlegible, Fraunces } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { siteName, siteUrl } from "@/lib/metadata";
 
 // Atkinson Hyperlegible for body and UI; Fraunces for h1 and h2 only.
 const body = Atkinson_Hyperlegible({
@@ -19,15 +20,18 @@ const display = Fraunces({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.assisi-ni.org"),
-  title: "Assisi Animal Sanctuary | Help for the Helpless",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${siteName} | Help for the Helpless`,
+    template: `%s | ${siteName}`,
+  },
   description: "Founded in 1997, Assisi Animal Sanctuary is Northern Ireland's leading independent animal welfare charity. Adopt a pet, volunteer, donate, or foster today.",
   keywords: "animal sanctuary, pet adoption, Northern Ireland, dogs, cats, rabbits, animal welfare, charity, volunteer, donate",
   openGraph: {
-    title: "Assisi Animal Sanctuary | Help for the Helpless",
+    title: `${siteName} | Help for the Helpless`,
     description: "Providing safety, healing, and hope for vulnerable animals in Northern Ireland since 1997.",
-    url: "https://www.assisi-ni.org",
-    siteName: "Assisi Animal Sanctuary",
+    url: siteUrl,
+    siteName,
     locale: "en_GB",
     type: "website",
   },

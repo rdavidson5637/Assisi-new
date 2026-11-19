@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import Link from 'next/link';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
 import { mailtoHref, site } from '@/data/site';
@@ -10,10 +10,19 @@ export default function DonatePage() {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(25);
   const [customAmount, setCustomAmount] = useState('');
   const [requested, setRequested] = useState(false);
+  const customAmountId = useId();
 
   const amounts = [10, 25, 50, 100];
-  const finalAmount = selectedAmount || (customAmount ? parseInt(customAmount) : 0);
-  const giftLabel = `£${finalAmount}${donationType === 'monthly' ? ' a month' : ''}`;
+  const parsedCustom = customAmount.trim() === '' ? NaN : Number(customAmount);
+  const validCustom =
+    Number.isFinite(parsedCustom) && parsedCustom > 0
+      ? Math.round(parsedCustom * 100) / 100
+      : 0;
+  const finalAmount = selectedAmount ?? validCustom;
+  const formattedAmount = Number.isInteger(finalAmount)
+    ? String(finalAmount)
+    : finalAmount.toFixed(2);
+  const giftLabel = `£${formattedAmount}${donationType === 'monthly' ? ' a month' : ''}`;
   const emailHref = mailtoHref(
     `Donation: ${giftLabel}`,
     `Hello,\n\nI would like to give ${giftLabel} to Assisi Animal Sanctuary. Please get in touch to arrange it.\n\nName:\nPhone:\n`,
@@ -42,6 +51,8 @@ export default function DonatePage() {
 
           <div className="flex rounded-[8px] border border-line p-1 mb-6">
             <button
+              type="button"
+              aria-pressed={donationType === 'one-time'}
               onClick={() => setDonationType('one-time')}
               className={`flex-1 py-2 px-4 rounded-[8px] font-medium transition-colors ${
                 donationType === 'one-time'
@@ -52,6 +63,8 @@ export default function DonatePage() {
               One-time
             </button>
             <button
+              type="button"
+              aria-pressed={donationType === 'monthly'}
               onClick={() => setDonationType('monthly')}
               className={`flex-1 py-2 px-4 rounded-[8px] font-medium transition-colors ${
                 donationType === 'monthly'
@@ -65,13 +78,15 @@ export default function DonatePage() {
 
           {/* Amount Selection */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-ink/80 mb-3">
+            <p className="block text-sm font-medium text-ink/80 mb-3">
               Select Amount
-            </label>
+            </p>
             <div className="grid grid-cols-4 gap-3 mb-4">
               {amounts.map((amount) => (
                 <button
                   key={amount}
+                  type="button"
+                  aria-pressed={selectedAmount === amount}
                   onClick={() => {
                     setSelectedAmount(amount);
                     setCustomAmount('');
@@ -87,9 +102,14 @@ export default function DonatePage() {
               ))}
             </div>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink/60">£</span>
+              <label htmlFor={customAmountId} className="sr-only">
+                Other amount in pounds
+              </label>
+              <span aria-hidden="true" className="absolute left-3 top-1/2 -translate-y-1/2 text-ink/60">£</span>
               <input
+                id={customAmountId}
                 type="number"
+                inputMode="decimal"
                 placeholder="Other amount"
                 value={customAmount}
                 onChange={(e) => {
@@ -98,6 +118,7 @@ export default function DonatePage() {
                 }}
                 className="field pl-8"
                 min="1"
+                step="any"
               />
             </div>
           </div>
