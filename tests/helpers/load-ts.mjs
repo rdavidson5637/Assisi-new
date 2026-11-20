@@ -99,6 +99,9 @@ export function loadTsModule(specifier, fromDir = srcRoot) {
         },
       };
     }
+    if (typeof req === 'string' && /\.css$/i.test(req)) {
+      return {};
+    }
     if (req.startsWith('@/') || req.startsWith('.')) {
       return loadTsModule(req, dir);
     }
