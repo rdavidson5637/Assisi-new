@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
+import { pageMetadata } from '@/lib/metadata';
+
+export const metadata: Metadata = pageMetadata(
+  'Outreach Scheme',
+  'Our Outreach Scheme supports local families struggling to afford pet food and care, helping keep pets and families together in Northern Ireland.',
+  '/outreach'
+);
 
 export default function OutreachPage() {
   return (

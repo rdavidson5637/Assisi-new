@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import AdoptionForm from '@/components/AdoptionForm';
 import { animals, isLongStay, type Compatibility } from '@/data/animals';
+import { siteName } from '@/lib/metadata';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -20,14 +21,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Animal not found' };
   }
 
-  const description = animal.description.replace(/\s+/g, ' ').slice(0, 160);
+  const clean = animal.description.replace(/\s+/g, ' ').trim();
+  const description =
+    clean.length <= 160 ? clean : `${clean.slice(0, 157).replace(/\s+\S*$/, '')}...`;
 
   return {
-    title: `${animal.name} | Adopt | Assisi Animal Sanctuary`,
+    title: `${animal.name} | Adopt`,
     description,
+    alternates: {
+      canonical: `/adopt/${animal.id}`,
+    },
     openGraph: {
-      title: `Adopt ${animal.name}`,
+      title: `Adopt ${animal.name} | ${siteName}`,
       description,
+      url: `/adopt/${animal.id}`,
+      siteName,
+      locale: 'en_GB',
+      type: 'website',
       images: [{ url: animal.image, alt: animal.name }],
     },
   };

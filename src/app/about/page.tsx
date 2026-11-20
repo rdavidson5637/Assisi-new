@@ -1,4 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/metadata';
+
+export const metadata: Metadata = pageMetadata(
+  'About Us',
+  'Founded in 1997, Assisi Animal Sanctuary is an independent no-kill animal welfare charity in Conlig, Northern Ireland. Read about our vision, mission and animal rights.',
+  '/about'
+);
 
 export default function AboutPage() {
   return (

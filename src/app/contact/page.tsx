@@ -80,7 +80,7 @@ export default function ContactPage() {
 
           <div>
             {draft ? (
-              <div className="panel p-6">
+              <div className="panel p-6" aria-live="polite">
                 <h2 className="text-lg font-bold text-ink mb-2">Ready to send</h2>
                 <p className="text-ink/80">
                   This form is not delivered automatically. Open your email app to send the message,

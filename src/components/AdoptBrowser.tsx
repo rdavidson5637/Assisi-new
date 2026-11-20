@@ -121,6 +121,7 @@ export default function AdoptBrowser() {
             <button
               key={tab.value}
               type="button"
+              aria-pressed={species === tab.value}
               onClick={() => update({ species: tab.value === 'all' ? null : tab.value })}
               className={`px-4 py-2 rounded-[8px] font-medium transition-colors border ${
                 species === tab.value
@@ -252,7 +253,7 @@ export default function AdoptBrowser() {
           )}
         </div>
 
-        <p className="text-sm text-ink/60 mb-4">
+        <p className="text-sm text-ink/60 mb-4" aria-live="polite">
           Showing {filteredAnimals.length} of {animals.length} animals
         </p>
 

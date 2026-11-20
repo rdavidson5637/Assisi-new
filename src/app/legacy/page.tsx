@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
+import { pageMetadata } from '@/lib/metadata';
+
+export const metadata: Metadata = pageMetadata(
+  'Leave a Legacy',
+  'Leave a gift in your will to Assisi Animal Sanctuary in Northern Ireland. Learn about residuary, pecuniary and specific gifts and how to get in touch.',
+  '/legacy'
+);
 
 export default function LegacyPage() {
   return (

@@ -35,7 +35,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav aria-label="Main" className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -56,6 +56,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
+            type="button"
             className="lg:hidden p-2 rounded-[8px] hover:bg-ink/5"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
@@ -67,6 +68,7 @@ export default function Header() {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               {mobileMenuOpen ? (
                 <path
@@ -90,7 +92,7 @@ export default function Header() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div id="mobile-nav" className="lg:hidden pb-4 border-t border-line">
-            <nav className="flex flex-col space-y-2 pt-4">
+            <nav aria-label="Mobile" className="flex flex-col space-y-2 pt-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}

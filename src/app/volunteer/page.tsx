@@ -1,5 +1,13 @@
+import type { Metadata } from 'next';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
 import { site } from '@/data/site';
+import { pageMetadata } from '@/lib/metadata';
+
+export const metadata: Metadata = pageMetadata(
+  'Volunteer',
+  'Volunteer with Assisi Animal Sanctuary in Northern Ireland. Help at the sanctuary, in our charity shops, as a transport driver, foster carer or fundraiser.',
+  '/volunteer'
+);
 
 export default function VolunteerPage() {
   return (
@@ -87,7 +95,8 @@ export default function VolunteerPage() {
             <p className="text-ink/70">
               You can contact our Fundraising Manager, {site.fundraising.name} by email at{' '}
               <a href={site.fundraising.emailHref} className="link">{site.fundraising.email}</a>
-              {' '}or by phone/text on {site.fundraising.phoneDisplay}.
+              {' '}or by phone/text on{' '}
+              <a href={site.fundraising.phoneHref} className="link">{site.fundraising.phoneDisplay}</a>.
             </p>
           </div>
 

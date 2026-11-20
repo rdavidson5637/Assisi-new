@@ -95,7 +95,7 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
   return (
     <>
       {draft && (
-        <div className="mb-6 panel p-4">
+        <div className="mb-6 panel p-4" aria-live="polite">
           <p className="text-ink">
             <strong>This form is not sent automatically.</strong> Email it to us, or call, and a
             member of the rehoming team will be in touch.
@@ -111,6 +111,18 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
           >
             Email this application
           </a>
+          <div className="mt-4">
+            <button
+              type="button"
+              onClick={() => {
+                setDraft(null);
+                setOpen(true);
+              }}
+              className="btn-secondary text-sm"
+            >
+              Start again
+            </button>
+          </div>
         </div>
       )}
 
@@ -121,7 +133,12 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
       )}
 
       {open && (
-        <div className="fixed inset-0 bg-ink/50 flex items-center justify-center p-4 z-50">
+        <div
+          className="fixed inset-0 bg-ink/50 flex items-center justify-center p-4 z-50"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) close();
+          }}
+        >
           <div
             ref={dialogRef}
             role="dialog"

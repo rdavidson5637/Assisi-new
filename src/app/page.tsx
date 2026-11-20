@@ -1,8 +1,16 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import AnimalCard from '@/components/AnimalCard';
 import { animals } from '@/data/animals';
+import { shops } from '@/data/shops';
 import { site } from '@/data/site';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
 
 const waysToHelp = [
   {
@@ -42,14 +50,6 @@ const waysToHelp = [
     link: 'Outreach scheme',
   },
 ] as const;
-
-const shops = [
-  { name: 'Bangor', address: '59 Main Street, Bangor, BT20 5AF' },
-  { name: 'Holywood', address: '60 High Street, Holywood, BT18 9AE' },
-  { name: 'Newtownards', address: '63 High Street, Newtownards, BT23 7HS' },
-] as const;
-
-const shopHoursUrl = 'https://www.assisi-ni.org/our-shops/';
 
 export default function Home() {
   const featuredAnimals = animals.filter((animal) => !animal.reserved).slice(0, 4);
@@ -146,18 +146,15 @@ export default function Home() {
           <h2 className="text-2xl md:text-3xl font-bold text-ink mb-6">Shops</h2>
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {shops.map((shop) => (
-              <li key={shop.name}>
+              <li key={shop.id}>
                 <h3 className="font-bold text-ink">{shop.name}</h3>
-                <p className="text-ink/80 text-sm mt-1">{shop.address}</p>
+                <p className="text-ink/80 text-sm mt-1">
+                  {shop.address}, {shop.postcode}
+                </p>
                 <p className="mt-1">
-                  <a
-                    href={shopHoursUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary text-sm"
-                  >
+                  <Link href={`/shops#${shop.id}`} className="btn-secondary text-sm">
                     Hours
-                  </a>
+                  </Link>
                 </p>
               </li>
             ))}

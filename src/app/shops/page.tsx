@@ -7,7 +7,8 @@ import { plainDashes } from '@/lib/text';
 
 export const metadata: Metadata = pageMetadata(
   'Our Shops',
-  'Assisi charity shops in Bangor, Holywood and Newtownards raise vital funds for animals in our care. Opening hours, donations and how to volunteer.'
+  'Assisi charity shops in Bangor, Holywood and Newtownards raise vital funds for animals in our care. Opening hours, donations and how to volunteer.',
+  '/shops'
 );
 
 export default function ShopsPage() {
@@ -21,7 +22,7 @@ export default function ShopsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {shops.map((shop) => (
-            <article key={shop.id} className="panel p-6 flex flex-col">
+            <article key={shop.id} id={shop.id} className="panel p-6 flex flex-col scroll-mt-24">
               <h2 className="text-xl font-bold text-ink mb-3">{shop.name}</h2>
               <p className="text-ink/70">
                 {shop.address}<br />
