@@ -14,6 +14,12 @@ export const metadata: Metadata = {
 
 const waysToHelp = [
   {
+    title: 'Christmas appeal',
+    text: 'Festive gifts, charity shops, fundraising ideas and upcoming Christmas events.',
+    href: '/christmas',
+    link: 'Christmas at Assisi',
+  },
+  {
     title: 'Donate',
     text: 'One-off and monthly gifts for food, housing and veterinary care.',
     href: '/donate',
