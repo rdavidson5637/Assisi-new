@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import AdoptBrowser from "@/components/AdoptBrowser";
 import InnerHero from "@/components/editorial/InnerHero";
+import QualityMobileStyles from "@/components/QualityMobileStyles";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata(
@@ -15,7 +16,8 @@ export const metadata: Metadata = pageMetadata(
  */
 export default function AdoptPage() {
   return (
-    <div className="bg-cream">
+    <div className="qm-page bg-cream">
+      <QualityMobileStyles />
       <InnerHero
         title="Adopt a Pet"
         subtitle="Dogs, cats, rabbits and guinea pigs waiting for a home."

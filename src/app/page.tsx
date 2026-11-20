@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import AnimalCard from '@/components/AnimalCard';
+import QualityMobileStyles from '@/components/QualityMobileStyles';
 import { animals } from '@/data/animals';
 import { shops } from '@/data/shops';
 import { site } from '@/data/site';
@@ -69,7 +70,8 @@ export default function Home() {
   const featuredAnimals = animals.filter((animal) => !animal.reserved).slice(0, 4);
 
   return (
-    <div>
+    <div className="qm-page">
+      <QualityMobileStyles />
       <section className="bg-ink text-cream [&_:focus-visible]:outline-cream!">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 lg:items-stretch">
           <div className="px-4 sm:px-6 lg:px-8 py-14 md:py-20 lg:col-span-6 lg:self-center lg:py-24">

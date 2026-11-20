@@ -3,6 +3,7 @@ import Link from "next/link";
 import { EmailLink, PhoneLink } from "@/components/ContactLinks";
 import EdSection from "@/components/editorial/EdSection";
 import InnerHero from "@/components/editorial/InnerHero";
+import QualityMobileStyles from "@/components/QualityMobileStyles";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata(
@@ -32,7 +33,8 @@ const lead = "text-[clamp(1.125rem,1.05rem+0.35vw,1.25rem)] leading-relaxed text
 
 export default function LegacyPage() {
   return (
-    <div className="bg-cream">
+    <div className="qm-page bg-cream">
+      <QualityMobileStyles />
       <InnerHero
         title="Leave a Legacy"
         subtitle="A gift that lasts long after you're gone"
