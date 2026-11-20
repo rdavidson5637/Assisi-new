@@ -3,6 +3,7 @@
 import { useId, useState } from 'react';
 import { AddressLines, EmailLink, PhoneLink } from '@/components/ContactLinks';
 import { mailtoHref, site } from '@/data/site';
+import { plainDashes } from '@/lib/text';
 
 const fieldClass = 'field';
 
@@ -53,14 +54,14 @@ export default function ContactPage() {
               <div>
                 <h3 className="font-semibold text-ink mb-1">Phone</h3>
                 <p>
-                  <PhoneLink className="text-ink/70 hover:text-ink" />
+                  <PhoneLink className="link" />
                 </p>
               </div>
 
               <div>
                 <h3 className="font-semibold text-ink mb-1">Email</h3>
                 <p>
-                  <EmailLink className="text-ink/70 hover:text-ink" />
+                  <EmailLink className="link" />
                 </p>
               </div>
 
@@ -69,7 +70,7 @@ export default function ContactPage() {
                 <p className="text-ink/70">
                   {site.openingHours.map((line) => (
                     <span key={line} className="block">
-                      {line}
+                      {plainDashes(line)}
                     </span>
                   ))}
                 </p>
@@ -86,9 +87,9 @@ export default function ContactPage() {
                   or call us and we&apos;ll take it from there.
                 </p>
                 <p className="text-ink/80 text-sm mt-2">
-                  <PhoneLink className="underline" />
+                  <PhoneLink className="link" />
                   {' · '}
-                  <EmailLink className="underline" />
+                  <EmailLink className="link" />
                 </p>
                 <a href={mailtoHref(draft.subject, draft.body)} className="btn-primary mt-4">
                   Email this message

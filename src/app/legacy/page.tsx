@@ -16,7 +16,7 @@ export default function LegacyPage() {
           <p>
             A gift left in your Will is a great way to ensure that your love of animals and interest
             in their well-being is continued into the future. Legacy gifts, of any size, make a real
-            and lasting difference — helping us be there for the next animal in need, long after
+            and lasting difference, helping us be there for the next animal in need, long after
             today.
           </p>
         </div>
@@ -24,33 +24,33 @@ export default function LegacyPage() {
         <div className="space-y-8 mb-12">
           <div className="border-b border-line pb-8">
             <h2 className="text-xl font-bold text-ink mb-3">Types of Gift</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-              <div className="panel p-4">
-                <h3 className="font-semibold text-ink mb-1">Residuary Gift</h3>
-                <p className="text-sm text-ink/70">
+            <dl className="mt-4 divide-y divide-line border-y border-line">
+              <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-1 sm:gap-6 py-4">
+                <dt className="font-semibold text-ink">Residuary Gift</dt>
+                <dd className="text-ink/70">
                   A share, or all, of what&apos;s left of your estate after other gifts and expenses
                   have been paid.
-                </p>
+                </dd>
               </div>
-              <div className="panel p-4">
-                <h3 className="font-semibold text-ink mb-1">Pecuniary Gift</h3>
-                <p className="text-sm text-ink/70">
+              <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-1 sm:gap-6 py-4">
+                <dt className="font-semibold text-ink">Pecuniary Gift</dt>
+                <dd className="text-ink/70">
                   A fixed sum of money, which can be updated over time to keep pace with inflation.
-                </p>
+                </dd>
               </div>
-              <div className="panel p-4">
-                <h3 className="font-semibold text-ink mb-1">Specific Gift</h3>
-                <p className="text-sm text-ink/70">
+              <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-1 sm:gap-6 py-4">
+                <dt className="font-semibold text-ink">Specific Gift</dt>
+                <dd className="text-ink/70">
                   A particular item, such as property, shares, or other assets of value.
-                </p>
+                </dd>
               </div>
-            </div>
+            </dl>
           </div>
 
           <div className="border-b border-line pb-8">
             <h2 className="text-xl font-bold text-ink mb-3">Why It Matters</h2>
             <p className="text-ink/70">
-              As an independent charity, Assisi receives no government funding — we rely entirely on
+              As an independent charity, Assisi receives no government funding. We rely entirely on
               the generosity of our community. Legacy gifts help fund the day-to-day running of the
               Sanctuary as well as bigger projects, like our current appeal to build a dedicated Cat
               Intake Unit, ensuring animals in Northern Ireland have somewhere to turn for years to
@@ -63,7 +63,7 @@ export default function LegacyPage() {
             <p className="text-ink/70">
               We&apos;d always recommend speaking with a solicitor when writing or updating your Will.
               If you&apos;re considering leaving a gift to Assisi, or have already included us, we&apos;d
-              love to hear from you so we can say thank you — get in touch with our team in complete
+              love to hear from you so we can say thank you. Get in touch with our team in complete
               confidence.
             </p>
           </div>
@@ -73,9 +73,9 @@ export default function LegacyPage() {
           <h2 className="text-xl font-bold text-ink mb-3">Talk to Us in Confidence</h2>
           <p className="text-ink/70 mb-4">
             Contact us at{' '}
-            <EmailLink className="underline" />
+            <EmailLink className="link" />
             {' '}or call{' '}
-            <PhoneLink className="underline" /> to discuss leaving a
+            <PhoneLink className="link" /> to discuss leaving a
             legacy gift.
           </p>
           <Link href="/about" className="btn-secondary">

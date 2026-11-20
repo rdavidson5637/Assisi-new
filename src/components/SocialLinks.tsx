@@ -1,6 +1,16 @@
 import { socialLinks } from '@/data/shops';
 
-export default function SocialLinks({ className = '' }: { className?: string }) {
+export default function SocialLinks({
+  className = '',
+  variant = 'dark',
+}: {
+  className?: string;
+  variant?: 'light' | 'dark';
+}) {
+  const tone =
+    variant === 'light'
+      ? 'border border-gray-900 text-gray-900 hover:bg-ink hover:text-paper'
+      : 'border border-white/30 text-white hover:bg-amber hover:border-amber hover:text-gray-900';
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       {socialLinks.map((link) => (
@@ -9,7 +19,7 @@ export default function SocialLinks({ className = '' }: { className?: string }) 
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white hover:bg-yellow-400 hover:text-gray-900 transition-colors"
+          className={`inline-flex items-center justify-center w-10 h-10 rounded-full transition-colors ${tone}`}
           aria-label={`Assisi on ${link.name}`}
         >
           {link.name === 'Facebook' && (

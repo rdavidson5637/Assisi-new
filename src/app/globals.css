@@ -1,21 +1,30 @@
 @import "tailwindcss";
 
+/*
+ * Assisi tokens. See .cursor/skills/assisi/SKILL.md.
+ * Ink #1a1a1a, paper #f6f1e6 (flat), amber #fbbf24 is button fill only,
+ * button text is ink, amber hover #e0a810, lines are ink at ~15%.
+ */
 :root {
-  --cream: #FBF7EE;
-  --ink: #171717;
-  --yellow: #F6E823;
-  --teal: #0F4C4C;
-  --line: rgba(23, 23, 23, 0.12);
+  --paper: #f6f1e6;
+  --ink: #1a1a1a;
+  --amber: #fbbf24;
+  --amber-hover: #e0a810;
+  --line: rgba(26, 26, 26, 0.15);
 }
 
 @theme inline {
-  --color-cream: var(--cream);
+  --color-paper: var(--paper);
+  /* `cream` is the older name for paper; pages still use it. */
+  --color-cream: var(--paper);
   --color-ink: var(--ink);
-  --color-yellow: var(--yellow);
-  --color-teal: var(--teal);
+  --color-amber: var(--amber);
+  --color-amber-hover: var(--amber-hover);
   --color-line: var(--line);
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  /* Map leftover Tailwind greys onto ink so stray utilities stay on-palette. */
+  --color-gray-900: var(--ink);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
 }
 
 html {
@@ -23,70 +32,76 @@ html {
 }
 
 body {
-  background: var(--cream);
+  background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-body);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
-}
-
+/* Fraunces on h1 and h2 only. Everything else stays Atkinson Hyperlegible. */
 h1,
 h2 {
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 h3,
 h4,
 h5,
 h6 {
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-weight: 700;
 }
 
-.font-bold {
-  font-weight: 800;
-}
-
+/* One panel style: flat, 1px ink at ~15%, no shadow. */
 .panel {
-  background: var(--cream);
+  background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: none;
 }
 
 .card-hover {
-  transition: border-color 0.2s ease;
+  transition: border-color 0.15s ease;
 }
 
 .card-hover:hover {
-  border-color: rgba(23, 23, 23, 0.4);
+  border-color: rgba(26, 26, 26, 0.45);
 }
 
+/* Content links: ink with an underline. */
+.link {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Amber fill, ink text. The only place amber appears. */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--yellow);
+  background: var(--amber);
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.25;
   padding: 0.75rem 1.5rem;
-  border: 1px solid transparent;
-  border-radius: 12px;
+  border: 1px solid var(--amber);
+  border-radius: 8px;
   box-shadow: none;
   text-decoration: none;
   cursor: pointer;
-  transition: filter 0.2s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .btn-primary:hover {
-  filter: brightness(0.96);
+  background: var(--amber-hover);
+  border-color: var(--amber-hover);
 }
 
 .btn-primary:disabled {
@@ -94,6 +109,7 @@ h6 {
   cursor: not-allowed;
 }
 
+/* Text button: ink with an underline. */
 .btn-secondary {
   display: inline;
   background: none;
@@ -101,28 +117,29 @@ h6 {
   border-radius: 0;
   box-shadow: none;
   padding: 0;
-  color: var(--teal);
-  font-weight: 600;
+  color: var(--ink);
+  font-weight: 700;
   text-decoration: underline;
+  text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
   cursor: pointer;
 }
 
 .btn-secondary:hover {
-  text-decoration: none;
+  text-decoration-thickness: 2px;
 }
 
 .btn-secondary.text-cream {
-  color: var(--cream);
+  color: var(--paper);
 }
 
 .field {
   width: 100%;
   padding: 0.5rem 0.75rem;
-  background: var(--cream);
+  background: var(--paper);
   color: var(--ink);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: none;
 }
 
@@ -131,6 +148,25 @@ h6 {
 }
 
 .field:focus {
-  outline: 2px solid var(--teal);
+  outline: 2px solid var(--ink);
   outline-offset: 1px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

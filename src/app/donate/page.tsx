@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
-import { site } from '@/data/site';
+import { mailtoHref, site } from '@/data/site';
 
 export default function DonatePage() {
   const [donationType, setDonationType] = useState<'one-time' | 'monthly'>('one-time');
@@ -13,6 +13,11 @@ export default function DonatePage() {
 
   const amounts = [10, 25, 50, 100];
   const finalAmount = selectedAmount || (customAmount ? parseInt(customAmount) : 0);
+  const giftLabel = `£${finalAmount}${donationType === 'monthly' ? ' a month' : ''}`;
+  const emailHref = mailtoHref(
+    `Donation: ${giftLabel}`,
+    `Hello,\n\nI would like to give ${giftLabel} to Assisi Animal Sanctuary. Please get in touch to arrange it.\n\nName:\nPhone:\n`,
+  );
 
   return (
     <div className="min-h-screen bg-cream">
@@ -35,10 +40,10 @@ export default function DonatePage() {
         <div className="panel p-6 md:p-8 mb-8">
           <h2 className="text-xl font-bold text-ink mb-6">Choose Your Donation</h2>
 
-          <div className="flex rounded-[12px] border border-line p-1 mb-6">
+          <div className="flex rounded-[8px] border border-line p-1 mb-6">
             <button
               onClick={() => setDonationType('one-time')}
-              className={`flex-1 py-2 px-4 rounded-[12px] font-medium transition-colors ${
+              className={`flex-1 py-2 px-4 rounded-[8px] font-medium transition-colors ${
                 donationType === 'one-time'
                   ? 'bg-ink text-cream'
                   : 'text-ink/70'
@@ -48,7 +53,7 @@ export default function DonatePage() {
             </button>
             <button
               onClick={() => setDonationType('monthly')}
-              className={`flex-1 py-2 px-4 rounded-[12px] font-medium transition-colors ${
+              className={`flex-1 py-2 px-4 rounded-[8px] font-medium transition-colors ${
                 donationType === 'monthly'
                   ? 'bg-ink text-cream'
                   : 'text-ink/70'
@@ -71,7 +76,7 @@ export default function DonatePage() {
                     setSelectedAmount(amount);
                     setCustomAmount('');
                   }}
-                  className={`py-3 px-4 rounded-[12px] font-semibold border transition-colors ${
+                  className={`py-3 px-4 rounded-[8px] font-semibold border transition-colors ${
                     selectedAmount === amount
                       ? 'bg-ink text-cream border-ink'
                       : 'bg-cream text-ink/80 border-line hover:border-ink'
@@ -97,33 +102,38 @@ export default function DonatePage() {
             </div>
           </div>
 
-          {/* Submit */}
+          {/* No card payments on this site. The button only shows how to give by phone or email. */}
           {requested ? (
-            <div className="panel p-4 text-center">
+            <div className="panel p-4" aria-live="polite">
               <p className="text-ink font-medium">
-                Thank you for choosing to give £{finalAmount}{donationType === 'monthly' ? ' a month' : ''}!
+                To give {giftLabel}, call or email us.
               </p>
               <p className="text-ink/70 text-sm mt-1">
-                Online card payments are launching soon. For now, please call{' '}
-                <PhoneLink className="underline" /> or email{' '}
-                <EmailLink className="underline" /> and
-                we&apos;ll take your donation over the phone or set up your standing order.
+                Nothing has been charged. Call <PhoneLink className="link" /> or{' '}
+                <a href={emailHref} className="link">email {site.email}</a> and we&apos;ll take your
+                donation over the phone or set up a standing order.
               </p>
+              <button
+                type="button"
+                onClick={() => setRequested(false)}
+                className="btn-secondary text-sm mt-3"
+              >
+                Change amount
+              </button>
             </div>
           ) : (
             <>
               <button
+                type="button"
                 onClick={() => setRequested(true)}
                 className="w-full btn-primary"
                 disabled={!finalAmount}
               >
-                {donationType === 'monthly'
-                  ? `Donate £${finalAmount || 0} per month`
-                  : `Donate £${finalAmount || 0}`}
+                {finalAmount ? `Give ${giftLabel} by phone or email` : 'Choose an amount'}
               </button>
 
               <p className="text-center text-sm text-ink/60 mt-4">
-                Online card payments are not available on this page yet. You can still give by phone or email.
+                We can&apos;t take card payments on this website. We&apos;ll take your gift by phone or email.
               </p>
             </>
           )}
@@ -188,9 +198,9 @@ export default function DonatePage() {
           <p className="text-ink/70">
             For bank transfer details, standing orders, or to discuss other ways to support us, 
             please contact us at{' '}
-            <EmailLink className="underline" />
+            <EmailLink className="link" />
             {' '}or call{' '}
-            <PhoneLink className="underline" />.
+            <PhoneLink className="link" />.
           </p>
         </div>
       </div>

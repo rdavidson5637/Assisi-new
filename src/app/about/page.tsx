@@ -88,12 +88,11 @@ export default function AboutPage() {
         <div className="mt-12 pt-8 border-t border-line">
           <h2 className="text-2xl font-bold text-ink mb-4">Make a Donation</h2>
           <p className="text-ink/70 mb-6">
-            Your donation helps provide everything from nutritious meals and veterinary treatment to warmth, 
-            safety and rehabilitation. Every contribution, whatever the amount, helps us continue our 
-            lifesaving work. Thank you for being part of their journey to a brighter future.
+            Your donation pays for food, veterinary treatment, warmth and safety for the animals in our
+            care. Any amount helps.
           </p>
           <Link href="/donate" className="btn-primary">
-            Donate Now
+            Donate
           </Link>
         </div>
       </div>

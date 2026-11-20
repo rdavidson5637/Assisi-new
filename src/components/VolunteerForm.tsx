@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 const roles = [
-  'Sanctuary — dogs, cats or small animals',
+  'Sanctuary: dogs, cats or small animals',
   'Reception / admin',
   'Charity shop',
   'Transport driver',
@@ -23,9 +23,9 @@ export default function VolunteerForm() {
 
   if (submitted) {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-2xl p-6">
-        <h3 className="text-lg font-bold text-green-800 mb-2">Thanks — we&apos;ll be in touch</h3>
-        <p className="text-green-700">
+      <div className="panel p-6">
+        <h3 className="text-lg font-bold text-gray-900 mb-2">Thanks, we&apos;ll be in touch</h3>
+        <p className="text-gray-700">
           Someone from the team will contact you about availability and the next step. If a
           particular day is full, we&apos;ll suggest another.
         </p>
@@ -34,7 +34,7 @@ export default function VolunteerForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm p-6 space-y-4">
+    <form onSubmit={handleSubmit} className="panel p-6 space-y-4">
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="vol-name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -44,7 +44,7 @@ export default function VolunteerForm() {
             id="vol-name"
             type="text"
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
           />
         </div>
         <div>
@@ -55,7 +55,7 @@ export default function VolunteerForm() {
             id="vol-email"
             type="email"
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
           />
         </div>
       </div>
@@ -66,7 +66,7 @@ export default function VolunteerForm() {
         <input
           id="vol-phone"
           type="tel"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
         />
       </div>
       <div>
@@ -76,7 +76,7 @@ export default function VolunteerForm() {
         <select
           id="vol-role"
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent bg-white"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent bg-white"
         >
           <option value="">Choose a role</option>
           {roles.map((role) => (
@@ -94,7 +94,7 @@ export default function VolunteerForm() {
           id="vol-message"
           rows={4}
           placeholder="Days you might be free, experience with animals, or anything we should know."
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
         />
       </div>
       <button type="submit" className="w-full btn-secondary">

@@ -36,12 +36,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 function compatibilityText(value: Compatibility, label: string) {
   if (value === true) return label;
   if (value === 'older-only') return `${label} (older only)`;
-  if (value === false) return `${label} — no`;
-  return `${label} — ask us`;
+  if (value === false) return `${label}: no`;
+  return `${label}: ask us`;
 }
 
 function compatibilityClass(value: Compatibility) {
-  if (value === true) return 'bg-teal text-cream';
+  if (value === true) return 'bg-ink text-cream';
   if (value === 'older-only') return 'border border-line text-ink';
   return 'border border-line text-ink/50';
 }
@@ -62,9 +62,9 @@ export default async function AnimalProfilePage({ params }: PageProps) {
       <div className="bg-cream border-b border-line">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <nav aria-label="Breadcrumb" className="flex items-center space-x-2 text-sm text-ink/60">
-            <Link href="/" className="hover:text-ink">Home</Link>
+            <Link href="/" className="link">Home</Link>
             <span aria-hidden="true">/</span>
-            <Link href="/adopt" className="hover:text-ink">Adopt</Link>
+            <Link href="/adopt" className="link">Adopt</Link>
             <span aria-hidden="true">/</span>
             <span className="text-ink">{animal.name}</span>
           </nav>
@@ -90,12 +90,12 @@ export default async function AnimalProfilePage({ params }: PageProps) {
             <div className="md:w-1/2 p-6 md:p-8">
               <div className="flex flex-wrap gap-2 mb-4">
                 {animal.reserved && (
-                  <span className="inline-block bg-ink text-cream text-sm font-medium px-3 py-1 rounded-[12px]">
+                  <span className="inline-block bg-ink text-cream text-sm font-medium px-3 py-1 rounded-[8px]">
                     Currently reserved
                   </span>
                 )}
                 {isLongStay(animal) && (
-                  <span className="inline-block border border-teal text-teal text-sm font-medium px-3 py-1 rounded-[12px]">
+                  <span className="inline-block border border-ink text-ink text-sm font-medium px-3 py-1 rounded-[8px]">
                     Long stay · waiting {animal.daysAtSanctuary} days
                   </span>
                 )}
@@ -109,7 +109,7 @@ export default async function AnimalProfilePage({ params }: PageProps) {
                   {animal.personality.map((trait) => (
                     <span
                       key={trait}
-                      className="border border-line text-teal text-xs font-medium px-2 py-1 rounded-[12px]"
+                      className="border border-line text-ink text-xs font-medium px-2 py-1 rounded-[8px]"
                     >
                       {trait}
                     </span>

@@ -65,7 +65,8 @@ export default function Home() {
           sizes="100vw"
           className="object-cover object-[center_30%]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/60 to-ink/25" />
+        {/* Flat scrim, no gradient, so the headline stays readable on the photo. */}
+        <div className="absolute inset-0 bg-ink/60" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
           <div className="max-w-3xl text-left">
             <h1 className="text-3xl md:text-5xl font-bold mb-8">
@@ -83,16 +84,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-yellow text-ink">
+      <section className="bg-cream text-ink border-b border-line">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <h2 className="text-2xl md:text-3xl font-bold mb-6">
             Help us build a dedicated Cat Intake Unit.
           </h2>
-          <Link
-            href="/donate"
-            className="btn-primary"
-            style={{ background: 'var(--ink)', color: 'var(--cream)' }}
-          >
+          <Link href="/donate" className="btn-primary">
             Donate
           </Link>
         </div>
@@ -204,7 +201,7 @@ export default function Home() {
                 alt={`${site.magazine.title}, ${site.magazine.edition}`}
                 width={180}
                 height={254}
-                className="rounded-[12px] border border-line"
+                className="rounded-[8px] border border-line"
                 style={{ width: '9rem', height: 'auto' }}
               />
             </a>
