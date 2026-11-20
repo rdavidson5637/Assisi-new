@@ -3,8 +3,9 @@ import { site } from '@/data/site';
 import { plainDashes } from '@/lib/text';
 
 export default function Footer() {
+  // The global focus ring is ink, which vanishes on this ink footer, so switch it to cream here.
   return (
-    <footer className="bg-ink text-cream">
+    <footer className="bg-ink text-cream [&_:focus-visible]:outline-cream!">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
           <div>
@@ -27,14 +28,14 @@ export default function Footer() {
           <div>
             <h2 className="font-bold mb-2">Phone</h2>
             <p>
-              <PhoneLink className="text-cream underline underline-offset-[0.2em] hover:decoration-2" />
+              <PhoneLink className="inline-flex min-h-11 items-center text-cream underline underline-offset-[0.2em] hover:decoration-2" />
             </p>
           </div>
 
           <div>
             <h2 className="font-bold mb-2">Email</h2>
             <p>
-              <EmailLink className="text-cream underline underline-offset-[0.2em] hover:decoration-2" />
+              <EmailLink className="inline-flex min-h-11 items-center text-cream underline underline-offset-[0.2em] hover:decoration-2" />
             </p>
           </div>
         </div>

@@ -62,7 +62,7 @@ export default function Home() {
 
   return (
     <div>
-      <section className="relative isolate overflow-hidden bg-ink text-cream min-h-[32rem]">
+      <section className="relative isolate overflow-hidden bg-ink text-cream min-h-[32rem] [&_:focus-visible]:outline-cream!">
         <Image
           src="/images/animals/wee-max.jpg"
           alt="Wee Max, a collie at Assisi Animal Sanctuary, lying in the grass"
@@ -82,7 +82,7 @@ export default function Home() {
               <Link href="/adopt" className="btn-primary">
                 Adopt a pet
               </Link>
-              <Link href="/donate" className="btn-secondary text-cream">
+              <Link href="/donate" className="inline-flex! min-h-11 items-center btn-secondary text-cream">
                 Donate
               </Link>
             </div>
@@ -119,7 +119,7 @@ export default function Home() {
           </div>
 
           <div className="mt-8">
-            <Link href="/adopt" className="btn-secondary">
+            <Link href="/adopt" className="inline-flex! min-h-11 items-center btn-secondary">
               View all animals
             </Link>
           </div>
@@ -136,7 +136,7 @@ export default function Home() {
                 <div>
                   <p className="text-ink/80">{way.text}</p>
                   <p>
-                    <Link href={way.href} className="btn-secondary">
+                    <Link href={way.href} className="inline-flex! min-h-11 items-center btn-secondary">
                       {way.link}
                     </Link>
                   </p>
@@ -158,7 +158,7 @@ export default function Home() {
                   {shop.address}, {shop.postcode}
                 </p>
                 <p className="mt-1">
-                  <Link href={`/shops#${shop.id}`} className="btn-secondary text-sm">
+                  <Link href={`/shops#${shop.id}`} className="inline-flex! min-h-11 items-center btn-secondary text-sm">
                     Hours
                   </Link>
                 </p>
@@ -218,7 +218,7 @@ export default function Home() {
                 href={site.magazine.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary"
+                className="inline-flex! min-h-11 items-center btn-secondary"
               >
                 Read the digital edition →
               </a>

@@ -51,12 +51,12 @@ export default function ChristmasEventsList({ events }: ChristmasEventsListProps
               href={calendarLink.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary"
+              className="btn-secondary inline-flex! min-h-11 items-center"
             >
               View festive events updates →
             </a>
           ) : (
-            <Link href={calendarLink.href} className="btn-secondary">
+            <Link href={calendarLink.href} className="btn-secondary inline-flex! min-h-11 items-center">
               Contact us about upcoming events →
             </Link>
           )}
@@ -87,12 +87,12 @@ export default function ChristmasEventsList({ events }: ChristmasEventsListProps
                 href={bookingLink.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary"
+                className="btn-secondary inline-flex! min-h-11 items-center"
               >
                 Event details →
               </a>
             ) : (
-              <Link href={bookingLink.href} className="btn-secondary">
+              <Link href={bookingLink.href} className="btn-secondary inline-flex! min-h-11 items-center">
                 Contact us for details →
               </Link>
             )}
