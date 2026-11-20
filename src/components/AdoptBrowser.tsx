@@ -91,16 +91,7 @@ export default function AdoptBrowser() {
     sort !== 'available';
 
   return (
-    <div className="min-h-screen bg-cream">
-      <section className="bg-cream border-b border-line py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">Adopt a Pet</h1>
-          <p className="text-lg text-ink/80">
-            Dogs, cats, rabbits and guinea pigs waiting for a home.
-          </p>
-        </div>
-      </section>
-
+    <>
       {longStayCount > 0 && (
         <div className="bg-ink text-cream">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-sm font-medium">
@@ -111,7 +102,7 @@ export default function AdoptBrowser() {
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-wrap gap-2 mb-6">
+        <div role="group" aria-label="Filter by species" className="flex flex-wrap gap-2 mb-6">
           {[
             { value: 'all', label: 'All Animals' },
             { value: 'dog', label: `Dogs (${dogs.length})` },
@@ -206,8 +197,8 @@ export default function AdoptBrowser() {
             </div>
           </div>
 
-          <div>
-            <span className="block text-sm font-medium text-ink/80 mb-2">Good with</span>
+          <fieldset>
+            <legend className="block text-sm font-medium text-ink/80 mb-2">Good with</legend>
             <div className="flex flex-wrap gap-4">
               <label htmlFor="filter-children" className="flex items-center gap-2 text-sm text-ink/80">
                 <input
@@ -240,7 +231,7 @@ export default function AdoptBrowser() {
                 Cats
               </label>
             </div>
-          </div>
+          </fieldset>
 
           {hasActiveFilters && (
             <button
@@ -253,6 +244,7 @@ export default function AdoptBrowser() {
           )}
         </div>
 
+        <h2 className="sr-only">Animals available for adoption</h2>
         <p className="text-sm text-ink/60 mb-4" aria-live="polite">
           Showing {filteredAnimals.length} of {animals.length} animals
         </p>
@@ -328,6 +320,6 @@ export default function AdoptBrowser() {
           </p>
         </div>
       </div>
-    </div>
+    </>
   );
 }
