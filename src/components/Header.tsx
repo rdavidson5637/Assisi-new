@@ -13,6 +13,7 @@ export default function Header() {
   const navLinks = [
     { href: '/adopt', label: 'Adopt' },
     { href: '/donate', label: 'Donate' },
+    { href: '/christmas', label: 'Christmas' },
     { href: '/volunteer', label: 'Volunteer' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
