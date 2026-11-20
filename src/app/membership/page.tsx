@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
 import { mailtoHref, site } from '@/data/site';
+import { shopCountWord } from '@/data/shops';
 
 const perks = [
   'Our Paw Prints magazine, posted to your door twice a year',
   'Invitation to our Annual General Meeting, with a vote on Sanctuary matters',
-  '10% discount in all four Assisi charity shops',
+  `10% discount in all ${shopCountWord()} Assisi charity shops`,
   'The knowledge that your support helps feed, treat and shelter every animal in our care',
 ];
 

@@ -67,3 +67,17 @@ export const socialLinks = [
     href: 'https://twitter.com/AssisiSanctuary',
   },
 ];
+
+const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+
+/** Shop count as a word ("three"), derived from the shops list above. */
+export function shopCountWord(count: number = shops.length): string {
+  return numberWords[count] ?? String(count);
+}
+
+/** Shop towns as a plain list, e.g. "Bangor, Holywood and Newtownards". */
+export function shopTownList(list: readonly Shop[] = shops): string {
+  const names = list.map((shop) => shop.name);
+  if (names.length <= 1) return names.join('');
+  return `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+}

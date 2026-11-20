@@ -3,7 +3,7 @@ import { Atkinson_Hyperlegible, Fraunces } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { siteName, siteUrl } from "@/lib/metadata";
+import { defaultOgImage, siteName, siteUrl } from "@/lib/metadata";
 
 // Atkinson Hyperlegible for body and UI; Fraunces for h1 and h2 only.
 const body = Atkinson_Hyperlegible({
@@ -34,6 +34,11 @@ export const metadata: Metadata = {
     siteName,
     locale: "en_GB",
     type: "website",
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [defaultOgImage],
   },
 };
 

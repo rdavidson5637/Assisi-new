@@ -107,6 +107,9 @@ test('ChristmasPage SSR output has metadata, all sections, valid heading levels,
   assert.ok(html.includes('Support the animals this Christmas'));
   assert.ok(html.includes('Ways to give at Christmas'));
   assert.ok(html.includes('Christmas events will be announced soon'));
+  // With no confirmed events, the intro must not invite people to events that are not listed.
+  assert.ok(html.includes('Festive events and collections will be listed here once they are confirmed.'));
+  assert.equal(html.includes('Join us at upcoming festive events'), false);
   assert.ok(html.includes('Fundraise for us this Christmas'));
   assert.ok(html.includes('href="/donate"'));
   assert.ok(html.includes('href="/sponsor"'));

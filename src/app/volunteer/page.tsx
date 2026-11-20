@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
 import { site } from '@/data/site';
+import { shopCountWord, shopTownList } from '@/data/shops';
 import { pageMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = pageMetadata(
@@ -62,7 +63,7 @@ export default function VolunteerPage() {
           <div className="border-b border-line pb-8">
             <h2 className="text-xl font-bold text-ink mb-3">In our Shops</h2>
             <p className="text-ink/70">
-              Our four shops in Bangor, Belfast, Holywood, and Newtownards need volunteers to work 
+              Our {shopCountWord()} shops in {shopTownList()} need volunteers to work 
               shifts, help serve customers, sort stock, and make deliveries. The shops are a vital 
               source of income for the Sanctuary, so for just a few hours a week, you can make a 
               huge contribution to the work we do here!
