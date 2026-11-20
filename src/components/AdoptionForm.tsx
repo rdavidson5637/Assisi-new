@@ -167,7 +167,7 @@ export default function AdoptionForm({ animalName }: AdoptionFormProps) {
                 We can&apos;t take applications through this page yet. When you continue, your email
                 app will open with this form ready to send to {site.email}.
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor={id('firstName')} className="block text-sm font-medium text-ink/80 mb-1">
                     First name *

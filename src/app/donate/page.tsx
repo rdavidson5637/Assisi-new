@@ -3,30 +3,29 @@
 import { useId, useState } from 'react';
 import Link from 'next/link';
 import { EmailLink, PhoneLink } from '@/components/ContactLinks';
-import { mailtoHref, site } from '@/data/site';
+import { site } from '@/data/site';
+import {
+  PRESET_DONATION_AMOUNTS,
+  type DonationType,
+  buildDonationGiftLabel,
+  buildDonationMailto,
+  parseCustomDonationAmount,
+  resolveDonationAmount,
+} from '@/lib/donate';
 
 export default function DonatePage() {
-  const [donationType, setDonationType] = useState<'one-time' | 'monthly'>('one-time');
+  const [donationType, setDonationType] = useState<DonationType>('one-time');
   const [selectedAmount, setSelectedAmount] = useState<number | null>(25);
   const [customAmount, setCustomAmount] = useState('');
   const [requested, setRequested] = useState(false);
   const customAmountId = useId();
+  const customErrorId = `${customAmountId}-error`;
 
-  const amounts = [10, 25, 50, 100];
-  const parsedCustom = customAmount.trim() === '' ? NaN : Number(customAmount);
-  const validCustom =
-    Number.isFinite(parsedCustom) && parsedCustom > 0
-      ? Math.round(parsedCustom * 100) / 100
-      : 0;
-  const finalAmount = selectedAmount ?? validCustom;
-  const formattedAmount = Number.isInteger(finalAmount)
-    ? String(finalAmount)
-    : finalAmount.toFixed(2);
-  const giftLabel = `£${formattedAmount}${donationType === 'monthly' ? ' a month' : ''}`;
-  const emailHref = mailtoHref(
-    `Donation: ${giftLabel}`,
-    `Hello,\n\nI would like to give ${giftLabel} to Assisi Animal Sanctuary. Please get in touch to arrange it.\n\nName:\nPhone:\n`,
-  );
+  const customResult = parseCustomDonationAmount(customAmount);
+  const finalAmount = resolveDonationAmount(selectedAmount, customAmount);
+  const customError = selectedAmount === null ? customResult.error : null;
+  const giftLabel = buildDonationGiftLabel(finalAmount, donationType);
+  const emailHref = buildDonationMailto(finalAmount, donationType);
 
   return (
     <div className="min-h-screen bg-cream">
@@ -82,7 +81,7 @@ export default function DonatePage() {
               Select Amount
             </p>
             <div className="grid grid-cols-4 gap-3 mb-4">
-              {amounts.map((amount) => (
+              {PRESET_DONATION_AMOUNTS.map((amount) => (
                 <button
                   key={amount}
                   type="button"
@@ -91,7 +90,7 @@ export default function DonatePage() {
                     setSelectedAmount(amount);
                     setCustomAmount('');
                   }}
-                  className={`py-3 px-4 rounded-[8px] font-semibold border transition-colors ${
+                  className={`py-3 px-2 sm:px-4 rounded-[8px] font-semibold border transition-colors ${
                     selectedAmount === amount
                       ? 'bg-ink text-cream border-ink'
                       : 'bg-cream text-ink/80 border-line hover:border-ink'
@@ -112,6 +111,8 @@ export default function DonatePage() {
                 inputMode="decimal"
                 placeholder="Other amount"
                 value={customAmount}
+                aria-invalid={customError ? true : undefined}
+                aria-describedby={customError ? customErrorId : undefined}
                 onChange={(e) => {
                   setCustomAmount(e.target.value);
                   setSelectedAmount(null);
@@ -121,6 +122,11 @@ export default function DonatePage() {
                 step="any"
               />
             </div>
+            {customError ? (
+              <p id={customErrorId} role="alert" className="text-sm text-ink mt-2">
+                {customError}
+              </p>
+            ) : null}
           </div>
 
           {/* No card payments on this site. The button only shows how to give by phone or email. */}
