@@ -1,96 +1,114 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { EmailLink, PhoneLink } from '@/components/ContactLinks';
-import { pageMetadata } from '@/lib/metadata';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { EmailLink, PhoneLink } from "@/components/ContactLinks";
+import EdSection from "@/components/editorial/EdSection";
+import InnerHero from "@/components/editorial/InnerHero";
+import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata(
-  'Leave a Legacy',
-  'Leave a gift in your will to Assisi Animal Sanctuary in Northern Ireland. Learn about residuary, pecuniary and specific gifts and how to get in touch.',
-  '/legacy'
+  "Leave a Legacy",
+  "Leave a gift in your will to Assisi Animal Sanctuary in Northern Ireland. Learn about residuary, pecuniary and specific gifts and how to get in touch.",
+  "/legacy",
 );
+
+const giftTypes = [
+  {
+    title: "Residuary Gift",
+    detail: "A share, or all, of what's left of your estate after other gifts and expenses have been paid.",
+  },
+  {
+    title: "Pecuniary Gift",
+    detail: "A fixed sum of money, which can be updated over time to keep pace with inflation.",
+  },
+  {
+    title: "Specific Gift",
+    detail: "A particular item, such as property, shares, or other assets of value.",
+  },
+] as const;
+
+const h2 =
+  "font-[family-name:var(--font-display)] text-[clamp(1.5rem,1.35rem+0.8vw,2rem)] font-semibold leading-[1.15] tracking-[-0.015em] text-balance";
+const lead = "text-[clamp(1.125rem,1.05rem+0.35vw,1.25rem)] leading-relaxed text-pretty";
 
 export default function LegacyPage() {
   return (
-    <div className="min-h-screen bg-cream">
-      <section className="bg-cream border-b border-line py-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-ink">Leave a Legacy</h1>
-          <p className="text-xl text-ink/80 mt-2">A gift that lasts long after you&apos;re gone</p>
+    <div className="bg-cream">
+      <InnerHero
+        title="Leave a Legacy"
+        subtitle="A gift that lasts long after you're gone"
+        photo={{
+          src: "/images/stories/francesca.jpg",
+          alt: "Francesca, a Turkish Van who found a forever foster home through Assisi",
+        }}
+        focus="50% 30%"
+      />
+
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:py-20 lg:px-8">
+        <p className={`${lead} max-w-[65ch] text-ink lg:max-w-[42rem]`}>
+          A gift left in your Will is a great way to ensure that your love of animals and interest in their
+          well-being is continued into the future. Legacy gifts, of any size, make a real and lasting
+          difference, helping us be there for the next animal in need, long after today.
+        </p>
+      </div>
+
+      <EdSection id="types" title="Types of Gift">
+        <dl className="divide-y divide-line border-y border-line">
+          {giftTypes.map((gift) => (
+            <div
+              key={gift.title}
+              className="grid gap-2 py-5 sm:grid-cols-12 sm:items-baseline sm:gap-6"
+            >
+              <dt className="text-xl font-bold text-ink sm:col-span-4">{gift.title}</dt>
+              <dd className="text-ink/80 sm:col-span-8">{gift.detail}</dd>
+            </div>
+          ))}
+        </dl>
+      </EdSection>
+
+      <section aria-labelledby="why-matters" className="bg-ink text-cream">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+          <div className="grid gap-8 border-t border-cream/20 pt-8 lg:grid-cols-12">
+            <h2 id="why-matters" className={`${h2} text-cream lg:col-span-4`}>
+              Why It Matters
+            </h2>
+            <p className="text-cream/90 lg:col-span-8">
+              As an independent charity, Assisi receives no government funding. We rely entirely on the
+              generosity of our community. Legacy gifts help fund the day-to-day running of the Sanctuary as
+              well as bigger projects, like our current appeal to build a dedicated Cat Intake Unit, ensuring
+              animals in Northern Ireland have somewhere to turn for years to come.
+            </p>
+          </div>
         </div>
       </section>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="prose prose-lg max-w-none mb-8">
-          <p>
-            A gift left in your Will is a great way to ensure that your love of animals and interest
-            in their well-being is continued into the future. Legacy gifts, of any size, make a real
-            and lasting difference, helping us be there for the next animal in need, long after
-            today.
-          </p>
-        </div>
+      <EdSection id="get-started" title="How to Get Started">
+        <p className="max-w-prose text-ink/90">
+          We&apos;d always recommend speaking with a solicitor when writing or updating your Will. If
+          you&apos;re considering leaving a gift to Assisi, or have already included us, we&apos;d love to
+          hear from you so we can say thank you. Get in touch with our team in complete confidence.
+        </p>
+      </EdSection>
 
-        <div className="space-y-8 mb-12">
-          <div className="border-b border-line pb-8">
-            <h2 className="text-xl font-bold text-ink mb-3">Types of Gift</h2>
-            <dl className="mt-4 divide-y divide-line border-y border-line">
-              <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-1 sm:gap-6 py-4">
-                <dt className="font-semibold text-ink">Residuary Gift</dt>
-                <dd className="text-ink/70">
-                  A share, or all, of what&apos;s left of your estate after other gifts and expenses
-                  have been paid.
-                </dd>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-1 sm:gap-6 py-4">
-                <dt className="font-semibold text-ink">Pecuniary Gift</dt>
-                <dd className="text-ink/70">
-                  A fixed sum of money, which can be updated over time to keep pace with inflation.
-                </dd>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-1 sm:gap-6 py-4">
-                <dt className="font-semibold text-ink">Specific Gift</dt>
-                <dd className="text-ink/70">
-                  A particular item, such as property, shares, or other assets of value.
-                </dd>
-              </div>
-            </dl>
-          </div>
-
-          <div className="border-b border-line pb-8">
-            <h2 className="text-xl font-bold text-ink mb-3">Why It Matters</h2>
-            <p className="text-ink/70">
-              As an independent charity, Assisi receives no government funding. We rely entirely on
-              the generosity of our community. Legacy gifts help fund the day-to-day running of the
-              Sanctuary as well as bigger projects, like our current appeal to build a dedicated Cat
-              Intake Unit, ensuring animals in Northern Ireland have somewhere to turn for years to
-              come.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-bold text-ink mb-3">How to Get Started</h2>
-            <p className="text-ink/70">
-              We&apos;d always recommend speaking with a solicitor when writing or updating your Will.
-              If you&apos;re considering leaving a gift to Assisi, or have already included us, we&apos;d
-              love to hear from you so we can say thank you. Get in touch with our team in complete
-              confidence.
-            </p>
+      <section aria-labelledby="legacy-contact" className="border-t border-line">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+          <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <h2 id="legacy-contact" className={`${h2} text-ink`}>
+                Talk to Us in Confidence
+              </h2>
+              <p className="mt-4 text-ink/90">
+                Contact us at <EmailLink className="link" /> or call <PhoneLink className="link" /> to
+                discuss leaving a legacy gift.
+              </p>
+            </div>
+            <div className="lg:col-span-5 lg:text-right">
+              <Link href="/about" className="btn-secondary inline-flex min-h-11 items-center">
+                Learn More About Our Work
+              </Link>
+            </div>
           </div>
         </div>
-
-        <div className="panel p-6 text-center">
-          <h2 className="text-xl font-bold text-ink mb-3">Talk to Us in Confidence</h2>
-          <p className="text-ink/70 mb-4">
-            Contact us at{' '}
-            <EmailLink className="link" />
-            {' '}or call{' '}
-            <PhoneLink className="link" /> to discuss leaving a
-            legacy gift.
-          </p>
-          <Link href="/about" className="btn-secondary">
-            Learn More About Our Work
-          </Link>
-        </div>
-      </div>
+      </section>
     </div>
   );
 }
