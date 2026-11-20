@@ -1,0 +1,82 @@
+/*
+ * Scoped mobile + form polish for remaining Assisi pages.
+ * Kept out of globals.css / layout.tsx (owned by draft PR #2).
+ * Import only from pages this lane is allowed to edit.
+ */
+
+.as-rm {
+  overflow-x: clip;
+}
+
+.as-rm .as-rm-field {
+  font-size: 1rem; /* 16px — avoids iOS input zoom */
+  min-height: 2.75rem; /* 44px */
+  line-height: 1.4;
+}
+
+.as-rm textarea.as-rm-field {
+  min-height: 8rem;
+}
+
+.as-rm .as-rm-tap {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+
+.as-rm .as-rm-tap-block {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+}
+
+/* Ruled editorial rows for ways-to-help / roles lists */
+.as-rm-row {
+  display: grid;
+  gap: 0.5rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 768px) {
+  .as-rm-row {
+    grid-template-columns: 14rem minmax(0, 1fr) auto;
+    gap: 1.5rem;
+    align-items: start;
+  }
+}
+
+.as-rm-row:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.as-rm-row-title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 1.0625rem;
+  line-height: 1.3;
+}
+
+.as-rm-row-body {
+  color: color-mix(in srgb, var(--ink) 80%, transparent);
+  min-width: 0;
+}
+
+.as-rm-row-action {
+  min-width: 0;
+}
+
+@media (max-width: 389px) {
+  .as-rm .as-rm-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .as-rm .as-rm-cta-row > a,
+  .as-rm .as-rm-cta-row > button {
+    width: 100%;
+    justify-content: center;
+  }
+}
