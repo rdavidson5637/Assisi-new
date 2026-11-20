@@ -69,7 +69,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="lg:hidden p-2 rounded-[8px] hover:bg-ink/5"
+            className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-[8px] hover:bg-ink/5"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
@@ -110,7 +110,7 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   aria-current={isCurrent(link.href) ? 'page' : undefined}
-                  className="link font-medium py-2 px-4 aria-[current=page]:decoration-2"
+                  className="link flex! min-h-11 items-center font-medium px-4 aria-[current=page]:decoration-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
