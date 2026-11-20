@@ -230,7 +230,9 @@ export default function ChristmasPage() {
             Christmas events
           </h2>
           <p className="text-ink/70 mb-6">
-            Join us at upcoming festive events and collections across Northern Ireland.
+            {christmasEvents.length > 0
+              ? 'Join us at upcoming festive events and collections across Northern Ireland.'
+              : 'Festive events and collections will be listed here once they are confirmed.'}
           </p>
           <ChristmasEventsList events={christmasEvents} />
         </section>

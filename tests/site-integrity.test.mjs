@@ -8,6 +8,9 @@ const { animals } = loadTsModule('@/data/animals');
 const { shops } = loadTsModule('@/data/shops');
 const { site } = loadTsModule('@/data/site');
 const { default: buildSitemap } = loadTsModule('@/app/sitemap');
+const { siteUrl, resolveSiteUrl, conceptFallbackUrl, defaultOgImage, pageMetadata } =
+  loadTsModule('@/lib/metadata');
+const { shopCountWord, shopTownList } = loadTsModule('@/data/shops');
 
 const STATIC_ROUTES = [
   '/',
@@ -83,12 +86,12 @@ test('sitemap includes every static route and every animal profile', () => {
   const urls = new Set(entries.map((e) => e.url));
 
   for (const route of STATIC_ROUTES) {
-    const expected = `https://www.assisi-ni.org${route === '/' ? '' : route}`;
+    const expected = `${siteUrl}${route === '/' ? '' : route}`;
     assert.ok(urls.has(expected), `sitemap missing static route ${route}`);
   }
   for (const animal of animals) {
     assert.ok(
-      urls.has(`https://www.assisi-ni.org/adopt/${animal.id}`),
+      urls.has(`${siteUrl}/adopt/${animal.id}`),
       `sitemap missing animal route /adopt/${animal.id}`
     );
   }
@@ -279,5 +282,44 @@ test('built static HTML passes metadata, alt text, link, heading, label, and das
         .replace(/<[^>]+>/g, ' ');
       assert.equal(/[–—]/.test(visibleText), false, `${route}: found en/em dash in visible text`);
     }
+  }
+});
+
+test('site URL resolves to the serving deployment, never the charity live domain', () => {
+  assert.equal(resolveSiteUrl({}), conceptFallbackUrl);
+  assert.equal(conceptFallbackUrl, 'https://assisi-new.vercel.app');
+  assert.equal(
+    resolveSiteUrl({ VERCEL_ENV: 'preview', VERCEL_URL: 'assisi-abc123.vercel.app' }),
+    'https://assisi-abc123.vercel.app'
+  );
+  assert.equal(
+    resolveSiteUrl({
+      VERCEL_ENV: 'production',
+      VERCEL_URL: 'assisi-abc123.vercel.app',
+      VERCEL_PROJECT_PRODUCTION_URL: 'assisi-new.vercel.app',
+    }),
+    'https://assisi-new.vercel.app'
+  );
+  assert.equal(siteUrl.includes('assisi-ni.org'), false);
+  assert.equal(defaultOgImage.url, '/opengraph-image');
+
+  const meta = pageMetadata('Test', 'Test description', '/test');
+  assert.equal(meta.openGraph.images[0].url, '/opengraph-image');
+  assert.equal(meta.twitter.images[0].url, '/opengraph-image');
+  assert.equal(meta.twitter.card, 'summary_large_image');
+});
+
+test('shop count and town wording match the shops data', () => {
+  assert.equal(shopCountWord(), ['zero', 'one', 'two', 'three', 'four', 'five'][shops.length]);
+  const towns = shopTownList();
+  for (const shop of shops) assert.ok(towns.includes(shop.name), `missing ${shop.name}`);
+
+  const volunteer = fs.readFileSync(path.join(srcRoot, 'app', 'volunteer', 'page.tsx'), 'utf8');
+  const membership = fs.readFileSync(path.join(srcRoot, 'app', 'membership', 'page.tsx'), 'utf8');
+  for (const source of [volunteer, membership]) {
+    assert.equal(/\b(two|three|four|five|six) (Assisi charity )?shops\b/i.test(source), false);
+  }
+  if (!shops.some((shop) => shop.name === 'Belfast')) {
+    assert.equal(volunteer.includes('Belfast'), false);
   }
 });
