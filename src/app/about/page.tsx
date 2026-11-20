@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import EdSection from "@/components/editorial/EdSection";
 import InnerHero from "@/components/editorial/InnerHero";
+import QualityMobileStyles from "@/components/QualityMobileStyles";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata(
@@ -25,7 +26,8 @@ const lead = "text-[clamp(1.125rem,1.05rem+0.35vw,1.25rem)] leading-relaxed text
 
 export default function AboutPage() {
   return (
-    <div className="bg-cream">
+    <div className="qm-page bg-cream">
+      <QualityMobileStyles />
       <InnerHero
         title="About Assisi Animal Sanctuary"
         subtitle="Founded in 1997, Assisi Animal Sanctuary is a local independent animal welfare charity in Northern Ireland."

@@ -61,7 +61,7 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center">
-            <Link href="/donate" className="btn-primary">
+            <Link href="/donate" className="btn-primary min-h-11">
               Donate
             </Link>
           </div>
@@ -119,7 +119,7 @@ export default function Header() {
               <div className="pt-4 px-4">
                 <Link
                   href="/donate"
-                  className="btn-primary w-full"
+                  className="btn-primary min-h-11 w-full"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Donate

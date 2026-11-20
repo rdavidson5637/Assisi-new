@@ -1,0 +1,34 @@
+/*
+ * Reference stylesheet for the Assisi quality / mobile pass.
+ * Runtime styles ship via src/components/QualityMobileStyles.tsx so the site-integrity
+ * TS loader never has to parse CSS (draft #2 owns load-ts.mjs / globals.css / layout.tsx).
+ *
+ * Keep this file in sync with QualityMobileStyles. Palette: Assisi tokens only.
+ */
+
+.qm-page {
+  overflow-x: clip;
+}
+
+.qm-page a.link,
+.qm-page .qm-tap {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+}
+
+.qm-page .btn-primary,
+.qm-page .btn-secondary {
+  min-height: 2.75rem;
+}
+
+@media (max-width: 390px) {
+  .qm-page {
+    overflow-wrap: anywhere;
+  }
+
+  .qm-page img,
+  .qm-page video {
+    max-width: 100%;
+  }
+}
